@@ -5,6 +5,7 @@
  */
 package com.cmsc495.spacesim.model;
 
+//comment
 public class Model {
     
 }
