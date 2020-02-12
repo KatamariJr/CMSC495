@@ -15,7 +15,7 @@ public class Controller {
     
     // load the given resources onto the specified ship (checking capacity) and send it to the target planet.
     // this will start a timer.
-    public static void SendShip(Ship s, Planet target, Person[] people, HashMap<Resource,Integer> resources){
+    public static void SendShip(Ship s, Planet target, Person[] people, HashMap<Resource,Integer> resources) throws RuntimeException{
         
         int totalResources = 0;
         for (Map.Entry<Resource, Integer> k : resources.entrySet()){
@@ -24,11 +24,11 @@ public class Controller {
   
         //check if we can send teh ship
         if (totalResources > s.cargoCapacity){
-            // throw insufficient space exception
+            throw new RuntimeException("insufficient cargo space");
         }
         float planetDistance  = earth.DistanceToPlanet(target);
         if (planetDistance > s.fuelCapacity){
-            //throw not enough fuel exception
+            throw new RuntimeException("not enough fuel");
         }
         
         earth.RemovePeople(people);
