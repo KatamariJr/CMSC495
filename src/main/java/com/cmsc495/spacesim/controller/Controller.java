@@ -10,6 +10,7 @@ import java.util.*;
 public class Controller {
     
     private static Planet earth;
+    private static ArrayList<Planet> planets = new ArrayList<Planet>(Arrays.asList(new Planet[]{earth}));
     
     
     // load the given resources onto the specified ship (checking capacity) and send it to the target planet.
@@ -39,6 +40,31 @@ public class Controller {
         //this might be the spot where we should start a timer, but for now we appear at the planet immediately
         target.DockShip(s);
         UnloadShip(s, target);
+    }
+    
+    // GetAllPeople will return all people on the starting planet.
+    public static Person[] GetAllPeople(){
+        return earth.people;
+    }
+    
+    // GetAllShips will return all ships on the starting planet.
+    public static Ship[] GetAllShips(){
+        return earth.ships;
+    }
+    
+    // GetAllPlanets will return all planets.
+    public static Planet[] GetAllPlanets(){
+        return planets;
+    }
+    
+    // GetAllResources will return all resources on the starting planet.
+    public static HashMap<Resource, Integer> GetAllResources(){
+        return earth.resources;
+    }
+    
+    // AddPlanet will append p to the static planet list.
+    public static void AddPlanet(Planet p){
+        planets.add(p);
     }
     
     
