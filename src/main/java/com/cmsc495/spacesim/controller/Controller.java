@@ -37,18 +37,10 @@ public class Controller {
         target.DockShip(s);
         UnloadShip(s, target);
     }
-    
-    // remove all people and resources from s and add them to target
-    private static void UnloadShip(Ship s, Planet target){
-        Person[] people = s.people;
-        HashMap<Resource,Integer> resources = s.resources;
-        target.AddPeople(people);
-        target.AddResources(resources);
-    }
         
     
     
-    
+    //these are here only for completion, they will be removed when teh model stuff comes in
     class Ship{
     
     }
