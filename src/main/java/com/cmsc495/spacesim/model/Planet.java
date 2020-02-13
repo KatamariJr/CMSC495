@@ -45,7 +45,7 @@ public class Planet {
     
     
     // remove the given people from the planet people
-    public void removePepole(Person[] p){
+    public void removePeople(Person[] p){
     } //End removePeople()
     
     
