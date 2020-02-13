@@ -20,6 +20,11 @@ public class Ship {
     HashMap<Resource,int> resources;
     Person[] person;
     
+    // Ship Constructor
+    public Ship () {
+        
+    }
+    
     // add the given resources to the ship resources
     private void AddResources(HashMap<Resource, int>) {
         
