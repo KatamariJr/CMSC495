@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.cmsc495.spacesim;
+package com.cmsc495.spacesim.model;
 
 /**
  *
@@ -19,7 +19,7 @@ public class Planet {
     
     private float distance;
     private String name;
-    private Progress colonization;
+    private Progress colonizationProgress;
     private boolean isColonized;
     private HashMap<Resource, int> resources;
     private Person [] people;
@@ -38,21 +38,21 @@ public class Planet {
     
     
     // add the given people to the planet people
-    private void addPeople(Person[] p){
+    public void addPeople(Person[] p){
     } //End addPeople()
     
     
     
     
     // remove the given people from the planet people
-    private void removePepole(Person[] p){
+    public void removePepole(Person[] p){
     } //End removePeople()
     
     
     
     
      // get the distance to this planet from an origin planet
-    private float distanceToPlanet(Planet origin){
+    public float distanceToPlanet(Planet origin){
         float holder = 0;   //Just a holder until real code is inputted
         return holder;
     } //End distanceToPlanet
@@ -61,27 +61,29 @@ public class Planet {
     
     
     // add the given resources to the planet resources
-    private void addResoures(HashMap add){
+    public void addResources(HashMap add){
     } //End addResources
     
     
     
     
     // remove the given resources from the planet resources
-    private void removeResources(HashMap remove){
+    public void removeResources(HashMap remove){
     } //End removeResources()
     
     
 
     
     
-    private float getCurrentTotalProgress(){
+    public float getCurrentTotalProgress(){
         float holder = 0;   //Just a holder until real code is inputted
         return holder;
     } // End getCurrentTotalProgress()
     
     
-    
+        // complete the given requirement, removing the needed resources from the planet supply and incrementing the progress
+    public void completeRequirement(Requirements req){
+    } //End completeRequirement()
     
     
 } //End Planet Class
