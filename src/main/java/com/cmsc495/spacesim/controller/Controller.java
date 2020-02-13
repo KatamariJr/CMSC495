@@ -6,6 +6,7 @@
 package com.cmsc495.spacesim.controller;
 
 import java.util.*;
+import com.cmsc495.spacesim.model.*;
 
 public class Controller {
     
@@ -26,13 +27,13 @@ public class Controller {
         if (totalResources > s.cargoCapacity){
             throw new RuntimeException("insufficient cargo space");
         }
-        float planetDistance  = earth.DistanceToPlanet(target);
+        float planetDistance  = earth.distanceToPlanet(target);
         if (planetDistance > s.fuelCapacity){
             throw new RuntimeException("not enough fuel");
         }
         
-        earth.RemovePeople(people);
-        earth.RemoveResources(resources);
+        earth.removePeople(people);
+        earth.removeResources(resources);
         s.AddPeople(people);
         s.AddResources(resources);
         earth.UndockShip(s);
@@ -49,7 +50,7 @@ public class Controller {
     
     // GetAllShips will return all ships on the starting planet.
     public static Ship[] GetAllShips(){
-        return earth.ships;
+        return earth.dockedShips;
     }
     
     // GetAllPlanets will return all planets.
@@ -69,13 +70,6 @@ public class Controller {
     
     
     //these are here only for completion, they will be removed when the model stuff comes in
-    class Ship{
-    
-    }
-
-    class Planet{
-
-    }
 
     class Person{
 
