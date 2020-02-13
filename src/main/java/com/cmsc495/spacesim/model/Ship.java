@@ -26,7 +26,7 @@ public class Ship {
     }
     
     // add the given people to the ship people
-    private void AddPeople([]Person) {
+    private void AddPeople(Person[]) {
         
     }
     
@@ -36,7 +36,7 @@ public class Ship {
     }
     
     // remove the given people from the ship people
-    private void RemovePeople([]Person) {
+    private void RemovePeople(Person[]) {
         
     }
     
