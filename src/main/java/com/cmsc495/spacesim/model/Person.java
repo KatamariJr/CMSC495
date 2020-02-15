@@ -24,16 +24,14 @@ public class Person {
     }
     
     //Add a Skill
-    public static void main (String args[]) {
-        ArrayList<Skills> possibleSkills = new ArrayList<Skills>();
-        possibleSkills.add("Chemist");
-        possibleSkills.add("Medic");
-        possibleSkills.add("Architect");
-        possibleSkills.add("Engineer");
-        possibleSkills.add("Explorer");
-        possibleSkills.add("Builder");
-        
+    public static void initialized () {
+        String[] possibleSkills = new String[6];
+        possibleSkills[0] = "Chemist";
+        possibleSkills[0] = ("Medic");
+        possibleSkills[0] = ("Architect");
+        possibleSkills[0] = ("Engineer");
+        possibleSkills[0] = ("Explorer");
+        possibleSkills[0] = ("Builder");   
     }
     
 }
-
