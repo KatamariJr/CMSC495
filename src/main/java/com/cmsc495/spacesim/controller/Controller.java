@@ -11,11 +11,36 @@ import com.cmsc495.spacesim.model.*;
 public class Controller {
     
     private static Planet earth;
-    private static ArrayList<Planet> planets = new ArrayList<Planet>(Arrays.asList(new Planet[]{earth}));
+    private static ArrayList<Planet> planets;
+    
+    // InitializeEarth will prepare earth for the simulation.
+    public static void InitializeEarth(){
+        earth = new Planet();
+        for (int i = 0; i < 50; i++) {
+            earth.people.add(newPerson());
+        }
+        
+        HashMap<Resource, Integer> r = new HashMap<Resource, Integer>();
+        r.put(new Resource("Food"), 999);
+        r.put(new Resource("Water"), 999);
+        r.put(new Resource("Medicine"), 999);
+        
+        earth.resources = r;
+        
+        planets = new ArrayList<Planet>();
+        planets.add(earth);
+    }
+    
+    // create a new person.
+    private static Person newPerson(){
+        Person p = new Person();
+        p.name = "Bob";
+        p.skill = "Flying";
+        return p;
+    }
     
     
-    // load the given resources onto the specified ship (checking capacity) and send it to the target planet.
-    // this will start a timer.
+    // SendShip will load the given resources onto the specified ship (checking capacity) and send it to the target planet.
     public static void SendShip(Ship s, Planet target, ArrayList<Person> people, HashMap<Resource,Integer> resources) throws RuntimeException{
         
         int totalResources = 0;
@@ -23,7 +48,7 @@ public class Controller {
             totalResources += k.getValue();
         }
   
-        //check if we can send teh ship
+        //check if we can send the ship
         if (totalResources > s.cargoCapacity){
             throw new RuntimeException("insufficient cargo space");
         }
