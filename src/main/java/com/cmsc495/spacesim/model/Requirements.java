@@ -16,7 +16,7 @@ import java.time.*;
 
 
 public class Requirements {
-    
+   
     public HashMap<Resource, int> resources;
     public HashMap<Skill, int> skills;
     public Progress progressContribution;
@@ -27,13 +27,14 @@ public class Requirements {
         
         resources = new HashMap();
         skills = new HashMap();
-        
+               
     }
     
     
         
     
     // complete the given requirement, removing the needed resources from the planet supply and incrementing the progress
+
     public void completeRequirement(){
     } //End completeRequirement()
     
