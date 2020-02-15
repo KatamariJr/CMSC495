@@ -107,6 +107,38 @@ public class Ship {
         return this.name;
     }
     
+    /**
+     * Getter for speed
+     * @return this.speed
+     **/
+    protected int getSpeed() {
+        return this.speed;
+    }
+    
+    /**
+     * Getter for fuelCapacity
+     * @return this.fuelCapacity
+     **/
+    protected int getfuelCapacity() {
+        return this.fuelCapacity;
+    }
+    
+    /**
+     * Getter for cargoCapacity
+     * @return this.cargoCapacity
+     **/
+    protected int getCargoCapacity() {
+        return this.cargoCapacity;
+    }
+    
+    /**
+     * Getter for peopleCapacity
+     * @return this.peopleCapacity
+     **/
+    protected int getPeopleCapacity() {
+        return this.peopleCapacity;
+    }
+    
     // add the given resources to the ship resources
     public void AddResources(HashMap<Resource, int>) {
         
