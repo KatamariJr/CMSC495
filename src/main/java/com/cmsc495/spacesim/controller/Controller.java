@@ -93,7 +93,55 @@ public class Controller {
         planets.add(p);
     }
     
-    
+    // remove all people and resources from s and add them to target
+    public static void unloadShip(Ship s, Planet target){
+       target.people.addAll(s.person); 
+       s.person.clear();
+       Set<String> rSet = s.resources.keySet();
+       //System.out.println("The planet before unloading: " + target.resources);
+       for(String r: rSet){
+          target.resources.computeIfPresent(r, (key, oldVal) -> oldVal + s.resources.get(r));
+          target.resources.computeIfAbsent(r, key -> s.resources.get(r));
+       }
+       //System.out.println("The planet after unloading: " + target.resources);
+       //System.out.println("The ship list b4 clearing : " + s.resources);
+       s.resources.clear();
+       //System.out.println("The ship list after clearing : " + s.resources);
+       //System.out.println("The planet has the following people: " + target.people);
+    }
+
+     // In case we want to create a separte log for errors
+    public static void logEvent(String event){
+       logFile(event, "log.txt");
+    }
+    // logs an event to a specified file
+    public static void logFile(String log, String fileName){
+         BufferedWriter writer = null;
+
+         // write the text variable using the bufferedwriter to testing.txt
+         try {
+             writer = new BufferedWriter(new FileWriter(fileName, true));
+             writer.write("---" + log + " at " + new Date());
+             writer.newLine();
+         }
+         // print error message if there is one
+         catch (IOException io) {
+             System.out.println("File IO Exception" + io.getMessage());
+         }
+         //close the file
+         finally {
+             try {
+                 if (writer != null) {
+                     writer.close();
+                 }
+             }
+             //print error message if there is one
+             catch (IOException io) {
+                 System.out.println("Issue closing the File." + io.getMessage());
+             }
+         }
+     }
+   
     //these are here only for completion, they will be removed when the model stuff comes in
 
     class Person{
