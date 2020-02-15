@@ -27,10 +27,10 @@ public class Person {
     public static void initialized () {
         String[] possibleSkills = new String[6];
         possibleSkills[0] = "Chemist";
-        possibleSkills[1] = ("Medic");
-        possibleSkills[2] = ("Architect");
-        possibleSkills[3] = ("Engineer");
-        possibleSkills[4] = ("Explorer");
-        possibleSkills[5] = ("Builder");   
+        possibleSkills[1] = "Medic";
+        possibleSkills[2] = "Architect";
+        possibleSkills[3] = "Engineer";
+        possibleSkills[4] = "Explorer";
+        possibleSkills[5] = "Builder";   
     }   
 }

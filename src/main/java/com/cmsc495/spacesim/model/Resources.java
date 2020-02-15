@@ -27,14 +27,14 @@ public class Resources {
     }
     
     //Add a Resource
-    public static void main (String args[]) {
-        ArrayList<Resources> possibleResources = new ArrayList<Resources>();
-        possibleResources.add("Food");
-        possibleResources.add("Water");
-        possibleResources.add("Gasoline");
-        possibleResources.add("Coal");
-        possibleResources.add("Medical Supplies");
-        possibleResources.add("Building Materials");
-    }
-
+    public static void initialized () {
+        String[] possibleResources = new String[6];
+        possibleSkills[0] = "Food";
+        possibleSkills[1] = "Water";
+        possibleSkills[2] = "Gasoline";
+        possibleSkills[3] = "Coal";
+        possibleSkills[4] = "Medical Supplied";
+        possibleSkills[5] = "Building Materials";   
+    }   
+    
 }
