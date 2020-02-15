@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.cmsc495.spacesim;
+package com.cmsc495.spacesim.model;
 
 /**
  *
@@ -25,6 +25,8 @@ public class Requirements {
     
     public Requirements(){
         
+        resources = new HashMap();
+        skills = new HashMap();
         
     }
     
