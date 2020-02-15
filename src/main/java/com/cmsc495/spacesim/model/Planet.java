@@ -17,14 +17,14 @@ import java.util.*;
 public class Planet {
     
     
-    private float distance;
-    private String name;
-    private Progress colonizationProgress;
-    private boolean isColonized;
-    private HashMap<Resource, int> resources;
-    private ArrayList<Person> people;
-    private ArrayList<Requirements> requirement;
-    private ArrayList<Ship> dockedShips;
+    public float distance;
+    public String name;
+    public Progress colonizationProgress;
+    public boolean isColonized;
+    public HashMap<Resource, int> resources;
+    public ArrayList<Person> people;
+    public ArrayList<Requirements> requirement;
+    public ArrayList<Ship> dockedShips;
 
     
     

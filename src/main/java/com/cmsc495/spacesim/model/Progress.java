@@ -12,9 +12,9 @@ package com.cmsc495.spacesim.model;
 public class Progress {
     
     
-    private float buildingColonizationProgress;
-    private float farmingColonizationProgress;
-    private float scienceColonizationProgress;
+    public float buildingColonizationProgress;
+    public float farmingColonizationProgress;
+    public float scienceColonizationProgress;
     
     
     
