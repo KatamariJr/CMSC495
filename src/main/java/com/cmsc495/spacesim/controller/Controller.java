@@ -16,7 +16,7 @@ public class Controller {
     
     // load the given resources onto the specified ship (checking capacity) and send it to the target planet.
     // this will start a timer.
-    public static void SendShip(Ship s, Planet target, Person[] people, HashMap<Resource,Integer> resources) throws RuntimeException{
+    public static void SendShip(Ship s, Planet target, ArrayList<Person> people, HashMap<Resource,Integer> resources) throws RuntimeException{
         
         int totalResources = 0;
         for (Map.Entry<Resource, Integer> k : resources.entrySet()){
@@ -44,17 +44,17 @@ public class Controller {
     }
     
     // GetAllPeople will return all people on the starting planet.
-    public static Person[] GetAllPeople(){
+    public static ArrayList<Person>GetAllPeople(){
         return earth.people;
     }
     
     // GetAllShips will return all ships on the starting planet.
-    public static Ship[] GetAllShips(){
+    public static ArrayList<Ship>GetAllShips(){
         return earth.dockedShips;
     }
     
     // GetAllPlanets will return all planets.
-    public static Planet[] GetAllPlanets(){
+    public static ArrayList<Planet> GetAllPlanets(){
         return planets;
     }
     
