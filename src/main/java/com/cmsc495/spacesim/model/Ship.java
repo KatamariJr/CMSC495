@@ -10,7 +10,7 @@ import java.util.*;
 
 /**
  *
- * @author RexannaMcGowan
+ * @author RexannaSmith
  */
 public class Ship {
     Planet target;
@@ -33,13 +33,78 @@ public class Ship {
         }
     }
     
-    /**************** GETTERS and SETTERS **************/
+    //Setters
+    
+    /**
+     * Setter for target
+     * @param target Planet
+     * @return void
+     **/
     public void setTarget (Planet target) {
         this.target = target;
     }
     
-    protected Planet getTarget {
+    /**
+     * Setter for name
+     * @param name String
+     * @return void
+     **/
+    public void setName (String name) {
+        this.name = name;
+    }
+    
+    /**
+     * Setter for speed
+     * @param speed int
+     * @return void
+     **/
+    public void setSpeed (int speed) {
+        this.speed = speed;
+    }
+    
+    /**
+     * Setter for fuelCapacity
+     * @param fuelCapacity int
+     * @return void
+     **/
+    public void setfuelCapacity (int fuelCapacity) {
+        this.fuelCapacity = fuelCapacity;
+    }
+    
+    /**
+     * Setter for cargoCapacity
+     * @param cargoCapacity int
+     * @return void
+     **/
+    public void setcargoCapacity (int cargoCapacity) {
+        this.cargoCapacity = cargoCapacity;
+    }
+    
+    /**
+     * Setter for peopleCapacity
+     * @param peopleCapacity int
+     * @return void
+     **/
+    public void setpeopleCapacity (int peopleCapacity) {
+        this.peopleCapacity = peopleCapacity;
+    }
+    
+    //Getters
+    
+    /**
+     * Getter for target
+     * @return this.target
+     **/
+    protected Planet getTarget() {
         return this.target;
+    }
+    
+    /**
+     * Getter for name
+     * @return this.name
+     **/
+    protected String getName() {
+        return this.name;
     }
     
     // add the given resources to the ship resources
@@ -70,6 +135,5 @@ public class Ship {
     // remove this ship from the docked ship array
     public void UndockShip(Ship) {
         
-    }
-    
+    } 
 }
