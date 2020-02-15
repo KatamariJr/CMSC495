@@ -17,35 +17,44 @@ import java.util.*;
 public class Planet {
     
     
-    private float distance;
-    private String name;
-    private Progress colonizationProgress;
-    private boolean isColonized;
-    private HashMap<Resource, int> resources;
-    private Person [] people;
-    private Requirements [] requirements;
-    private Ships [] dockedShips;
+    public float distance;
+    public String name;
+    public Progress colonizationProgress;
+    public boolean isColonized;
+    public HashMap<Resource, int> resources;
+    public ArrayList<Person> people;
+    public ArrayList<Requirements> requirement;
+    public ArrayList<Ship> dockedShips;
 
     
-
     
     
     
     public Planet(){
-    } 
+        
+        distance = 0;
+        name = "";
+        isColonized = false;
+        people = new ArrayList();
+        requirement = new ArrayList();
+        dockedShips = new ArrayList();
+        resources = new HashMap();
+        
+        
+    } //End constructor
     
     
     
     
     // add the given people to the planet people
-    public void addPeople(Person[] p){
+    public void addPeople(ArrayList<Person> p){
     } //End addPeople()
     
     
     
     
     // remove the given people from the planet people
-    public void removePeople(Person[] p){
+    public void removePeople(ArrayList<Person> p){
     } //End removePeople()
     
     
@@ -82,8 +91,25 @@ public class Planet {
     
     
         // complete the given requirement, removing the needed resources from the planet supply and incrementing the progress
-    public void completeRequirement(Requirements req){
+    public void completeRequirement(ArrayList<Requirements> req){
     } //End completeRequirement()
+    
+    
+    
+    
+    // add this ship to the docked ship array
+    public void dockShip(ArrayList<Ship> s){
+        
+    } // End dockedShip()
+
+    
+    
+     // remove this ship from the docked ship array
+    public void undockShip(ArrayList<Ship> s){
+        
+    } // End undockedShip()
+
+    
     
     
 } //End Planet Class
