@@ -30,6 +30,8 @@ public class Ship {
         }
         if (speed >= 400000 && fuelCapacity >= 1500 && cargoCapacity >= 25 && peopleCapacity >= 20) {
             shipSize = "Large";
+        } else {
+            shipSize = "Unknown";
         }
     }
     
@@ -95,7 +97,7 @@ public class Ship {
      * Getter for target
      * @return this.target
      **/
-    protected Planet getTarget() {
+    public Planet getTarget() {
         return this.target;
     }
     
@@ -103,7 +105,7 @@ public class Ship {
      * Getter for name
      * @return this.name
      **/
-    protected String getName() {
+    public String getName() {
         return this.name;
     }
     
@@ -111,7 +113,7 @@ public class Ship {
      * Getter for speed
      * @return this.speed
      **/
-    protected int getSpeed() {
+    public int getSpeed() {
         return this.speed;
     }
     
@@ -119,7 +121,7 @@ public class Ship {
      * Getter for fuelCapacity
      * @return this.fuelCapacity
      **/
-    protected int getfuelCapacity() {
+    public int getfuelCapacity() {
         return this.fuelCapacity;
     }
     
@@ -127,7 +129,7 @@ public class Ship {
      * Getter for cargoCapacity
      * @return this.cargoCapacity
      **/
-    protected int getCargoCapacity() {
+    public int getCargoCapacity() {
         return this.cargoCapacity;
     }
     
@@ -135,7 +137,7 @@ public class Ship {
      * Getter for peopleCapacity
      * @return this.peopleCapacity
      **/
-    protected int getPeopleCapacity() {
+    public int getPeopleCapacity() {
         return this.peopleCapacity;
     }
     
