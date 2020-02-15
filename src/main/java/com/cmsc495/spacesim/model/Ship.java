@@ -14,33 +14,41 @@ import java.util.*;
  */
 public class Ship {
     Planet target;
-    private float speed;
-    private int fuelCapacity, cargoCapacity, peopleCapacity;
+    private int speed, fuelCapacity, cargoCapacity, peopleCapacity;
     private String name, shipSize;
     HashMap<Resource,int> resources;
-    Person[] person;
+    ArrayList<Person> person;
     
     // Ship Constructor
     public Ship () {
-        if (fuelCapacity <= 500 && cargoCapacity <= 15 && peopleCapacity <= 6) {
+        if (speed <= 300000 && fuelCapacity <= 500 && cargoCapacity <= 15 && peopleCapacity <= 6) {
             shipSize = "Small";
         }
-        if ((fuelCapacity > 500 && fuelCapacity < 1500) && (cargoCapacity > 15 && cargoCapacity < 25)
+        if ((speed > 300000 && speed < 400000) && (fuelCapacity > 500 && fuelCapacity < 1500) && (cargoCapacity > 15 && cargoCapacity < 25)
             && (peopleCapacity > 6 && peopleCapacity < 20)) {
             shipSize = "Medium";
         }
-        if (fuelCapacity >= 1500 && cargoCapacity >= 25 && peopleCapacity >= 20) {
+        if (speed >= 400000 && fuelCapacity >= 1500 && cargoCapacity >= 25 && peopleCapacity >= 20) {
             shipSize = "Large";
         }
     }
     
+    /**************** GETTERS and SETTERS **************/
+    public void setTarget (Planet target) {
+        this.target = target;
+    }
+    
+    protected Planet getTarget {
+        return this.target;
+    }
+    
     // add the given resources to the ship resources
-    private void AddResources(HashMap<Resource, int>) {
+    public void AddResources(HashMap<Resource, int>) {
         
     }
     
     // add the given people to the ship people
-    public void AddPeople(Person[]) {
+    public void AddPeople(ArrayList<Person>) {
         
     }
     
@@ -50,7 +58,7 @@ public class Ship {
     }
     
     // remove the given people from the ship people
-    public void RemovePeople(Person[]) {
+    public void RemovePeople(ArrayList<Person>) {
         
     }
     
