@@ -34,5 +34,5 @@ public class Resources {
         possibleResources[3] = "Coal";
         possibleResources[4] = "Medical Supplied";
         possibleResources[5] = "Building Materials";   
-    }       
+    }  
 }
