@@ -18,23 +18,21 @@ public class Resources {
     private ArrayList <Resources> possibleResources;
     private int weight;
     private int size;
-
-    
+ 
     public Resources() {
         weight = 0;
         size = 0;
         possibleResources = new ArrayList();
     }
     
-    //Add a Resource
+    //Add Resources
     public static void initialized () {
         String[] possibleResources = new String[6];
-        possibleSkills[0] = "Food";
-        possibleSkills[1] = "Water";
-        possibleSkills[2] = "Gasoline";
-        possibleSkills[3] = "Coal";
-        possibleSkills[4] = "Medical Supplied";
-        possibleSkills[5] = "Building Materials";   
-    }   
-    
+        possibleResources[0] = "Food";
+        possibleResources[1] = "Water";
+        possibleResources[2] = "Gasoline";
+        possibleResources[3] = "Coal";
+        possibleResources[4] = "Medical Supplied";
+        possibleResources[5] = "Building Materials";   
+    }  
 }

@@ -6,24 +6,25 @@
 
 package com.cmsc495.spacesim.model;
 
-import java.util.*;
-
 /**
  *
  * @author NoorQasim
  */
+
+import java.util.*;
+
 public class Person {
     
     private ArrayList <Skills> possibleSkills;
     private String assignedPerson;
     private String name;
     private boolean locked;
-
+    
     public Person() {
        possibleSkills = new ArrayList();
     }
     
-    //Add a Skill
+    //Add Skills
     public static void initialized () {
         String[] possibleSkills = new String[6];
         possibleSkills[0] = "Chemist";
@@ -32,5 +33,5 @@ public class Person {
         possibleSkills[3] = "Engineer";
         possibleSkills[4] = "Explorer";
         possibleSkills[5] = "Builder";   
-    }   
+    }
 }
