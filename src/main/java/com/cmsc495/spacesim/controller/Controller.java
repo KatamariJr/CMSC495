@@ -7,6 +7,7 @@ package com.cmsc495.spacesim.controller;
 
 import java.util.*;
 import com.cmsc495.spacesim.model.*;
+import java.io.*;
 
 public class Controller {
     
@@ -20,10 +21,10 @@ public class Controller {
             earth.people.add(newPerson());
         }
         
-        HashMap<Resource, Integer> r = new HashMap<Resource, Integer>();
-        r.put(new Resource("Food"), 999);
-        r.put(new Resource("Water"), 999);
-        r.put(new Resource("Medicine"), 999);
+        HashMap<String, Integer> r = new HashMap<String, Integer>();
+        r.put("Food", 999);
+        r.put("Water", 999);
+        r.put("Medicine", 999);
         
         earth.resources = r;
         
@@ -40,11 +41,11 @@ public class Controller {
     }
     
     
-    // SendShip will load the given resources onto the specified ship (checking capacity) and send it to the target planet.
-    public static void SendShip(Ship s, Planet target, ArrayList<Person> people, HashMap<Resource,Integer> resources) throws RuntimeException{
+    // sendShip will load the given resources onto the specified ship (checking capacity) and send it to the target planet.
+    public static void sendShip(Ship s, Planet target, ArrayList<Person> people, HashMap<String,Integer> resources) throws RuntimeException{
         
         int totalResources = 0;
-        for (Map.Entry<Resource, Integer> k : resources.entrySet()){
+        for (Map.Entry<String, Integer> k : resources.entrySet()){
             totalResources += k.getValue();
         }
   
@@ -59,44 +60,44 @@ public class Controller {
         
         earth.removePeople(people);
         earth.removeResources(resources);
-        s.AddPeople(people);
-        s.AddResources(resources);
-        earth.UndockShip(s);
+        s.addPeople(people);
+        s.addResources(resources);
+        earth.undockShip(s);
         
         //this might be the spot where we should start a timer, but for now we appear at the planet immediately
-        target.DockShip(s);
-        UnloadShip(s, target);
+        target.dockShip(s);
+        unloadShip(s, target);
     }
     
     // GetAllPeople will return all people on the starting planet.
-    public static ArrayList<Person>GetAllPeople(){
+    public static ArrayList<Person>getAllPeople(){
         return earth.people;
     }
     
     // GetAllShips will return all ships on the starting planet.
-    public static ArrayList<Ship>GetAllShips(){
+    public static ArrayList<Ship>getAllShips(){
         return earth.dockedShips;
     }
     
     // GetAllPlanets will return all planets.
-    public static ArrayList<Planet> GetAllPlanets(){
+    public static ArrayList<Planet> getAllPlanets(){
         return planets;
     }
     
     // GetAllResources will return all resources on the starting planet.
-    public static HashMap<Resource, Integer> GetAllResources(){
+    public static HashMap<String, Integer> getAllResources(){
         return earth.resources;
     }
     
     // AddPlanet will append p to the static planet list.
-    public static void AddPlanet(Planet p){
+    public static void addPlanet(Planet p){
         planets.add(p);
     }
     
     // remove all people and resources from s and add them to target
     public static void unloadShip(Ship s, Planet target){
-       target.people.addAll(s.person); 
-       s.person.clear();
+       target.people.addAll(s.people); 
+       s.people.clear();
        Set<String> rSet = s.resources.keySet();
        //System.out.println("The planet before unloading: " + target.resources);
        for(String r: rSet){
@@ -141,15 +142,5 @@ public class Controller {
              }
          }
      }
-   
-    //these are here only for completion, they will be removed when the model stuff comes in
-
-    class Person{
-
-    }
-
-    class Resource{
-
-    }
     
 }
