@@ -13,11 +13,11 @@ import java.util.*;
  * @author RexannaSmith
  */
 public class Ship {
-    Planet target;
-    private int speed, fuelCapacity, cargoCapacity, peopleCapacity;
-    private String name, shipSize;
-    HashMap<Resource,int> resources;
-    ArrayList<Person> person;
+    public Planet target;
+    public int speed, fuelCapacity, cargoCapacity, peopleCapacity;
+    public String name, shipSize;
+    public HashMap<String, Integer> resources;
+    public ArrayList<Person> people;
     
     // Ship Constructor
     public Ship () {
@@ -142,32 +142,23 @@ public class Ship {
     }
     
     // add the given resources to the ship resources
-    public void AddResources(HashMap<Resource, int>) {
+    public void addResources(HashMap<String, Integer> h) {
         
     }
     
     // add the given people to the ship people
-    public void AddPeople(ArrayList<Person>) {
+    public void addPeople(ArrayList<Person> p) {
         
     }
     
     // remove the given resources from the ship resources
-    public void RemoveResources(HashMap<Resource, int>) {
+    public void removeResources(HashMap<String, Integer> r) {
         
     }
     
     // remove the given people from the ship people
-    public void RemovePeople(ArrayList<Person>) {
+    public void removePeople(ArrayList<Person> p) {
         
     }
     
-    // add this ship to the docked ship array
-    public void DockShip(Ship) {
-        
-    }
-    
-    // remove this ship from the docked ship array
-    public void UndockShip(Ship) {
-        
-    } 
 }
