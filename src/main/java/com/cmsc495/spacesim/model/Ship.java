@@ -1,7 +1,7 @@
 /*
  * CMSC495 SpaceSimProject
  * C.O.P.E. Team
- * 12FEB2020
+ * 19FEB2020
  * Ship.java holds the data that constructs the Ship Class
  */
 package com.cmsc495.spacesim.model;
@@ -16,11 +16,15 @@ public class Ship {
     Planet target;
     private int speed, fuelCapacity, cargoCapacity, peopleCapacity;
     private String name, shipSize;
-    HashMap<Resource,int> resources;
+    HashMap<String,Integer> resources;
     ArrayList<Person> person;
     
     // Ship Constructor
     public Ship () {
+        /******** Insert all encompassing if statement here ******/
+        if (speed > 1 && fuelCapacity > 1 && cargoCapacity > 1 && peopleCapacity > 1) {
+            shipSize = "";
+        }
         if (speed <= 300000 && fuelCapacity <= 500 && cargoCapacity <= 15 && peopleCapacity <= 6) {
             shipSize = "Small";
         }
@@ -30,8 +34,6 @@ public class Ship {
         }
         if (speed >= 400000 && fuelCapacity >= 1500 && cargoCapacity >= 25 && peopleCapacity >= 20) {
             shipSize = "Large";
-        } else {
-            shipSize = "Unknown";
         }
     }
     
@@ -69,7 +71,7 @@ public class Ship {
      * @param fuelCapacity int
      * @return void
      **/
-    public void setfuelCapacity (int fuelCapacity) {
+    public void setFuelCapacity (int fuelCapacity) {
         this.fuelCapacity = fuelCapacity;
     }
     
@@ -78,7 +80,7 @@ public class Ship {
      * @param cargoCapacity int
      * @return void
      **/
-    public void setcargoCapacity (int cargoCapacity) {
+    public void setCargoCapacity (int cargoCapacity) {
         this.cargoCapacity = cargoCapacity;
     }
     
@@ -87,7 +89,7 @@ public class Ship {
      * @param peopleCapacity int
      * @return void
      **/
-    public void setpeopleCapacity (int peopleCapacity) {
+    public void setPeopleCapacity (int peopleCapacity) {
         this.peopleCapacity = peopleCapacity;
     }
     
@@ -121,7 +123,7 @@ public class Ship {
      * Getter for fuelCapacity
      * @return this.fuelCapacity
      **/
-    public int getfuelCapacity() {
+    public int getFuelCapacity() {
         return this.fuelCapacity;
     }
     
@@ -142,7 +144,7 @@ public class Ship {
     }
     
     // add the given resources to the ship resources
-    public void AddResources(HashMap<Resource, int>) {
+    public void AddResources(HashMap<String, Integer>) {
         
     }
     
@@ -152,7 +154,7 @@ public class Ship {
     }
     
     // remove the given resources from the ship resources
-    public void RemoveResources(HashMap<Resource, int>) {
+    public void RemoveResources(HashMap<String, Integer>) {
         
     }
     
@@ -162,12 +164,12 @@ public class Ship {
     }
     
     // add this ship to the docked ship array
-    public void DockShip(Ship) {
+    public void DockShip(ArrayList<Ship> s) {
         
     }
     
     // remove this ship from the docked ship array
-    public void UndockShip(Ship) {
+    public void UndockShip(ArrayList<Ship> s) {
         
     } 
 }
