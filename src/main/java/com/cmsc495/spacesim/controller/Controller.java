@@ -10,6 +10,8 @@ import com.cmsc495.spacesim.model.*;
 import java.io.*;
 
 public class Controller {
+    final static private int REQUIREMENT_MAXIMUM_SKILL_TOTAL = 5;
+    final static private int REQUIREMENT_MAXIMUM_RESOURCE_TOTAL = 15;
     
     private static Planet earth;
     private static ArrayList<Planet> planets;
@@ -38,6 +40,51 @@ public class Controller {
         p.name = "Bob";
         p.skill = "Flying";
         return p;
+    }
+    
+    // get a new Requirement with randomly populated skill/resource values
+    public static Requirement newRequirement(){
+        Requirement req = new Requirement();
+        Random r = new Random();
+        ArrayList<String> allSkills =  allPossibleSkills();
+        ArrayList<String> allResources =  allPossibleResources();
+        //pick a random number of skills
+        for(int i = 0; i < r.nextInt(REQUIREMENT_MAXIMUM_SKILL_TOTAL) + 1; i++){
+            //add a random skill
+            String skill = allSkills.get(r.nextInt(allSkills.size()));
+            
+            //make sure key is set
+            if (!req.skills.containsKey(skill)){
+                req.skills.put(skill, 1);
+            } else {
+                req.skills.put(skill, req.skills.get(skill));
+            }
+        }
+        
+        //pick a random number of resources
+        for(int i = 0; i <= r.nextInt(REQUIREMENT_MAXIMUM_RESOURCE_TOTAL) + 1; i++){
+            //add a random skill
+            String skill = allResources.get(r.nextInt(allResources.size()));
+            
+            //make sure key is set
+            if (!req.resources.containsKey(skill)){
+                req.resources.put(skill, 1);
+            } else {
+                req.resources.put(skill, req.resources.get(skill));
+            }
+        }
+        
+        return req;     
+    }
+    
+    private static ArrayList<String> allPossibleResources(){
+        String[] str = {"Food", "Water", "Gasoline", "Coal", "Building Materials", "Medical Supplies"};
+        return new ArrayList<String>(Arrays.asList(str));
+    }
+    
+     private static ArrayList<String> allPossibleSkills(){
+        String[] str = {"Chemist", "Medic", "Architect", "Explorer", "Engineer"};
+        return new ArrayList<String>(Arrays.asList(str));
     }
     
     
