@@ -23,12 +23,11 @@ public class Controller {
             earth.people.add(newPerson());
         }
         
-        HashMap<String, Integer> r = new HashMap<String, Integer>();
-        r.put("Food", 999);
-        r.put("Water", 999);
-        r.put("Medicine", 999);
-        
-        earth.resources = r;
+        //populate the list of resources
+        ArrayList<String> allResources =  getAllPossibleResources();
+        for(int i = 0; i < allResources.size(); i++){
+            earth.resources.put(allResources.get(i), 999);
+        }
         
         planets = new ArrayList<Planet>();
         planets.add(earth);
@@ -37,8 +36,11 @@ public class Controller {
     // create a new person.
     private static Person newPerson(){
         Person p = new Person();
-        p.name = "Bob";
-        p.skill = "Flying";
+        Random r = new Random();
+        ArrayList<String> names = getAllPossiblePeopleNames();
+        ArrayList<String> skills = getAllPossibleSkills();
+        p.name = names.get(r.nextInt(names.size()));
+        p.skill = skills.get(r.nextInt(skills.size()));
         return p;
     }
     
@@ -46,8 +48,8 @@ public class Controller {
     public static Requirement newRequirement(){
         Requirement req = new Requirement();
         Random r = new Random();
-        ArrayList<String> allSkills =  allPossibleSkills();
-        ArrayList<String> allResources =  allPossibleResources();
+        ArrayList<String> allSkills =  getAllPossibleSkills();
+        ArrayList<String> allResources =  getAllPossibleResources();
         //pick a random number of skills
         for(int i = 0; i < r.nextInt(REQUIREMENT_MAXIMUM_SKILL_TOTAL) + 1; i++){
             //add a random skill
@@ -77,13 +79,18 @@ public class Controller {
         return req;     
     }
     
-    private static ArrayList<String> allPossibleResources(){
+    private static ArrayList<String> getAllPossibleResources(){
         String[] str = {"Food", "Water", "Gasoline", "Coal", "Building Materials", "Medical Supplies"};
         return new ArrayList<String>(Arrays.asList(str));
     }
     
-     private static ArrayList<String> allPossibleSkills(){
+    private static ArrayList<String> getAllPossibleSkills(){
         String[] str = {"Chemist", "Medic", "Architect", "Explorer", "Engineer"};
+        return new ArrayList<String>(Arrays.asList(str));
+    }
+    
+    private static ArrayList<String> getAllPossiblePeopleNames(){
+        String[] str = {"Alice", "Bob", "Charlie", "Darcy", "Edward"};
         return new ArrayList<String>(Arrays.asList(str));
     }
     
