@@ -8,6 +8,8 @@ package com.cmsc495.spacesim.controller;
 import com.cmsc495.spacesim.model.Planet;
 import com.cmsc495.spacesim.model.Requirement;
 import com.cmsc495.spacesim.model.Ship;
+import com.cmsc495.spacesim.model.Person;
+import java.util.ArrayList;
 import java.util.HashMap;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
@@ -53,8 +55,9 @@ public class ControllerTest {
     @org.junit.jupiter.api.Test
     public void testGetAllPeople() {
         System.out.println("GetAllPeople");
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Controller.InitializeEarth();
+        ArrayList<Person> p = Controller.getAllPeople();
+        assertTrue(!p.isEmpty());
     }
 
     /**
@@ -63,19 +66,9 @@ public class ControllerTest {
     @org.junit.jupiter.api.Test
     public void testGetAllShips() {
         System.out.println("GetAllShips");
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of GetAllPlanets method, of class Controller.
-     */
-    @org.junit.jupiter.api.Test
-    public void testGetAllPlanets() {
-        System.out.println("GetAllPlanets");
-        
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Controller.InitializeEarth();
+        ArrayList<Ship> s = Controller.getAllShips();
+        assertTrue(!s.isEmpty());
     }
 
     /**
@@ -84,9 +77,9 @@ public class ControllerTest {
     @org.junit.jupiter.api.Test
     public void testGetAllResources() {
         System.out.println("GetAllResources");
-        
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Controller.InitializeEarth();
+        HashMap<String, Integer> r = Controller.getAllResources();
+        assertTrue(r.keySet().size() > 0);
     }
 
     /**
@@ -95,9 +88,11 @@ public class ControllerTest {
     @org.junit.jupiter.api.Test
     public void testAddPlanet() {
         System.out.println("AddPlanet");
-       
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Controller.InitializeEarth();
+        Planet p = new Planet();
+        Controller.addPlanet(p);
+        ArrayList<Planet> planets = Controller.getAllPlanets();
+        assertTrue(planets.size() == 2);
     }
 
     /**
@@ -107,8 +102,8 @@ public class ControllerTest {
     public void testInitializeEarth() {
         System.out.println("InitializeEarth");
         Controller.InitializeEarth();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        ArrayList<Planet> planets = Controller.getAllPlanets();
+        assertTrue(planets.size() == 1);
     }
 
     /**
