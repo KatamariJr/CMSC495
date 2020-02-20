@@ -13,16 +13,16 @@ import java.util.*;
  * @author RexannaSmith
  */
 public class Ship {
-    Planet target;
-    private int speed, fuelCapacity, cargoCapacity, peopleCapacity;
-    private String name, shipSize;
-    HashMap<String,Integer> resources;
-    ArrayList<Person> person;
+    public Planet target;
+    public int speed, fuelCapacity, cargoCapacity, peopleCapacity;
+    public String name, shipSize;
+    public HashMap<String, Integer> resources;
+    public ArrayList<Person> people;
     
     // Ship Constructor
     public Ship () {
         /******** Insert all encompassing if statement here ******/
-        if (speed > 1 && fuelCapacity > 1 && cargoCapacity > 1 && peopleCapacity > 1) {
+        if (speed > 0 && fuelCapacity > 0 && cargoCapacity > 0 && peopleCapacity > 0) {
             shipSize = "";
         }
         if (speed <= 300000 && fuelCapacity <= 500 && cargoCapacity <= 15 && peopleCapacity <= 6) {
@@ -144,32 +144,22 @@ public class Ship {
     }
     
     // add the given resources to the ship resources
-    public void AddResources(HashMap<String, Integer>) {
+    public void addResources(HashMap<String, Integer> h) {
         
     }
     
     // add the given people to the ship people
-    public void AddPeople(ArrayList<Person>) {
+    public void addPeople(ArrayList<Person> p) {
         
     }
     
     // remove the given resources from the ship resources
-    public void RemoveResources(HashMap<String, Integer>) {
+    public void removeResources(HashMap<String, Integer> r) {
         
     }
     
     // remove the given people from the ship people
-    public void RemovePeople(ArrayList<Person>) {
+    public void removePeople(ArrayList<Person> p) {
         
     }
-    
-    // add this ship to the docked ship array
-    public void DockShip(ArrayList<Ship> s) {
-        
-    }
-    
-    // remove this ship from the docked ship array
-    public void UndockShip(ArrayList<Ship> s) {
-        
-    } 
 }

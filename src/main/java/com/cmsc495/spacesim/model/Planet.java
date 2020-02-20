@@ -21,9 +21,9 @@ public class Planet {
     public String name;
     public Progress colonizationProgress;
     public boolean isColonized;
-    public HashMap<Resource, int> resources;
+    public HashMap<String, Integer> resources;
     public ArrayList<Person> people;
-    public ArrayList<Requirements> requirement;
+    public ArrayList<Requirement> requirement;
     public ArrayList<Ship> dockedShips;
 
     
@@ -39,8 +39,6 @@ public class Planet {
         requirement = new ArrayList();
         dockedShips = new ArrayList();
         resources = new HashMap();
-        
-        
     } //End constructor
     
     
@@ -70,14 +68,14 @@ public class Planet {
     
     
     // add the given resources to the planet resources
-    public void addResources(HashMap add){
+    public void addResources(HashMap<String, Integer> add){
     } //End addResources
     
     
     
     
     // remove the given resources from the planet resources
-    public void removeResources(HashMap remove){
+    public void removeResources(HashMap<String, Integer> remove){
     } //End removeResources()
     
     
@@ -91,21 +89,21 @@ public class Planet {
     
     
         // complete the given requirement, removing the needed resources from the planet supply and incrementing the progress
-    public void completeRequirement(ArrayList<Requirements> req){
+    public void completeRequirement(ArrayList<Requirement> req){
     } //End completeRequirement()
     
     
     
     
     // add this ship to the docked ship array
-    public void dockShip(ArrayList<Ship> s){
+    public void dockShip(Ship s){
         
     } // End dockedShip()
 
     
     
      // remove this ship from the docked ship array
-    public void undockShip(ArrayList<Ship> s){
+    public void undockShip(Ship s){
         
     } // End undockedShip()
 

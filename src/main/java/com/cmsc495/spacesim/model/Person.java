@@ -15,23 +15,25 @@ import java.util.*;
 
 public class Person {
     
-    private ArrayList <Skills> possibleSkills;
-    private String assignedPerson;
-    private String name;
-    private boolean locked;
+    public String skill;
+    public String name;
+    public boolean locked;
     
     public Person() {
-       possibleSkills = new ArrayList();
+       
+    }
+       
+    // this person will be locked while they are being used to complete a requirement
+    public void lock(){
+        
     }
     
-    //Add Skills
-    public static void initialized () {
-        String[] possibleSkills = new String[6];
-        possibleSkills[0] = "Chemist";
-        possibleSkills[1] = "Medic";
-        possibleSkills[2] = "Architect";
-        possibleSkills[3] = "Engineer";
-        possibleSkills[4] = "Explorer";
-        possibleSkills[5] = "Builder";   
+    // unlock a person after the requirement they are working on is completed.
+    public void unlock(){
+        
     }
+    
+    
+    
+
 }
