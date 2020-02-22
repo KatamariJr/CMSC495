@@ -21,8 +21,8 @@ public class Person {
     public boolean locked;
     
     public Person(String name, String skill) { 
-        name = "";
-        skill = "";
+        this.name = name;
+        this.skill = skill;
         locked = false;
     }
        
