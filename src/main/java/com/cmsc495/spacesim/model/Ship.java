@@ -19,22 +19,19 @@ public class Ship {
     public HashMap<String, Integer> resources;
     public ArrayList<Person> people;
     
-    // Ship Constructor
+    // Parameterized Ship Constructor
+    public Ship (int speed, int fuelCapacity, int cargoCapacity, int peopleCapacity, String name, String shipSize) {
+ 
+    }
+    
+    // Default Ship Constructor with passed values
     public Ship () {
-        /******** Insert all encompassing if statement here ******/
-        if (speed > 0 && fuelCapacity > 0 && cargoCapacity > 0 && peopleCapacity > 0) {
-            shipSize = "";
-        }
-        if (speed <= 300000 && fuelCapacity <= 500 && cargoCapacity <= 15 && peopleCapacity <= 6) {
-            shipSize = "Small";
-        }
-        if ((speed > 300000 && speed < 400000) && (fuelCapacity > 500 && fuelCapacity < 1500) && (cargoCapacity > 15 && cargoCapacity < 25)
-            && (peopleCapacity > 6 && peopleCapacity < 20)) {
-            shipSize = "Medium";
-        }
-        if (speed >= 400000 && fuelCapacity >= 1500 && cargoCapacity >= 25 && peopleCapacity >= 20) {
-            shipSize = "Large";
-        }
+        speed = 300000;
+        fuelCapacity = 500;
+        cargoCapacity = 15;
+        peopleCapacity = 6;
+        name = "Default Ship";
+        shipSize = "Small";
     }
     
     //Setters
@@ -144,22 +141,29 @@ public class Ship {
     }
     
     // add the given resources to the ship resources
-    public void addResources(HashMap<String, Integer> h) {
-        
+    public void addResources(HashMap<String, Integer> r) {
+
+        for (String key: r.keySet()) {
+            for (int i = 0; i <= cargoCapacity; i++) {
+                r.get(key);
+            }
+        }
     }
     
     // add the given people to the ship people
     public void addPeople(ArrayList<Person> p) {
+        ArrayList<Person> shipPeopleAL = new ArrayList<Person>(peopleCapacity);
         
+        shipPeopleAL.addAll(p);
     }
     
     // remove the given resources from the ship resources
     public void removeResources(HashMap<String, Integer> r) {
-        
+        r.clear();
     }
     
     // remove the given people from the ship people
     public void removePeople(ArrayList<Person> p) {
-        
+        p.clear();
     }
 }
