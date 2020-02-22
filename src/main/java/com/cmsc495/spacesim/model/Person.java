@@ -11,6 +11,7 @@ package com.cmsc495.spacesim.model;
  * @author NoorQasim
  */
 
+
 import java.util.*;
 
 public class Person {
@@ -19,21 +20,27 @@ public class Person {
     public String name;
     public boolean locked;
     
-    public Person() {
-       
+    public Person(String name, String skill) { 
+        this.name = name;
+        this.skill = skill;
+        locked = false;
     }
        
     // this person will be locked while they are being used to complete a requirement
     public void lock(){
-        
+        //set locked=true
+        boolean locked = true;
     }
     
     // unlock a person after the requirement they are working on is completed.
     public void unlock(){
-        
+        //set locked=false
+        boolean locked = false;  
     }
     
+    // return the value of the locked field
+    public boolean isLocked (){
+        return locked;
+    }
     
-    
-
 }
