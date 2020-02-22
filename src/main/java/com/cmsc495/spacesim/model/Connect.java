@@ -135,7 +135,6 @@ public class Connect {
             tempShip.setfuelCapacity(result.getInt("FuelCapacity"));
             tempShip.setcargoCapacity(result.getInt("CargoCapacity"));
             tempShip.setpeopleCapacity(result.getInt("peopleCapacity"));
-            tempShip.setSpeed(result.getInt("speed"));
             ships.add(tempShip);         
         }
         return ships;
@@ -149,24 +148,21 @@ public class Connect {
             Planet tempPlanet = new Planet();
             tempPlanet.setName(result.getString("name"));
             tempPlanet.setDistance(result.getFloat("distance"));
-            tempPlanet.setColonized(result.getBoolean("isColonized"));
             planets.add(tempPlanet);   
         }
         return planets;
     }
 
-    public ArrayList getPerson(String condition){
-        ArrayList<Person> person = new ArrayList<>();
+    public ArrayList getIdentifier(String type){
+        ArrayList<String> list = new ArrayList<>();
         Statement stmt = con.createStatement();
-        ResultSet result = stmt.executeQuery("SELECT * FROM Person WHERE condition = " + condition);
+        ResultSet result = stmt.executeQuery("SELECT * FROM Person WHERE type = " + type);
         while(result.next()){
-            Person tempPerson = new Person();
-            tempPerson.setName(result.getString("name"));
-            tempPerson.setSkill(result.getString("skill"));
-            person.add(tempPerson);         
+            String text = "";
+            text = result.getString("value");
+            list.add(text);         
         }
-        return person;
-
+        return list;
     }
 
     //main method to test database has been created; need to comment out later
