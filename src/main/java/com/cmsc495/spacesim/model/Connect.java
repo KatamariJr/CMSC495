@@ -10,6 +10,9 @@ import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 
 /**
  *
@@ -117,6 +120,51 @@ public class Connect {
         }
     }
     
+    // This method retrieves a ship list from a sql database
+    // It is based on conditions present in the UI (most likely)
+    // the ship size. If a user selects small ship, the condition is 
+    // small, hopefully there is such a parameter in the table
+    public ArrayList getShip(String condition) throws SQLException{
+        ArrayList<Ship> ships = new ArrayList<>();
+        // It may be beneficial to create a connect variable to be used by all methods
+        Statement stmt = con.createStatement(); 
+        ResultSet result = stmt.executeQuery("SELECT * FROM Ships WHERE condition <= " + condition);
+        while(result.next()){
+            Ship tempShip = new Ship();
+            tempShip.setName(result.getString("name"));
+            tempShip.setfuelCapacity(result.getInt("FuelCapacity"));
+            tempShip.setcargoCapacity(result.getInt("CargoCapacity"));
+            tempShip.setpeopleCapacity(result.getInt("peopleCapacity"));
+            ships.add(tempShip);         
+        }
+        return ships;
+    }
+
+    public ArrayList getPlanet(String condition){
+        ArrayList<Planet> planets = new ArrayList<>();
+        Statement stmt = con.createStatement();
+        ResultSet result = stmt.executeQuery("SELECT * FROM Planets WHERE condition = " + condition);
+        while(result.next()){
+            Planet tempPlanet = new Planet();
+            tempPlanet.setName(result.getString("name"));
+            tempPlanet.setDistance(result.getFloat("distance"));
+            planets.add(tempPlanet);   
+        }
+        return planets;
+    }
+
+    public ArrayList getIdentifier(String type){
+        ArrayList<String> list = new ArrayList<>();
+        Statement stmt = con.createStatement();
+        ResultSet result = stmt.executeQuery("SELECT * FROM Person WHERE type = " + type);
+        while(result.next()){
+            String text = "";
+            text = result.getString("value");
+            list.add(text);         
+        }
+        return list;
+    }
+
     //main method to test database has been created; need to comment out later
     public static void main (String[]args){
         createDatabase();
