@@ -5,6 +5,11 @@
  */
 package com.cmsc495.spacesim.controller;
 
+import com.cmsc495.spacesim.model.Planet;
+import com.cmsc495.spacesim.model.Requirement;
+import com.cmsc495.spacesim.model.Ship;
+import com.cmsc495.spacesim.model.Person;
+import java.util.ArrayList;
 import java.util.HashMap;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
@@ -50,8 +55,9 @@ public class ControllerTest {
     @org.junit.jupiter.api.Test
     public void testGetAllPeople() {
         System.out.println("GetAllPeople");
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Controller.InitializeEarth();
+        ArrayList<Person> p = Controller.getAllPeople();
+        assertTrue(!p.isEmpty());
     }
 
     /**
@@ -60,19 +66,9 @@ public class ControllerTest {
     @org.junit.jupiter.api.Test
     public void testGetAllShips() {
         System.out.println("GetAllShips");
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of GetAllPlanets method, of class Controller.
-     */
-    @org.junit.jupiter.api.Test
-    public void testGetAllPlanets() {
-        System.out.println("GetAllPlanets");
-        
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Controller.InitializeEarth();
+        ArrayList<Ship> s = Controller.getAllShips();
+        assertTrue(!s.isEmpty());
     }
 
     /**
@@ -81,9 +77,9 @@ public class ControllerTest {
     @org.junit.jupiter.api.Test
     public void testGetAllResources() {
         System.out.println("GetAllResources");
-        
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Controller.InitializeEarth();
+        HashMap<String, Integer> r = Controller.getAllResources();
+        assertTrue(r.keySet().size() > 0);
     }
 
     /**
@@ -92,7 +88,69 @@ public class ControllerTest {
     @org.junit.jupiter.api.Test
     public void testAddPlanet() {
         System.out.println("AddPlanet");
-       
+        Controller.InitializeEarth();
+        Planet p = new Planet();
+        Controller.addPlanet(p);
+        ArrayList<Planet> planets = Controller.getAllPlanets();
+        assertTrue(planets.size() == 2);
+    }
+
+    /**
+     * Test of InitializeEarth method, of class Controller.
+     */
+    @Test
+    public void testInitializeEarth() {
+        System.out.println("InitializeEarth");
+        Controller.InitializeEarth();
+        ArrayList<Planet> planets = Controller.getAllPlanets();
+        assertTrue(planets.size() == 1);
+    }
+
+    /**
+     * Test of newRequirement method, of class Controller.
+     */
+    @Test
+    public void testNewRequirement() {
+        System.out.println("newRequirement");
+        Requirement result = Controller.newRequirement();
+        assertTrue(result.resources.keySet().size() > 0);
+        assertTrue(result.skills.keySet().size() > 0);
+    }
+
+    /**
+     * Test of unloadShip method, of class Controller.
+     */
+    @Test
+    public void testUnloadShip() {
+        System.out.println("unloadShip");
+        Ship s = null;
+        Planet target = null;
+        Controller.unloadShip(s, target);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of logEvent method, of class Controller.
+     */
+    @Test
+    public void testLogEvent() {
+        System.out.println("logEvent");
+        String event = "";
+        Controller.logEvent(event);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of logFile method, of class Controller.
+     */
+    @Test
+    public void testLogFile() {
+        System.out.println("logFile");
+        String log = "";
+        String fileName = "";
+        Controller.logFile(log, fileName);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
