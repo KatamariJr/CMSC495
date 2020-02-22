@@ -11,6 +11,7 @@ package com.cmsc495.spacesim.model;
  * @author NoorQasim
  */
 
+
 import java.util.*;
 
 public class Person {
