@@ -66,19 +66,6 @@ public class ShipTest {
     }
 
     /**
-     * Test of setSpeed method, of class Ship.
-     */
-    @org.junit.Test
-    public void testSetSpeed() {
-        System.out.println("setSpeed");
-        int speed = 0;
-        Ship instance = new Ship();
-        instance.setSpeed(speed);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
      * Test of setFuelCapacity method, of class Ship.
      */
     @org.junit.Test
@@ -140,20 +127,6 @@ public class ShipTest {
         Ship instance = new Ship();
         String expResult = "";
         String result = instance.getName();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getSpeed method, of class Ship.
-     */
-    @org.junit.Test
-    public void testGetSpeed() {
-        System.out.println("getSpeed");
-        Ship instance = new Ship();
-        int expResult = 0;
-        int result = instance.getSpeed();
         assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
