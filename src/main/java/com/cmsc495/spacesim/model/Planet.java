@@ -171,7 +171,7 @@ public class Planet {
     
 
     
-    
+    // add up the total individual colonization progresses
     public float getCurrentTotalProgress(){
         
         float totalProgress = 0;
