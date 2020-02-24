@@ -19,106 +19,20 @@ import java.util.ArrayList;
  * @author Tom Helfrich
  */
 public class Connect {
+    String url = "jdbc:sqlite:test8.db";
+    Connection conn = connect();
     
-    //Create new database
-    public static void createDatabase(){
-        String url = "jdbc:sqlite:test.db";
-        
-        try(Connection conn = DriverManager.getConnection(url)){
-            if(conn != null){
-                 DatabaseMetaData meta = conn.getMetaData();
-                System.out.println("The driver name is " + meta.getDriverName());
-                System.out.println("A new database has been created.");
-            }
-        }catch (SQLException e){
+    private Connection connect() {
+        // SQLite connection string
+        Connection conn = null;
+        try {
+            conn = DriverManager.getConnection(url);
+        } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+        return conn;
     }
-    //method for creating Planet table
-    public static void createPlanetTable(){
-        //Database connection string
-        String url = "jdbc:sqlite:test.db";
-        //SQL statement for creating Planet table
-        String sql = "CREATE TABLE IF NOT EXISTS planet (\n"
-                + "   planetID integer PRIMARY KEY,\n"
-                + "   distance float,\n"
-                + "   name text NOT NULL\n "
-                + ");";
-        
-        try (Connection conn = DriverManager.getConnection(url);
-            Statement stmt = conn.createStatement()){
-            //create Planet table
-            stmt.execute(sql);
-            //System.out to see if table was created
-            System.out.println("Planet table created.");
-        }catch (SQLException e){
-            System.out.println(e.getMessage());
-        }
-    }
-    //Method for creating Ship table
-    public static void createShipTable(){
-        //Database connection string
-        String url = "jdbc:sqlite:test.db";
-        //SQL statement for creating Ship table
-        String sql = "CREATE TABLE IF NOT EXISTS ship (\n"
-                + "   shipID integer PRIMARY KEY,\n"
-                + "   fuelCapacity integer,\n"
-                + "   cargoCapacity integer,\n"
-                + "   peopleCapacity integer,\n"
-                + "   name text NOT NULL\n "
-                + ");";
-        
-        try (Connection conn = DriverManager.getConnection(url);
-            Statement stmt = conn.createStatement()){
-            //create ship table
-            stmt.execute(sql);
-            //System.out to see if table was created
-            System.out.println("Ship table created.");
-        }catch (SQLException e){
-            System.out.println(e.getMessage());
-        }
-    }
-    //Method for creating Person table
-    public static void createPersonTable(){
-        //Database connection string
-        String url = "jdbc:sqlite:test.db";
-        //SQL statement for creating person table
-        String sql = "CREATE TABLE IF NOT EXISTS person (\n"
-                + "   personID integer PRIMARY KEY,\n"
-                + "   skill text NOT NULL,\n"
-                + "   name text NOT NULL\n "
-                + ");";
-        
-        try (Connection conn = DriverManager.getConnection(url);
-            Statement stmt = conn.createStatement()){
-            //create Person table
-            stmt.execute(sql);
-            //System.out to see if table was created
-            System.out.println("Person table created.");
-        }catch (SQLException e){
-            System.out.println(e.getMessage());
-        }
-    }
-    //method for creating Skill table
-    public static void createSkillTable(){
-        //Database connection string
-        String url = "jdbc:sqlite:test.db";
-        //SQL statement for creating skill table
-        String sql = "CREATE TABLE IF NOT EXISTS skill (\n"
-                + "   skillID integer PRIMARY KEY,\n"
-                + "   skill text NOT NULL\n"
-                + ");";
-        
-        try (Connection conn = DriverManager.getConnection(url);
-            Statement stmt = conn.createStatement()){
-            //create skille table
-            stmt.execute(sql);
-            //System.out to see if table was created
-            System.out.println("Skill table created.");
-        }catch (SQLException e){
-            System.out.println(e.getMessage());
-        }
-    }
+    
     
     // This method retrieves a ship list from a sql database
     // It is based on conditions present in the UI (most likely)
@@ -127,7 +41,7 @@ public class Connect {
     public ArrayList getShip(String condition) throws SQLException{
         ArrayList<Ship> ships = new ArrayList<>();
         // It may be beneficial to create a connect variable to be used by all methods
-        Statement stmt = con.createStatement(); 
+        Statement stmt = conn.createStatement(); 
         ResultSet result = stmt.executeQuery("SELECT * FROM Ships WHERE condition <= " + condition);
         while(result.next()){
             Ship tempShip = new Ship();
@@ -140,9 +54,9 @@ public class Connect {
         return ships;
     }
 
-    public ArrayList getPlanet(String condition){
+    public ArrayList getPlanet(String condition) throws SQLException{
         ArrayList<Planet> planets = new ArrayList<>();
-        Statement stmt = con.createStatement();
+        Statement stmt = conn.createStatement();
         ResultSet result = stmt.executeQuery("SELECT * FROM Planets WHERE condition = " + condition);
         while(result.next()){
             Planet tempPlanet = new Planet();
@@ -153,10 +67,10 @@ public class Connect {
         return planets;
     }
 
-    public ArrayList getIdentifier(String type){
+    public ArrayList getIdentifier(String type) throws SQLException{
         ArrayList<String> list = new ArrayList<>();
-        Statement stmt = con.createStatement();
-        ResultSet result = stmt.executeQuery("SELECT * FROM Person WHERE type = " + type);
+        Statement stmt = conn.createStatement();
+        ResultSet result = stmt.executeQuery("SELECT * FROM Identifiers WHERE type = " + type);
         while(result.next()){
             String text = "";
             text = result.getString("value");
@@ -165,14 +79,10 @@ public class Connect {
         return list;
     }
 
-    //main method to test database has been created; need to comment out later
+    /*//main method to test database has been created; need to comment out later
     public static void main (String[]args){
-        createDatabase();
-        createPlanetTable();
-        createShipTable();
-        createPersonTable();
-        createSkillTable();
+       
     }
-    
+    */
     
 }

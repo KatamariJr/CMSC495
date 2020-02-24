@@ -97,7 +97,7 @@ public class Planet {
         
     } //End removePeople()
     
-    
+     
     
     
      // get the distance to this planet from an origin planet
@@ -134,7 +134,25 @@ public class Planet {
         
     } //End addResources
     
+    //method for setting Planet name
+    public void setName(String name){
+        this.name = name;
+    }
     
+    //method for getting Planet name
+    public String getName(){
+        return this.name;
+    }
+    
+    //method for setting Planet distance
+    public void setDistance(float distance){
+        this.distance = distance;
+    }
+    
+    //method for getting Planet distance
+    public float getDistance(){
+        return this.distance;
+    }
     
     
     // remove the given resources from the planet resources
