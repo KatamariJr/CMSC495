@@ -1,7 +1,7 @@
 /*
  * CMSC495 SpaceSimProject
  * C.O.P.E. Team
- * 12FEB2020
+ * 23FEB2020
  * Ship.java holds the data that constructs the Ship Class
  */
 package com.cmsc495.spacesim.model;
@@ -19,20 +19,22 @@ public class Ship {
     public HashMap<String, Integer> resources;
     public ArrayList<Person> people;
     
-    // Ship Constructor
+    // Parameterized Ship Constructor
+    public Ship (int fuelCapacity, int cargoCapacity, int peopleCapacity, String name, String shipSize) {
+        this.fuelCapacity = fuelCapacity;
+        this.cargoCapacity = cargoCapacity;
+        this.peopleCapacity = peopleCapacity;
+        this.name = name;
+        this.shipSize = shipSize;
+    }
+    
+    // Default Ship Constructor with passed values
     public Ship () {
-        if (speed <= 300000 && fuelCapacity <= 500 && cargoCapacity <= 15 && peopleCapacity <= 6) {
-            shipSize = "Small";
-        }
-        if ((speed > 300000 && speed < 400000) && (fuelCapacity > 500 && fuelCapacity < 1500) && (cargoCapacity > 15 && cargoCapacity < 25)
-            && (peopleCapacity > 6 && peopleCapacity < 20)) {
-            shipSize = "Medium";
-        }
-        if (speed >= 400000 && fuelCapacity >= 1500 && cargoCapacity >= 25 && peopleCapacity >= 20) {
-            shipSize = "Large";
-        } else {
-            shipSize = "Unknown";
-        }
+        fuelCapacity = 500;
+        cargoCapacity = 15;
+        peopleCapacity = 6;
+        name = "Default Ship";
+        shipSize = "Small";
     }
     
     //Setters
@@ -56,20 +58,11 @@ public class Ship {
     }
     
     /**
-     * Setter for speed
-     * @param speed int
-     * @return void
-     **/
-    public void setSpeed (int speed) {
-        this.speed = speed;
-    }
-    
-    /**
      * Setter for fuelCapacity
      * @param fuelCapacity int
      * @return void
      **/
-    public void setfuelCapacity (int fuelCapacity) {
+    public void setFuelCapacity (int fuelCapacity) {
         this.fuelCapacity = fuelCapacity;
     }
     
@@ -78,7 +71,7 @@ public class Ship {
      * @param cargoCapacity int
      * @return void
      **/
-    public void setcargoCapacity (int cargoCapacity) {
+    public void setCargoCapacity (int cargoCapacity) {
         this.cargoCapacity = cargoCapacity;
     }
     
@@ -87,7 +80,7 @@ public class Ship {
      * @param peopleCapacity int
      * @return void
      **/
-    public void setpeopleCapacity (int peopleCapacity) {
+    public void setPeopleCapacity (int peopleCapacity) {
         this.peopleCapacity = peopleCapacity;
     }
     
@@ -110,18 +103,10 @@ public class Ship {
     }
     
     /**
-     * Getter for speed
-     * @return this.speed
-     **/
-    public int getSpeed() {
-        return this.speed;
-    }
-    
-    /**
      * Getter for fuelCapacity
      * @return this.fuelCapacity
      **/
-    public int getfuelCapacity() {
+    public int getFuelCapacity() {
         return this.fuelCapacity;
     }
     
@@ -142,23 +127,96 @@ public class Ship {
     }
     
     // add the given resources to the ship resources
-    public void addResources(HashMap<String, Integer> h) {
+    public void addResources(HashMap<String, Integer> r) {
+        /*
+         * original code to go through HashMap keySet
+        for (String key: r.keySet()) {
+            for (int i = 0; i <= cargoCapacity; i++) {
+                r.get(key);
+            }
+        } */
         
-    }
+        // code to coincide with Planet.java function addResources
+        int totalInt = 0;
+        HashMap<String, Integer> total = new HashMap();
+        
+        total = (HashMap)this.resources.clone();
+        
+        totalInt = total.size();
+        
+        for(String rec : r.keySet()){
+            if(total.containsKey(rec)){
+                
+            }else{
+                totalInt++;
+                total.put(rec, null);
+            }
+        }//End for loop to go through HashMap keys
+        
+        this.resources = total;
+    }//End addResources function
     
     // add the given people to the ship people
-    public void addPeople(ArrayList<Person> p) {
+    public void addPeople(ArrayList<Person> p) {        
+        // original function to add all people in the Person arrayList to the ship's people ArrayList
+        // this.people.addAll(p);
         
-    }
+        // code to coincide with Planet.java function addPeople
+        for(int i = 0; i < p.size(); i++){
+            Person p1 = p.get(i);
+            for(int j = 0; j < people.size(); j++){
+                Person p2 = people.get(j);
+            
+                if(p1.equals(p2)){
+                   //do nothing 
+                }else
+                    people.add(p1);
+            }//End inner for loop
+        }//End for outer Loop
+    }//End addPeople function
     
     // remove the given resources from the ship resources
     public void removeResources(HashMap<String, Integer> r) {
+        //code to coincide with Planet.Java function removeResources
+        int totalInt = 0;
+        int valOne = 0;
+        int valTwo = 0;
+        int valDiff = 0;
+        HashMap<String, Integer> diff = new HashMap();
         
+        diff = (HashMap)this.resources.clone();
+        
+        totalInt = diff.size();
+        try{
+            for(String rec : r.keySet()){
+                if(diff.containsKey(rec)){
+                    valOne = r.get(rec);
+                    valTwo = diff.get(rec);
+                    valDiff = valOne - valTwo;
+                }
+            }//End for loop to go through HashMap differentiation
+        }catch(Exception E){
+            System.out.println("Error in removeResouces");
+        }   
+        
+        this.resources = diff;
     }
     
     // remove the given people from the ship people
     public void removePeople(ArrayList<Person> p) {
+        // original function to remove all people from ship's arrayList of people
+        // this.people.removeAll(p);
         
-    }
-    
+        // code to coincide with Planet.java function removePeople
+        for(int i = 0; i < p.size(); i++){
+            Person p1 = p.get(i);
+            for(int j = 0; j < people.size(); j++){
+                Person p2 = people.get(j);
+            
+                if(p1.equals(p2)){
+                  people.remove(p1);
+                }
+            }//End inner for loop
+        }//End for outer Loop
+    }//End removePeople function
 }
