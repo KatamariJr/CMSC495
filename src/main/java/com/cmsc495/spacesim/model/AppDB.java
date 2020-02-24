@@ -16,7 +16,7 @@ import java.sql.ResultSet;
  * @author Tom Helfrich
  */
 public class AppDB {
-    private static final String url = "jdbc:sqlite:test9.db";
+    private static final String url = "jdbc:sqlite:test13.db";
     
     public AppDB(){
         
@@ -182,7 +182,7 @@ public class AppDB {
     
     //Method for inserting rows into Identifiers table
     public void insertIdentifier(int id, String type, String value) {
-        String sql = "INSERT INTO Identifiers(id,type,value) VALUES(?,?)";
+        String sql = "INSERT INTO Identifiers(id,type,value) VALUES(?,?,?)";
  
         try (Connection conn = this.connect();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -221,14 +221,12 @@ public class AppDB {
              ResultSet rs    = stmt.executeQuery(sql)){
             
             // loop through the result set
-            if(rs.next()== false){
-                System.out.println("ResultSet is empty");
-            }else{
-            while (rs.next()) {
+          
+            while (rs.next()== true) {
                 System.out.println(rs.getInt("planetID") +  "\t" + 
                                    rs.getFloat("distance") + "\t" +
                                    rs.getString("name"));
-            }
+            
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -243,9 +241,7 @@ public class AppDB {
              ResultSet rs    = stmt.executeQuery(sql)){
             
             // loop through the result set
-            if(rs.next()== false){
-                System.out.println("ResultSet is empty");
-            }else{
+            
             while (rs.next()) {
                 System.out.println(rs.getInt("shipID") +  "\t" + 
                                    rs.getInt("fuelCapacity") +  "\t" + 
@@ -253,7 +249,7 @@ public class AppDB {
                                    rs.getInt("peopleCapacity") +  "\t" + 
                                    rs.getString("shipSize") + "\t" +
                                    rs.getString("name"));
-            }
+            
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -268,14 +264,11 @@ public class AppDB {
              ResultSet rs    = stmt.executeQuery(sql)){
             
             // loop through the result set
-            if(rs.next()== false){
-                System.out.println("ResultSet is empty");
-            }else{
             while (rs.next()) {
                 System.out.println(rs.getInt("id") +  "\t" + 
                                    rs.getString("type") + "\t" + 
                                    rs.getString("value"));
-            }
+            
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
