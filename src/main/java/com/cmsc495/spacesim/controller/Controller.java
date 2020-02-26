@@ -7,6 +7,7 @@ package com.cmsc495.spacesim.controller;
 
 import java.util.*;
 import com.cmsc495.spacesim.model.*;
+import com.cmsc495.spacesim.view.*;
 import java.io.*;
 
 public class Controller {
@@ -80,18 +81,21 @@ public class Controller {
     }
     
     private static ArrayList<String> getAllPossibleResources(){
-        String[] str = {"Food", "Water", "Gasoline", "Coal", "Building Materials", "Medical Supplies"};
-        return new ArrayList<String>(Arrays.asList(str));
+        //String[] str = {"Food", "Water", "Gasoline", "Coal", "Building Materials", "Medical Supplies"};
+        //return new ArrayList<String>(Arrays.asList(str));
+        return new Connect().getIdentifier("resource");
     }
     
     private static ArrayList<String> getAllPossibleSkills(){
-        String[] str = {"Chemist", "Medic", "Architect", "Explorer", "Engineer"};
-        return new ArrayList<String>(Arrays.asList(str));
+        //String[] str = {"Chemist", "Medic", "Architect", "Explorer", "Engineer"};
+        //return new ArrayList<String>(Arrays.asList(str));
+        return new Connect().getIdentifier("skill");
     }
     
     private static ArrayList<String> getAllPossiblePeopleNames(){
-        String[] str = {"Alice", "Bob", "Charlie", "Darcy", "Edward"};
-        return new ArrayList<String>(Arrays.asList(str));
+        //String[] str = {"Alice", "Bob", "Charlie", "Darcy", "Edward"};
+        //return new ArrayList<String>(Arrays.asList(str));
+        return new Connect().getIdentifier("name");
     }
     
     
@@ -197,4 +201,17 @@ public class Controller {
          }
      }
     
+    // This method should not retrieve log entries from a log file but rather
+    // paste log entries to a log screen as they happen in real time
+    // The method would be called by any method that appends to a log file 
+    // and use that same data for the log file, which might be a text area
+    // It would log to the text area with minimal overhead
+    public static void getAllLogEntries(String logEntryText, UserInterface XXX){
+        synchronized(XXX){
+           // XXX.logArea.append(logEntryText); // log area may be the name of the textArea object
+           // XXX.logArea.setCaretPosition(
+           // XXX.logArea.getDocument().getLength());
+            XXX.notify();   
+        }
+    }   
 }
