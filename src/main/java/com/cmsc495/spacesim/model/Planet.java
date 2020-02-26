@@ -240,7 +240,10 @@ public class Planet {
         
     } // End undockedShip()
 
-    
+    // toString method
+    public String toString(){
+        return name;
+    }
     
     
 } //End Planet Class
