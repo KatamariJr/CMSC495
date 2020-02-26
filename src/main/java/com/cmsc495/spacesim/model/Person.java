@@ -43,4 +43,9 @@ public class Person {
         return locked;
     }
     
+    // toString method
+    public String toString(){
+        return name;
+    }
+    
 }
