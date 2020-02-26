@@ -84,6 +84,14 @@ public class Ship {
         this.peopleCapacity = peopleCapacity;
     }
     
+    /**
+     * Setter for shipSize
+     * @param shipSize String
+     * @return void
+     **/
+    public void setShipSize (String shipSize) {
+        this.shipSize = shipSize;
+    }
     //Getters
     
     /**
@@ -219,4 +227,9 @@ public class Ship {
             }//End inner for loop
         }//End for outer Loop
     }//End removePeople function
+    
+    // toString for Ship class. 
+    public String toString(){
+        return name + "(" + fuelCapacity + " gal)";
+    }
 }
