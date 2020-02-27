@@ -89,7 +89,7 @@ public class ControllerTest {
     public void testAddPlanet() {
         System.out.println("AddPlanet");
         Controller.InitializeEarth();
-        Planet p = new Planet();
+        Planet p = new Planet("Test", 700);
         Controller.addPlanet(p);
         ArrayList<Planet> planets = Controller.getAllPlanets();
         assertTrue(planets.size() == 2);
