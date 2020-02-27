@@ -36,12 +36,10 @@ public class Controller {
     
     // create a new person.
     private static Person newPerson(){
-        Person p = new Person();
         Random r = new Random();
         ArrayList<String> names = getAllPossiblePeopleNames();
         ArrayList<String> skills = getAllPossibleSkills();
-        p.name = names.get(r.nextInt(names.size()));
-        p.skill = skills.get(r.nextInt(skills.size()));
+        Person p = new Person(names.get(r.nextInt(names.size())), skills.get(r.nextInt(skills.size())));
         return p;
     }
     
