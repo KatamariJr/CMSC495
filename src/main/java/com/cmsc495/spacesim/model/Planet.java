@@ -68,9 +68,7 @@ public class Planet {
     
      // get the distance to this planet from an origin planet
     public float distanceToPlanet(Planet origin){
-        
-        return distance;
-        
+        return Math.abs(origin.getDistance() - this.getDistance());
     } //End distanceToPlanet
     
     // add the given resources to the planet resources
@@ -143,25 +141,15 @@ public class Planet {
     } // End getCurrentTotalProgress()
     
     // complete the given requirement, removing the needed resources from the planet supply and incrementing the progress
-    public void completeRequirement(ArrayList<Requirement> req){
+    public void completeRequirement(ArrayList<Requirement> req) throws Exception{
         
-        for(int i = 0; i < req.size(); i++){
-            Requirement r1 = req.get(i);
-            for(int j = 0; j<requirements.size(); j++){
-                Requirement r2 = requirements.get(j);
+        for(Requirement r : req){
+            this.removeResources(r.resources);
             
-                if(r1.equals(r2)){
-                  requirements.remove(r1);
-                }
-            
-            }//End inner for loop
-        }//End for outer Loop
-        
-        
-    } //End completeRequirement()
-    
-    
-    
+            this.colonizationProgress = Progress.combineProgress(this.colonizationProgress, r.progressContribution);
+        }
+
+    }
     
     // add this ship to the docked ship array
     public void dockShip(Ship s){

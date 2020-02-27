@@ -27,5 +27,13 @@ public class Progress {
         
     } //End constructor
     
+    public static Progress combineProgress(Progress p1, Progress p2) {
+        Progress p = new Progress();
+        p.buildingColonizationProgress = p1.buildingColonizationProgress + p2.buildingColonizationProgress;
+        p.farmingColonizationProgress = p1.farmingColonizationProgress + p2.farmingColonizationProgress;
+        p.scienceColonizationProgress = p1.scienceColonizationProgress + p2.scienceColonizationProgress;
+        return p;
+    }
+    
     
 } //End Progress Class
