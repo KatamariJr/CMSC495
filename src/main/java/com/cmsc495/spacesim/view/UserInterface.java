@@ -9,6 +9,10 @@ package com.cmsc495.spacesim.view;
  *
  * @author RexannaMcGowan
  */
+
+import com.cmsc495.spacesim.controller.Controller;
+import javax.swing.*;
+
 public class UserInterface extends javax.swing.JFrame {
 
     /**
@@ -16,6 +20,8 @@ public class UserInterface extends javax.swing.JFrame {
      */
     public UserInterface() {
         initComponents();
+        
+        planetList();
     }
 
     /**
@@ -291,6 +297,7 @@ public class UserInterface extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        //planetList();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -325,8 +332,30 @@ public class UserInterface extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new UserInterface().setVisible(true);
-            }
+                }
         });
+    }
+    
+    
+    //Function to display Planet Selection
+    public void planetList(){
+        JList pList;
+        
+        DefaultListModel mList = new DefaultListModel();
+        
+        //Testers
+        mList.addElement("Test One");
+        mList.addElement("Test Two");
+        mList.addElement("Test 3");
+        
+        pList = new JList(mList);
+        pList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        pList.setLayoutOrientation(JList.VERTICAL);
+        
+        jScrollPane1.getViewport().setView(pList);
+        
+        
+        //JList pList = new JList((ListModel) Controller.getAllPlanets());      
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
