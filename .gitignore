@@ -26,5 +26,5 @@ hs_err_pid*
 /nbproject/
 
 # project specific ignore
-test.db
+test*.db
 log.txt

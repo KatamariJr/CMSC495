@@ -57,82 +57,39 @@ public class Planet {
     
     
     // add the given people to the planet people
-    public void addPeople(ArrayList<Person> p){
-        
-        for(int i = 0; i < p.size(); i++){
-            Person p1 = p.get(i);
-            for(int j = 0; j<people.size(); j++){
-                Person p2 = people.get(j);
-            
-                if(p1.equals(p2)){
-                   //do nothing 
-                }else
-                    people.add(p1);
-            
-            }//End inner for loop
-        }//End for outer Loop
-        
-    } //End addPeople()
+    public void addPeople(ArrayList<Person> p) {        
+        this.people.addAll(p);
+    }//End addPeople function
     
-    
-    
-    
-    // remove the given people from the planet people
-    public void removePeople(ArrayList<Person> p){
-        
-        
-        for(int i = 0; i < p.size(); i++){
-            Person p1 = p.get(i);
-            for(int j = 0; j<people.size(); j++){
-                Person p2 = people.get(j);
-            
-                if(p1.equals(p2)){
-                  people.remove(p1);
-                }
-            
-            }//End inner for loop
-        }//End for outer Loop
-        
-        
-        
-    } //End removePeople()
-    
-     
-    
+    // remove the given people from the ship people
+    public void removePeople(ArrayList<Person> p) {
+        this.people.removeAll(p);
+    }//End removePeople function
     
      // get the distance to this planet from an origin planet
     public float distanceToPlanet(Planet origin){
-        
-        return distance;
-        
+        return Math.abs(origin.getDistance() - this.getDistance());
     } //End distanceToPlanet
     
-    
-    
-    
     // add the given resources to the planet resources
-    public void addResources(HashMap<String, Integer> h){
-        
+    public void addResources(HashMap<String, Integer> r){
+        //track the total number of resources to check at the end
         int totalInt = 0;
-        HashMap<String, Integer> total = new HashMap();
         
-        total = (HashMap)this.resources.clone();
-        
-        totalInt = total.size();
-        
-        for(String rec : h.keySet()){
-            if(total.containsKey(rec)){
+        //clone the resource map so we can rollback if we exceed the max cargo size
+        HashMap<String, Integer> total = (HashMap)this.resources.clone();
                 
-            }else{
-                totalInt++;
-                total.put(rec, null);
+        // loop over all resources
+        for(String k : r.keySet()){
+            if(!total.containsKey(k)){
+                int i = r.get(k) + this.resources.get(k);
+                total.put(k, i);
+                totalInt += i;
             }
-        
         }
         
         this.resources = total;
-        
-    } //End addResources
+    }
     
     //method for setting Planet name
     public void setName(String name){
@@ -154,40 +111,21 @@ public class Planet {
         return this.distance;
     }
     
-    
     // remove the given resources from the planet resources
-    public void removeResources(HashMap<String, Integer> r){
+    public void removeResources(HashMap<String, Integer> r) throws Exception{
+        HashMap<String, Integer> diff = (HashMap)this.resources.clone();
         
-        int totalInt = 0;
-        int valOne = 0;
-        int valTwo = 0;
-        int valDiff = 0;
-        HashMap<String, Integer> diff = new HashMap();
-        
-        diff = (HashMap)this.resources.clone();
-        
-        totalInt = diff.size();
-        try{
-        for(String rec : r.keySet()){
-            if(diff.containsKey(rec)){
-                
-                valOne = r.get(rec);
-                valTwo = diff.get(rec);
-                valDiff = valOne - valTwo;
-                
-            }}
-        }catch(Exception E){
-                
-        }   
-        
-        
-        
-        this.resources = diff;
-        
-    } //End removeResources()
-    
-    
+        for(String k : r.keySet()){
+            int valDiff = r.get(k) - diff.get(k);
+            if (valDiff < 0){
+                throw new Exception("resource removal would result in negative resource count");
+            }
+            
+            diff.put(k, valDiff);
+        }//End for loop to go through HashMap differentiation
 
+        this.resources = diff;
+    }
     
     // add up the total individual colonization progresses
     public float getCurrentTotalProgress(){
@@ -202,27 +140,16 @@ public class Planet {
         
     } // End getCurrentTotalProgress()
     
-    
-        // complete the given requirement, removing the needed resources from the planet supply and incrementing the progress
-    public void completeRequirement(ArrayList<Requirement> req){
+    // complete the given requirement, removing the needed resources from the planet supply and incrementing the progress
+    public void completeRequirement(ArrayList<Requirement> req) throws Exception{
         
-        for(int i = 0; i < req.size(); i++){
-            Requirement r1 = req.get(i);
-            for(int j = 0; j<requirements.size(); j++){
-                Requirement r2 = requirements.get(j);
+        for(Requirement r : req){
+            this.removeResources(r.resources);
             
-                if(r1.equals(r2)){
-                  requirements.remove(r1);
-                }
-            
-            }//End inner for loop
-        }//End for outer Loop
-        
-        
-    } //End completeRequirement()
-    
-    
-    
+            this.colonizationProgress = Progress.combineProgress(this.colonizationProgress, r.progressContribution);
+        }
+
+    }
     
     // add this ship to the docked ship array
     public void dockShip(Ship s){

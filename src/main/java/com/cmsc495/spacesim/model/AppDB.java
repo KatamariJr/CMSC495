@@ -296,6 +296,5 @@ public class AppDB {
         test.insertIdentifier(3, "skill", "medic");
         test.selectAllIdentifiers();
         
-        
     }
 }

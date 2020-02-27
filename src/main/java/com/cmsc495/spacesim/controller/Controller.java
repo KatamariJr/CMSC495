@@ -19,7 +19,7 @@ public class Controller {
     
     // InitializeEarth will prepare earth for the simulation.
     public static void InitializeEarth(){
-        earth = new Planet();
+        earth = new Planet("Earth", 0);
         for (int i = 0; i < 50; i++) {
             earth.people.add(newPerson());
         }
@@ -36,12 +36,10 @@ public class Controller {
     
     // create a new person.
     private static Person newPerson(){
-        Person p = new Person();
         Random r = new Random();
         ArrayList<String> names = getAllPossiblePeopleNames();
         ArrayList<String> skills = getAllPossibleSkills();
-        p.name = names.get(r.nextInt(names.size()));
-        p.skill = skills.get(r.nextInt(skills.size()));
+        Person p = new Person(names.get(r.nextInt(names.size())), skills.get(r.nextInt(skills.size())));
         return p;
     }
     
@@ -117,9 +115,14 @@ public class Controller {
         }
         
         earth.removePeople(people);
-        earth.removeResources(resources);
+        try{
+            earth.removeResources(resources);
+            s.addResources(resources);
+        } catch(Exception e){
+            System.err.println(e);
+        }
+        
         s.addPeople(people);
-        s.addResources(resources);
         earth.undockShip(s);
         
         //this might be the spot where we should start a timer, but for now we appear at the planet immediately
