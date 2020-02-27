@@ -135,97 +135,54 @@ public class Ship {
     }
     
     // add the given resources to the ship resources
-    public void addResources(HashMap<String, Integer> r) {
-        /*
-         * original code to go through HashMap keySet
-        for (String key: r.keySet()) {
-            for (int i = 0; i <= cargoCapacity; i++) {
-                r.get(key);
-            }
-        } */
-        
-        // code to coincide with Planet.java function addResources
+    public void addResources(HashMap<String, Integer> r) throws Exception{
+        //track the total number of resources to check at the end
         int totalInt = 0;
-        HashMap<String, Integer> total = new HashMap();
         
-        total = (HashMap)this.resources.clone();
-        
-        totalInt = total.size();
-        
-        for(String rec : r.keySet()){
-            if(total.containsKey(rec)){
+        //clone the resource map so we can rollback if we exceed the max cargo size
+        HashMap<String, Integer> total = (HashMap)this.resources.clone();
                 
-            }else{
-                totalInt++;
-                total.put(rec, null);
+        // loop over all resources
+        for(String k : r.keySet()){
+            if(!total.containsKey(k)){
+                int i = r.get(k) + this.resources.get(k);
+                total.put(k, i);
+                totalInt += i;
             }
-        }//End for loop to go through HashMap keys
+        }
+        
+        //check max cargo amount
+        if (totalInt > this.cargoCapacity){
+            throw new Exception("too much cargo");
+        }
         
         this.resources = total;
-    }//End addResources function
+    }
     
     // add the given people to the ship people
     public void addPeople(ArrayList<Person> p) {        
-        // original function to add all people in the Person arrayList to the ship's people ArrayList
-        // this.people.addAll(p);
-        
-        // code to coincide with Planet.java function addPeople
-        for(int i = 0; i < p.size(); i++){
-            Person p1 = p.get(i);
-            for(int j = 0; j < people.size(); j++){
-                Person p2 = people.get(j);
-            
-                if(p1.equals(p2)){
-                   //do nothing 
-                }else
-                    people.add(p1);
-            }//End inner for loop
-        }//End for outer Loop
+        this.people.addAll(p);
     }//End addPeople function
     
     // remove the given resources from the ship resources
-    public void removeResources(HashMap<String, Integer> r) {
-        //code to coincide with Planet.Java function removeResources
-        int totalInt = 0;
-        int valOne = 0;
-        int valTwo = 0;
-        int valDiff = 0;
-        HashMap<String, Integer> diff = new HashMap();
+    public void removeResources(HashMap<String, Integer> r) throws Exception{
+        HashMap<String, Integer> diff = (HashMap)this.resources.clone();
         
-        diff = (HashMap)this.resources.clone();
-        
-        totalInt = diff.size();
-        try{
-            for(String rec : r.keySet()){
-                if(diff.containsKey(rec)){
-                    valOne = r.get(rec);
-                    valTwo = diff.get(rec);
-                    valDiff = valOne - valTwo;
-                }
-            }//End for loop to go through HashMap differentiation
-        }catch(Exception E){
-            System.out.println("Error in removeResouces");
-        }   
-        
+        for(String k : r.keySet()){
+            int valDiff = r.get(k) - diff.get(k);
+            if (valDiff < 0){
+                throw new Exception("resource removal would result in negative resource count");
+            }
+            
+            diff.put(k, valDiff);
+        }//End for loop to go through HashMap differentiation
+
         this.resources = diff;
     }
     
     // remove the given people from the ship people
     public void removePeople(ArrayList<Person> p) {
-        // original function to remove all people from ship's arrayList of people
-        // this.people.removeAll(p);
-        
-        // code to coincide with Planet.java function removePeople
-        for(int i = 0; i < p.size(); i++){
-            Person p1 = p.get(i);
-            for(int j = 0; j < people.size(); j++){
-                Person p2 = people.get(j);
-            
-                if(p1.equals(p2)){
-                  people.remove(p1);
-                }
-            }//End inner for loop
-        }//End for outer Loop
+        this.people.removeAll(p);
     }//End removePeople function
     
     // toString for Ship class. 
