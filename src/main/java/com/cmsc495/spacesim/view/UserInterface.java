@@ -11,6 +11,8 @@ package com.cmsc495.spacesim.view;
  */
 
 import com.cmsc495.spacesim.controller.Controller;
+import java.util.Arrays;
+import java.util.HashMap;
 import javax.swing.*;
 
 public class UserInterface extends javax.swing.JFrame {
@@ -196,6 +198,31 @@ public class UserInterface extends javax.swing.JFrame {
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_submitButtonActionPerformed
+
+    private void refreshPassengerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshPassengerActionPerformed
+       HashMap<String, Integer> pass = Controller.getAllPassengers();
+       
+       for(String p : pass.keySet()){
+           System.out.println("go");
+           passengerContainerPane.add(makePassengerContainerListItem(p));
+       }
+       
+       passengerContainerPane.revalidate();
+       passengerContainerPane.repaint();
+       
+       
+       System.out.println(Arrays.toString(passengerContainerPane.getComponents()));
+    }//GEN-LAST:event_refreshPassengerActionPerformed
+
+    
+    private javax.swing.JPanel makePassengerContainerListItem(String text) {
+        javax.swing.JPanel r = new javax.swing.JPanel();
+        javax.swing.JCheckBox s = new javax.swing.JCheckBox ();
+        javax.swing.JLabel l = new javax.swing.JLabel(text);
+        r.add(l);
+        r.add(s);
+        return r;
+    }
 
     /**
      * @param args the command line arguments
