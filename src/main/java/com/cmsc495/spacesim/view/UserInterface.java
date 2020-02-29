@@ -213,12 +213,15 @@ public class UserInterface extends javax.swing.JFrame {
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
         
         //get ship
-        Ship s = null;
+        //TODO set shiplist to type Ship
+        Ship s = shipList.getSelectedValue();
         
         //get target planet
-        Planet target = null;
+        //TODO set planetList to type Planet
+        Planet target = planetList.getSelectedValue();
         
         //get list of chosen people
+        //TODO
         ArrayList<Person> people = null;
         
         //get all resources
