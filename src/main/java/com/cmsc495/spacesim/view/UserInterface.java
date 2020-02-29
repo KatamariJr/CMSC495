@@ -7,7 +7,7 @@ package com.cmsc495.spacesim.view;
 
 /**
  *
- * @author RexannaMcGowan
+ * @author RexannaSmith
  */
 
 import com.cmsc495.spacesim.controller.Controller;
@@ -44,7 +44,7 @@ public class UserInterface extends javax.swing.JFrame {
         planetList = new javax.swing.JList<>();
         passengerPanel = new javax.swing.JPanel();
         shipPanel = new javax.swing.JPanel();
-        shipSizeCombBox = new javax.swing.JComboBox<>();
+        shipSizeComboBox = new javax.swing.JComboBox<>();
         jScrollPane4 = new javax.swing.JScrollPane();
         shipList = new javax.swing.JList<>();
         supplyPanel = new javax.swing.JPanel();
@@ -97,7 +97,12 @@ public class UserInterface extends javax.swing.JFrame {
 
         shipPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder("Spaceship Selection")));
 
-        shipSizeCombBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Small", "Medium", "Large" }));
+        shipSizeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Small", "Medium", "Large" }));
+        shipSizeComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                shipSizeComboBoxActionPerformed(evt);
+            }
+        });
 
         shipList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -115,14 +120,14 @@ public class UserInterface extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(shipPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane4)
-                    .addComponent(shipSizeCombBox, 0, 238, Short.MAX_VALUE))
+                    .addComponent(shipSizeComboBox, 0, 238, Short.MAX_VALUE))
                 .addContainerGap())
         );
         shipPanelLayout.setVerticalGroup(
             shipPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(shipPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(shipSizeCombBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(shipSizeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                 .addContainerGap())
@@ -229,6 +234,19 @@ public class UserInterface extends javax.swing.JFrame {
     
     }//GEN-LAST:event_supplyPanelTestButtonActionPerformed
 
+    private void shipSizeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shipSizeComboBoxActionPerformed
+        Object selected = shipSizeComboBox.getSelectedItem();
+        if(selected.toString().equals("Small")) {
+            // Output small ships to shipList
+        }
+        if(selected.toString().equals("Medium")) {
+            // Output medium ships to shipList
+        }
+        else {
+            // Output large ships to shipList
+        }
+    }//GEN-LAST:event_shipSizeComboBoxActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -299,7 +317,7 @@ public class UserInterface extends javax.swing.JFrame {
     private javax.swing.JList<String> planetList;
     private javax.swing.JList<String> shipList;
     private javax.swing.JPanel shipPanel;
-    private javax.swing.JComboBox<String> shipSizeCombBox;
+    private javax.swing.JComboBox<String> shipSizeComboBox;
     private javax.swing.JButton submitButton;
     private javax.swing.JPanel supplyPanel;
     private javax.swing.JPanel supplyPanelInner;
