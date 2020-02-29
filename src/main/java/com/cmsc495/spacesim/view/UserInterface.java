@@ -35,10 +35,6 @@ public class UserInterface extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
-        buttonGroup2 = new javax.swing.ButtonGroup();
-        buttonGroup3 = new javax.swing.ButtonGroup();
-        buttonGroup4 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         planetList = new javax.swing.JList<>();
@@ -237,13 +233,13 @@ public class UserInterface extends javax.swing.JFrame {
     private void shipSizeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shipSizeComboBoxActionPerformed
         Object selected = shipSizeComboBox.getSelectedItem();
         if(selected.toString().equals("Small")) {
-            // Output small ships to shipList
+            // Output small ships to shipList from earth.dockedShips
         }
         if(selected.toString().equals("Medium")) {
-            // Output medium ships to shipList
+            // Output medium ships to shipList from earth.dockedShips
         }
         else {
-            // Output large ships to shipList
+            // Output large ships to shipList from earth.dockedShips
         }
     }//GEN-LAST:event_shipSizeComboBoxActionPerformed
 
@@ -283,6 +279,23 @@ public class UserInterface extends javax.swing.JFrame {
         });
     }
     
+    public void searchShipSize() {
+        List<String> smallSize = new ArrayList<String>();
+        List<String> mediumSize = new ArrayList<String>();
+        List<String> largeSize = new ArrayList<String>();        
+        
+        for (String sizes : dockedShips) {
+            if(sizes.matches("Small")){
+                smallSize.add(dockedShip.name);
+            }
+            if(sizes.matches("Medium")) {
+                mediumSize.add(dockedShip.name);
+            }
+            else {
+                largeSize.add(dockedShip.name);
+            }
+        }
+    }
     
     //Function to display Planet Selection
     public void planetList(){
@@ -306,10 +319,6 @@ public class UserInterface extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.ButtonGroup buttonGroup3;
-    private javax.swing.ButtonGroup buttonGroup4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane4;
