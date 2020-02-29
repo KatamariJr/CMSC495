@@ -7,7 +7,7 @@ package com.cmsc495.spacesim.view;
 
 /**
  *
- * @author RexannaMcGowan
+ * @author RexannaSmith
  */
 
 import com.cmsc495.spacesim.controller.Controller;
@@ -22,7 +22,7 @@ public class UserInterface extends javax.swing.JFrame {
      */
     public UserInterface() {
         initComponents();
-        
+        Controller.InitializeEarth();
         planetList();
     }
 
@@ -44,10 +44,13 @@ public class UserInterface extends javax.swing.JFrame {
         planetList = new javax.swing.JList<>();
         passengerPanel = new javax.swing.JPanel();
         shipPanel = new javax.swing.JPanel();
-        shipSizeCombBox = new javax.swing.JComboBox<>();
+        shipSizeComboBox = new javax.swing.JComboBox<>();
         jScrollPane4 = new javax.swing.JScrollPane();
         shipList = new javax.swing.JList<>();
         supplyPanel = new javax.swing.JPanel();
+        supplyPanelScroll = new javax.swing.JScrollPane();
+        supplyPanelInner = new javax.swing.JPanel();
+        supplyPanelTestButton = new javax.swing.JButton();
         submitButton = new javax.swing.JButton();
         viewLogButton = new javax.swing.JButton();
 
@@ -94,7 +97,12 @@ public class UserInterface extends javax.swing.JFrame {
 
         shipPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder("Spaceship Selection")));
 
-        shipSizeCombBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Small", "Medium", "Large" }));
+        shipSizeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Small", "Medium", "Large" }));
+        shipSizeComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                shipSizeComboBoxActionPerformed(evt);
+            }
+        });
 
         shipList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -112,31 +120,34 @@ public class UserInterface extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(shipPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane4)
-                    .addComponent(shipSizeCombBox, 0, 238, Short.MAX_VALUE))
+                    .addComponent(shipSizeComboBox, 0, 238, Short.MAX_VALUE))
                 .addContainerGap())
         );
         shipPanelLayout.setVerticalGroup(
             shipPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(shipPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(shipSizeCombBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(shipSizeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         supplyPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Supply Selection"));
+        supplyPanel.setLayout(new java.awt.GridLayout(5, 0));
 
-        javax.swing.GroupLayout supplyPanelLayout = new javax.swing.GroupLayout(supplyPanel);
-        supplyPanel.setLayout(supplyPanelLayout);
-        supplyPanelLayout.setHorizontalGroup(
-            supplyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 225, Short.MAX_VALUE)
-        );
-        supplyPanelLayout.setVerticalGroup(
-            supplyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 520, Short.MAX_VALUE)
-        );
+        supplyPanelInner.setLayout(new java.awt.GridLayout(0, 1));
+        supplyPanelScroll.setViewportView(supplyPanelInner);
+
+        supplyPanel.add(supplyPanelScroll);
+
+        supplyPanelTestButton.setText("jButton1");
+        supplyPanelTestButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                supplyPanelTestButtonActionPerformed(evt);
+            }
+        });
+        supplyPanel.add(supplyPanelTestButton);
 
         submitButton.setText("Submit");
         submitButton.addActionListener(new java.awt.event.ActionListener() {
@@ -164,11 +175,9 @@ public class UserInterface extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(supplyPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 130, Short.MAX_VALUE)
-                        .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 130, Short.MAX_VALUE)
+                        .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(supplyPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -198,6 +207,45 @@ public class UserInterface extends javax.swing.JFrame {
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_submitButtonActionPerformed
+
+    private void supplyPanelTestButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_supplyPanelTestButtonActionPerformed
+        HashMap<String, Integer> res = Controller.getAllResources();
+
+        for(String k : res.keySet()){
+            System.out.println("go");
+            supplyPanelInner.add(makeResourceContainerListItem(k));
+        }
+
+        supplyPanelInner.revalidate();
+        supplyPanelInner.repaint();
+
+
+        System.out.println(Arrays.toString(supplyPanelInner.getComponents()));
+        
+    }
+    
+    private javax.swing.JPanel makeResourceContainerListItem(String text) {
+        javax.swing.JPanel r = new javax.swing.JPanel();
+        javax.swing.JSpinner s = new javax.swing.JSpinner();
+        javax.swing.JLabel l = new javax.swing.JLabel(text);
+        r.add(l);
+        r.add(s);
+        return r;
+    
+    }//GEN-LAST:event_supplyPanelTestButtonActionPerformed
+
+    private void shipSizeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shipSizeComboBoxActionPerformed
+        Object selected = shipSizeComboBox.getSelectedItem();
+        if(selected.toString().equals("Small")) {
+            // Output small ships to shipList
+        }
+        if(selected.toString().equals("Medium")) {
+            // Output medium ships to shipList
+        }
+        else {
+            // Output large ships to shipList
+        }
+    }//GEN-LAST:event_shipSizeComboBoxActionPerformed
 
     private void refreshPassengerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshPassengerActionPerformed
        HashMap<String, Integer> pass = Controller.getAllPassengers();
@@ -294,9 +342,12 @@ public class UserInterface extends javax.swing.JFrame {
     private javax.swing.JList<String> planetList;
     private javax.swing.JList<String> shipList;
     private javax.swing.JPanel shipPanel;
-    private javax.swing.JComboBox<String> shipSizeCombBox;
+    private javax.swing.JComboBox<String> shipSizeComboBox;
     private javax.swing.JButton submitButton;
     private javax.swing.JPanel supplyPanel;
+    private javax.swing.JPanel supplyPanelInner;
+    private javax.swing.JScrollPane supplyPanelScroll;
+    private javax.swing.JButton supplyPanelTestButton;
     private javax.swing.JButton viewLogButton;
     // End of variables declaration//GEN-END:variables
 }
