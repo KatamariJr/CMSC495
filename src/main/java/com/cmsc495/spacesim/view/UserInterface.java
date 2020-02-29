@@ -11,11 +11,17 @@ package com.cmsc495.spacesim.view;
  */
 
 import com.cmsc495.spacesim.controller.Controller;
+import com.cmsc495.spacesim.model.Person;
+import com.cmsc495.spacesim.model.Planet;
+import com.cmsc495.spacesim.model.Ship;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import javax.swing.*;
 
 public class UserInterface extends javax.swing.JFrame {
+    
+    private ArrayList<JSpinner> resourceValues = new ArrayList<JSpinner>();
 
     /**
      * Creates new form COPEUserInterface
@@ -205,10 +211,33 @@ public class UserInterface extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
-        // TODO add your handling code here:
+        
+        //get ship
+        Ship s = null;
+        
+        //get target planet
+        Planet target = null;
+        
+        //get list of chosen people
+        ArrayList<Person> people = null;
+        
+        //get all resources
+        HashMap<String, Integer> resources = new HashMap<String, Integer>();
+        for (JSpinner sp : resourceValues){
+            resources.put(sp.getName(), (Integer)sp.getValue());
+        }
+        
+        System.out.println(resources);
+        
+        
+        
+        //send trhe ship
+        Controller.sendShip(s, target, people, resources);
     }//GEN-LAST:event_submitButtonActionPerformed
 
     private void supplyPanelTestButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_supplyPanelTestButtonActionPerformed
+        supplyPanelInner.removeAll();
+        resourceValues.clear();
         HashMap<String, Integer> res = Controller.getAllResources();
 
         for(String k : res.keySet()){
@@ -227,6 +256,11 @@ public class UserInterface extends javax.swing.JFrame {
     private javax.swing.JPanel makeResourceContainerListItem(String text) {
         javax.swing.JPanel r = new javax.swing.JPanel();
         javax.swing.JSpinner s = new javax.swing.JSpinner();
+        s.setName(text);
+        
+        //add to total list
+        resourceValues.add(s);
+                
         javax.swing.JLabel l = new javax.swing.JLabel(text);
         r.add(l);
         r.add(s);
