@@ -234,6 +234,32 @@ public class UserInterface extends javax.swing.JFrame {
     
     }//GEN-LAST:event_supplyPanelTestButtonActionPerformed
 
+    
+    private void passengerPanelTestButtonActionPerformed(java.awt.event.ActionEvent evt) {
+       HashMap<String, Integer> pass = Controller.getAllPassengers();
+       
+       for(String p : pass.keySet()){
+           System.out.println("go");
+           passengerPanelInner.add(makePassengerContainerListItem(p));
+       }
+       
+       passengerPanelInner.revalidate();
+       passengerPanelInner.repaint();
+       
+       
+       System.out.println(Arrays.toString(passengerPanelInner.getComponents()));
+    }
+
+    
+    private javax.swing.JPanel makePassengerContainerListItem(String text) {
+        javax.swing.JPanel r = new javax.swing.JPanel();
+        javax.swing.JCheckBox s = new javax.swing.JCheckBox();
+        javax.swing.JLabel l = new javax.swing.JLabel(text);
+        r.add(l);
+        r.add(s);
+        return r;
+    }
+    
     private void shipSizeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shipSizeComboBoxActionPerformed
         Object selected = shipSizeComboBox.getSelectedItem();
         if(selected.toString().equals("Small")) {
@@ -246,6 +272,31 @@ public class UserInterface extends javax.swing.JFrame {
             // Output large ships to shipList
         }
     }//GEN-LAST:event_shipSizeComboBoxActionPerformed
+
+    private void refreshPassengerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshPassengerActionPerformed
+       HashMap<String, Integer> pass = Controller.getAllPassengers();
+       
+       for(String p : pass.keySet()){
+           System.out.println("go");
+           passengerContainerPane.add(makePassengerContainerListItem(p));
+       }
+       
+       passengerContainerPane.revalidate();
+       passengerContainerPane.repaint();
+       
+       
+       System.out.println(Arrays.toString(passengerContainerPane.getComponents()));
+    }//GEN-LAST:event_refreshPassengerActionPerformed
+
+    
+    private javax.swing.JPanel makePassengerContainerListItem(String text) {
+        javax.swing.JPanel r = new javax.swing.JPanel();
+        javax.swing.JCheckBox s = new javax.swing.JCheckBox ();
+        javax.swing.JLabel l = new javax.swing.JLabel(text);
+        r.add(l);
+        r.add(s);
+        return r;
+    }
 
     /**
      * @param args the command line arguments
