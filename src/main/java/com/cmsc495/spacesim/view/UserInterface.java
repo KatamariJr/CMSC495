@@ -50,7 +50,7 @@ public class UserInterface extends javax.swing.JFrame {
         passengerPanel = new javax.swing.JPanel();
         passengerPanelScroll = new javax.swing.JScrollPane();
         passengerPanelInner = new javax.swing.JPanel();
-        passengerPanelTestButton = new javax.swing.JButton();
+        refreshPassenger = new javax.swing.JButton();
         shipPanel = new javax.swing.JPanel();
         shipSizeComboBox = new javax.swing.JComboBox<>();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -98,13 +98,13 @@ public class UserInterface extends javax.swing.JFrame {
 
         passengerPanel.add(passengerPanelScroll);
 
-        passengerPanelTestButton.setText("jButton1");
-        passengerPanelTestButton.addActionListener(new java.awt.event.ActionListener() {
+        refreshPassenger.setText("jButton1");
+        refreshPassenger.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 refreshPassengerActionPerformed(evt);
             }
         });
-        passengerPanel.add(passengerPanelTestButton);
+        passengerPanel.add(refreshPassenger);
 
         shipPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder("Spaceship Selection")));
 
@@ -145,7 +145,7 @@ public class UserInterface extends javax.swing.JFrame {
         );
 
         supplyPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Supply Selection"));
-        supplyPanel.setLayout(new java.awt.GridLayout(5, 0));
+        supplyPanel.setLayout(new javax.swing.BoxLayout(supplyPanel, javax.swing.BoxLayout.Y_AXIS));
 
         supplyPanelInner.setLayout(new java.awt.GridLayout(0, 1));
         supplyPanelScroll.setViewportView(supplyPanelInner);
@@ -182,11 +182,11 @@ public class UserInterface extends javax.swing.JFrame {
                             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(shipPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(passengerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(passengerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 144, Short.MAX_VALUE)
+                        .addGap(0, 63, Short.MAX_VALUE)
                         .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(supplyPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -196,7 +196,7 @@ public class UserInterface extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(9, 11, Short.MAX_VALUE)
                         .addComponent(shipPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -276,26 +276,23 @@ public class UserInterface extends javax.swing.JFrame {
     }//GEN-LAST:event_shipSizeComboBoxActionPerformed
 
     private void refreshPassengerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshPassengerActionPerformed
-       pass = Controller.getAllPeople();
+        pass = Controller.getAllPeople();
        
-       ButtonGroup bg = new ButtonGroup();
-       for(int i = 0; i < pass.size(); i++){
-           Person p = pass.get(i);
-           passengerPanelInner.add(makePassengerContainerListItem(bg, p, i));
-       }
-       
-              
-       passengerPanelInner.revalidate();
-       passengerPanelInner.repaint();
-       
-       
-       System.out.println(bg);
+        ButtonGroup bg = new ButtonGroup();
+        for(int i = 0; i < pass.size(); i++){
+            Person p = pass.get(i);
+            passengerPanelInner.add(makePassengerContainerListItem(bg, p, i));
+        }
+
+
+        passengerPanelInner.revalidate();
+        passengerPanelInner.repaint();
+
+
+        System.out.println(bg);
     }//GEN-LAST:event_refreshPassengerActionPerformed
 
-    private void refreshPassengerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passengerPanelTestButtonActionPerformed
-        //TODO add your handling code here:
-    }//GEN-LAST:event_passengerPanelTestButtonActionPerformed
-
+  
     
 
     /**
@@ -367,8 +364,8 @@ public class UserInterface extends javax.swing.JFrame {
     private javax.swing.JPanel passengerPanel;
     private javax.swing.JPanel passengerPanelInner;
     private javax.swing.JScrollPane passengerPanelScroll;
-    private javax.swing.JButton passengerPanelTestButton;
     private javax.swing.JList<String> planetList;
+    private javax.swing.JButton refreshPassenger;
     private javax.swing.JList<String> shipList;
     private javax.swing.JPanel shipPanel;
     private javax.swing.JComboBox<String> shipSizeComboBox;
