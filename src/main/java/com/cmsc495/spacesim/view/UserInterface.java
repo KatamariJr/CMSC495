@@ -11,6 +11,8 @@ package com.cmsc495.spacesim.view;
  */
 
 import com.cmsc495.spacesim.controller.Controller;
+import java.util.Arrays;
+import java.util.HashMap;
 import javax.swing.*;
 
 public class UserInterface extends javax.swing.JFrame {
@@ -20,7 +22,7 @@ public class UserInterface extends javax.swing.JFrame {
      */
     public UserInterface() {
         initComponents();
-        
+        Controller.InitializeEarth();
         planetList();
     }
 
@@ -46,6 +48,9 @@ public class UserInterface extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         shipList = new javax.swing.JList<>();
         supplyPanel = new javax.swing.JPanel();
+        supplyPanelScroll = new javax.swing.JScrollPane();
+        supplyPanelInner = new javax.swing.JPanel();
+        supplyPanelTestButton = new javax.swing.JButton();
         submitButton = new javax.swing.JButton();
         viewLogButton = new javax.swing.JButton();
 
@@ -124,17 +129,20 @@ public class UserInterface extends javax.swing.JFrame {
         );
 
         supplyPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Supply Selection"));
+        supplyPanel.setLayout(new java.awt.GridLayout(5, 0));
 
-        javax.swing.GroupLayout supplyPanelLayout = new javax.swing.GroupLayout(supplyPanel);
-        supplyPanel.setLayout(supplyPanelLayout);
-        supplyPanelLayout.setHorizontalGroup(
-            supplyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 225, Short.MAX_VALUE)
-        );
-        supplyPanelLayout.setVerticalGroup(
-            supplyPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 520, Short.MAX_VALUE)
-        );
+        supplyPanelInner.setLayout(new java.awt.GridLayout(0, 1));
+        supplyPanelScroll.setViewportView(supplyPanelInner);
+
+        supplyPanel.add(supplyPanelScroll);
+
+        supplyPanelTestButton.setText("jButton1");
+        supplyPanelTestButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                supplyPanelTestButtonActionPerformed(evt);
+            }
+        });
+        supplyPanel.add(supplyPanelTestButton);
 
         submitButton.setText("Submit");
         submitButton.addActionListener(new java.awt.event.ActionListener() {
@@ -162,11 +170,9 @@ public class UserInterface extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(supplyPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 130, Short.MAX_VALUE)
-                        .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 130, Short.MAX_VALUE)
+                        .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(supplyPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -196,6 +202,32 @@ public class UserInterface extends javax.swing.JFrame {
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_submitButtonActionPerformed
+
+    private void supplyPanelTestButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_supplyPanelTestButtonActionPerformed
+        HashMap<String, Integer> res = Controller.getAllResources();
+
+        for(String k : res.keySet()){
+            System.out.println("go");
+            supplyPanelInner.add(makeResourceContainerListItem(k));
+        }
+
+        supplyPanelInner.revalidate();
+        supplyPanelInner.repaint();
+
+
+        System.out.println(Arrays.toString(supplyPanelInner.getComponents()));
+        
+    }
+    
+    private javax.swing.JPanel makeResourceContainerListItem(String text) {
+        javax.swing.JPanel r = new javax.swing.JPanel();
+        javax.swing.JSpinner s = new javax.swing.JSpinner();
+        javax.swing.JLabel l = new javax.swing.JLabel(text);
+        r.add(l);
+        r.add(s);
+        return r;
+    
+    }//GEN-LAST:event_supplyPanelTestButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -270,6 +302,9 @@ public class UserInterface extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> shipSizeCombBox;
     private javax.swing.JButton submitButton;
     private javax.swing.JPanel supplyPanel;
+    private javax.swing.JPanel supplyPanelInner;
+    private javax.swing.JScrollPane supplyPanelScroll;
+    private javax.swing.JButton supplyPanelTestButton;
     private javax.swing.JButton viewLogButton;
     // End of variables declaration//GEN-END:variables
 }
