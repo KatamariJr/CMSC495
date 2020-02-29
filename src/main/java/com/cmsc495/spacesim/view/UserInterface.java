@@ -92,7 +92,7 @@ public class UserInterface extends javax.swing.JFrame {
         );
         passengerPanelLayout.setVerticalGroup(
             passengerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 520, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         shipPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder("Spaceship Selection")));
@@ -134,7 +134,7 @@ public class UserInterface extends javax.swing.JFrame {
         );
 
         supplyPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Supply Selection"));
-        supplyPanel.setLayout(new java.awt.GridLayout(5, 0));
+        supplyPanel.setLayout(new javax.swing.BoxLayout(supplyPanel, javax.swing.BoxLayout.Y_AXIS));
 
         supplyPanelInner.setLayout(new java.awt.GridLayout(0, 1));
         supplyPanelScroll.setViewportView(supplyPanelInner);
@@ -175,7 +175,7 @@ public class UserInterface extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 130, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(supplyPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
