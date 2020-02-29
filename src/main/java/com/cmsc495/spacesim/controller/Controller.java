@@ -79,21 +79,21 @@ public class Controller {
     }
     
     private static ArrayList<String> getAllPossibleResources(){
-        //String[] str = {"Food", "Water", "Gasoline", "Coal", "Building Materials", "Medical Supplies"};
-        //return new ArrayList<String>(Arrays.asList(str));
-        return new Connect().getIdentifier("resource");
+        String[] str = {"Food", "Water", "Gasoline", "Coal", "Building Materials", "Medical Supplies"};
+        return new ArrayList<String>(Arrays.asList(str));
+        //return new Connect().getIdentifier("resource");
     }
     
     private static ArrayList<String> getAllPossibleSkills(){
-        //String[] str = {"Chemist", "Medic", "Architect", "Explorer", "Engineer"};
-        //return new ArrayList<String>(Arrays.asList(str));
-        return new Connect().getIdentifier("skill");
+        String[] str = {"Chemist", "Medic", "Architect", "Explorer", "Engineer"};
+        return new ArrayList<String>(Arrays.asList(str));
+        //return new Connect().getIdentifier("skill");
     }
     
     private static ArrayList<String> getAllPossiblePeopleNames(){
-        //String[] str = {"Alice", "Bob", "Charlie", "Darcy", "Edward"};
-        //return new ArrayList<String>(Arrays.asList(str));
-        return new Connect().getIdentifier("name");
+        String[] str = {"Alice", "Bob", "Charlie", "Darcy", "Edward"};
+        return new ArrayList<String>(Arrays.asList(str));
+        //return new Connect().getIdentifier("name");
     }
     
     
