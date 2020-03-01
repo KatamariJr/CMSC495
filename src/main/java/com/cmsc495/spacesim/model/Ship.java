@@ -187,6 +187,6 @@ public class Ship {
     
     // toString for Ship class. 
     public String toString(){
-        return name + "(" + fuelCapacity + " gal)";
+        return name;// + "(" + fuelCapacity + " gal)";
     }
 }

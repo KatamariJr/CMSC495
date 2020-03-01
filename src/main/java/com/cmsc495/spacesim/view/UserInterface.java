@@ -12,6 +12,8 @@ package com.cmsc495.spacesim.view;
 
 import com.cmsc495.spacesim.controller.Controller;
 import com.cmsc495.spacesim.model.Person;
+import com.cmsc495.spacesim.model.Ship;
+import com.cmsc495.spacesim.model.Planet;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,14 +23,17 @@ import javax.swing.*;
 public class UserInterface extends javax.swing.JFrame {
 
     ArrayList<Person> pass = new ArrayList<Person>();
+    ViewLog logWindow = new ViewLog();
     
     /**
      * Creates new form COPEUserInterface
      */
     public UserInterface() {
-        initComponents();
+        
         Controller.InitializeEarth();
-        planetList();
+        initComponents();
+        if(!shipList.isSelectionEmpty())
+            planetList();
     }
 
     /**
@@ -66,11 +71,6 @@ public class UserInterface extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Planet Selection"));
 
-        planetList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
         jScrollPane1.setViewportView(planetList);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -115,12 +115,14 @@ public class UserInterface extends javax.swing.JFrame {
             }
         });
 
-        shipList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
+        setShipListModel();
+        selectFirstShip();
         shipList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        shipList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                shipListValueChanged(evt);
+            }
+        });
         jScrollPane4.setViewportView(shipList);
 
         javax.swing.GroupLayout shipPanelLayout = new javax.swing.GroupLayout(shipPanel);
@@ -131,7 +133,7 @@ public class UserInterface extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(shipPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane4)
-                    .addComponent(shipSizeComboBox, 0, 238, Short.MAX_VALUE))
+                    .addComponent(shipSizeComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         shipPanelLayout.setVerticalGroup(
@@ -168,6 +170,11 @@ public class UserInterface extends javax.swing.JFrame {
         });
 
         viewLogButton.setText("View Log");
+        viewLogButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewLogButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -186,7 +193,7 @@ public class UserInterface extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 63, Short.MAX_VALUE)
+                        .addGap(0, 43, Short.MAX_VALUE)
                         .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(supplyPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -262,19 +269,33 @@ public class UserInterface extends javax.swing.JFrame {
         return r;
     }
     
+    // when ship size is changed, update the JList of ships matching the size
     private void shipSizeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shipSizeComboBoxActionPerformed
-        Object selected = shipSizeComboBox.getSelectedItem();
-        if(selected.toString().equals("Small")) {
-            // Output small ships to shipList
-        }
-        if(selected.toString().equals("Medium")) {
-            // Output medium ships to shipList
-        }
-        else {
-            // Output large ships to shipList
-        }
+        setShipListModel();
+        selectFirstShip();
     }//GEN-LAST:event_shipSizeComboBoxActionPerformed
 
+    // Ensure the first ship is selected
+    public void selectFirstShip(){
+        try{
+        shipList.setSelectedIndex(0);
+        }catch(Exception e){
+            System.out.println("There are no ships to display");
+        }
+        
+    }
+    
+    // sets the model of the ship list to be displayed
+    private void setShipListModel(){
+        shipList.setModel(new javax.swing.AbstractListModel<Ship>() {
+            ArrayList<Ship> ships = Controller.searchShipSize(shipSizeComboBox.getSelectedItem().toString());
+
+            //String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return ships.size(); }
+            public Ship getElementAt(int i) { return ships.get(i); }
+        });
+    }
+    
     private void refreshPassengerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshPassengerActionPerformed
         pass = Controller.getAllPeople();
        
@@ -292,8 +313,17 @@ public class UserInterface extends javax.swing.JFrame {
         System.out.println(bg);
     }//GEN-LAST:event_refreshPassengerActionPerformed
 
-  
-    
+    private void viewLogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewLogButtonActionPerformed
+        // TODO add your handling code here:
+        logWindow.setVisible(true);
+    }//GEN-LAST:event_viewLogButtonActionPerformed
+
+    private void shipListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_shipListValueChanged
+        // TODO add your handling code here:
+        if(!shipList.isSelectionEmpty())
+            planetList();
+    }//GEN-LAST:event_shipListValueChanged
+
 
     /**
      * @param args the command line arguments
@@ -330,27 +360,22 @@ public class UserInterface extends javax.swing.JFrame {
                 }
         });
     }
-    
+
     
     //Function to display Planet Selection
     public void planetList(){
-        JList pList;
+        planetList.setModel(new javax.swing.AbstractListModel<Planet>() {
+            ArrayList<Planet> planets = Controller.getPlanetList(
+             (float)shipList.getSelectedValue().getFuelCapacity());
+            public int getSize() { return planets.size(); }
+            public Planet getElementAt(int i) { return planets.get(i); }
+        });
+        planetList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane1.setViewportView(planetList);
+        planetList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        planetList.setLayoutOrientation(JList.VERTICAL);
         
-        DefaultListModel mList = new DefaultListModel();
-        
-        //Testers
-        mList.addElement("Test One");
-        mList.addElement("Test Two");
-        mList.addElement("Test 3");
-        
-        pList = new JList(mList);
-        pList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        pList.setLayoutOrientation(JList.VERTICAL);
-        
-        jScrollPane1.getViewport().setView(pList);
-        
-        
-        //JList pList = new JList((ListModel) Controller.getAllPlanets());      
+        jScrollPane1.getViewport().setView(planetList);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -364,9 +389,9 @@ public class UserInterface extends javax.swing.JFrame {
     private javax.swing.JPanel passengerPanel;
     private javax.swing.JPanel passengerPanelInner;
     private javax.swing.JScrollPane passengerPanelScroll;
-    private javax.swing.JList<String> planetList;
+    private javax.swing.JList<Planet> planetList;
     private javax.swing.JButton refreshPassenger;
-    private javax.swing.JList<String> shipList;
+    private javax.swing.JList<Ship> shipList;
     private javax.swing.JPanel shipPanel;
     private javax.swing.JComboBox<String> shipSizeComboBox;
     private javax.swing.JButton submitButton;
