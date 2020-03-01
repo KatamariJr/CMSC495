@@ -11,19 +11,23 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.File;
 /**
  *
  * @author Tom Helfrich
  */
 public class AppDB {
-    private static final String url = "jdbc:sqlite:test13.db";
+    private static final String url = "jdbc:sqlite:test21.db";
     
     public AppDB(){
         
     }
     //method for creating database
     public static void createDatabase(){
-        //String url = "jdbc:sqlite:test8.db";
         
         try(Connection conn = DriverManager.getConnection(url)){
             if(conn != null){
@@ -54,8 +58,8 @@ public class AppDB {
         //SQL statement for creating Planet table
         String sql = "CREATE TABLE IF NOT EXISTS planet (\n"
                 + "   planetID integer PRIMARY KEY,\n"
-                + "   distance float,\n"
-                + "   name text NOT NULL\n "
+                + "   distance float\n"
+               // + "   name text NOT NULL\n "
                 + ");";
         
         try (Connection conn = DriverManager.getConnection(url);
@@ -70,28 +74,58 @@ public class AppDB {
     }
     
     //Method for inserting rows into Planet table
-    public void insertPlanet(int planetId, float distance, String name) {
-        String sql = "INSERT INTO planet(planetID,distance,name) VALUES(?,?,?)";
- 
-        try (Connection conn = this.connect();
-                PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, planetId);
-            pstmt.setFloat(2, distance);
-            pstmt.setString(3, name);
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+    public void insertPlanet() {
+        String sql = "INSERT INTO planet(distance) VALUES(?)";
+        int batchSize = 3;
+        
+        try{
+            Connection conn = this.connect();
+            conn.setAutoCommit(false);
+            
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            File file = new File("PlanetTest.csv");
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            int count = 0;
+            String line;
+      
+            while((line = reader.readLine()) != null){
+                String[] s = line.split(",");
+                String strDistance = s[0];
+                //String strName = s[1];
+                
+                Float fDistance = Float.parseFloat(strDistance);
+                pstmt.setFloat(1, fDistance);
+                
+                //pstmt.setString(2, strName);
+                
+                pstmt.addBatch();
+                
+                if(count % batchSize == 0){
+                    pstmt.executeBatch();
+                }
+            }
+            reader.close();
+            pstmt.executeBatch();
+            conn.commit();
+            conn.close();
+        }catch (IOException e){
+                    e.printStackTrace();
         }
-    }
+        catch (SQLException e){
+            e.printStackTrace();
+             
+            }
+        }
+    
     //Method for deleting rows in Planet table
-    public void deletePlanet(int id) {
-        String sql = "DELETE FROM planet WHERE id = ?";
+    public void deletePlanet(int strId) {
+        String sql = "DELETE FROM planet WHERE planetId = ?";
  
         try (Connection conn = this.connect();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
  
             // set the corresponding param
-            pstmt.setInt(1, id);
+            pstmt.setInt(1, strId);
             // execute the delete statement
             pstmt.executeUpdate();
  
@@ -109,8 +143,7 @@ public class AppDB {
                 + "   fuelCapacity integer,\n"
                 + "   cargoCapacity integer,\n"
                 + "   peopleCapacity integer,\n"
-                + "   shipSize text NOT NULL,\n"
-                + "   name text NOT NULL\n "
+                + "   shipSize text NOT NULL\n"
                 + ");";
         
         try (Connection conn = DriverManager.getConnection(url);
@@ -124,32 +157,66 @@ public class AppDB {
         }
     }
     //Method for inserting rows into Ship table
-    public void insertShip(int shipId, int fuelCapacity, int cargoCapacity, int peopleCapacity, String shipSize, String name) {
-        String sql = "INSERT INTO ship(shipID,fuelCapacity,cargoCapacity,peopleCapacity,shipSize,name) VALUES(?,?,?,?,?,?)";
+    public void insertShip() {
+        String sql = "INSERT INTO ship(fuelCapacity,cargoCapacity,peopleCapacity,shipSize) VALUES(?,?,?,?)";
  
-        try (Connection conn = this.connect();
-                PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, shipId);
-            pstmt.setInt(2, fuelCapacity);
-            pstmt.setInt(3, cargoCapacity);
-            pstmt.setInt(4, peopleCapacity);
-            pstmt.setString(5, shipSize);
-            pstmt.setString(6, name);
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+        int batchSize = 3;
         
+        try{
+            Connection conn = this.connect();
+            conn.setAutoCommit(false);
+            
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            File file = new File("ShipTest.csv");
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            int count = 0;
+            String line;
+      
+            while((line = reader.readLine()) != null){
+                String[] s = line.split(",");
+                String strFuel = s[0];
+                String strCargo = s[1];
+                String strPeople = s[2];
+                String strSize = s[3];
+                
+                Integer sqlFuel = Integer.parseInt(strFuel);
+                pstmt.setInt(1, sqlFuel);
+                
+                Integer sqlCargo = Integer.parseInt(strCargo);
+                pstmt.setInt(2, sqlCargo);
+                
+                Integer sqlPeople = Integer.parseInt(strPeople);
+                pstmt.setInt(3, sqlPeople);
+                
+                pstmt.setString(4, strSize);
+                
+                pstmt.addBatch();
+                
+                if(count % batchSize == 0){
+                    pstmt.executeBatch();
+                }
+            }
+            reader.close();
+            pstmt.executeBatch();
+            conn.commit();
+            conn.close();
+        }catch (IOException e){
+                    e.printStackTrace();
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+             
+            }
     }
     //Method for deleting rows in ship table
-    public void deleteShip(int id) {
-        String sql = "DELETE FROM ship WHERE id = ?";
+    public void deleteShip(int strId) {
+        String sql = "DELETE FROM ship WHERE shipId = ?";
  
         try (Connection conn = this.connect();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
  
             // set the corresponding param
-            pstmt.setInt(1, id);
+            pstmt.setInt(1, strId);
             // execute the delete statement
             pstmt.executeUpdate();
  
@@ -163,7 +230,7 @@ public class AppDB {
         //String url = "jdbc:sqlite:test8.db";
         //SQL statement for creating person table
         String sql = "CREATE TABLE IF NOT EXISTS Identifiers (\n"
-                + "   id integer PRIMARY KEY,\n"
+                + "   Id integer PRIMARY KEY,\n"
                 + "   type text NOT NULL,\n"
                 + "   value text NOT NULL\n "
                 + ");";
@@ -181,29 +248,56 @@ public class AppDB {
     }
     
     //Method for inserting rows into Identifiers table
-    public void insertIdentifier(int id, String type, String value) {
-        String sql = "INSERT INTO Identifiers(id,type,value) VALUES(?,?,?)";
- 
-        try (Connection conn = this.connect();
-                PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, id);
-            pstmt.setString(2, type);
-            pstmt.setString(3, value);
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+    public void insertIdentifier() {
+        String sql = "INSERT INTO Identifiers(type,value) VALUES(?,?)";
+        int batchSize = 3;
         
+        try{
+            Connection conn = this.connect();
+            conn.setAutoCommit(false);
+            
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            File file = new File("IdentifierTest.csv");
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            int count = 0;
+            String line;
+      
+            while((line = reader.readLine()) != null){
+                String[] s = line.split(",");
+                String strType = s[0];
+                String strValue = s[1];
+                
+                pstmt.setString(1, strType);
+                
+                pstmt.setString(2, strValue);
+                
+                pstmt.addBatch();
+                
+                if(count % batchSize == 0){
+                    pstmt.executeBatch();
+                }
+            }
+            reader.close();
+            pstmt.executeBatch();
+            conn.commit();
+            conn.close();
+        }catch (IOException e){
+                    e.printStackTrace();
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+             
+            }
     }
     //Method for deleting rows in Identifiers table
-    public void deleteIdentifier(int id) {
-        String sql = "DELETE FROM Identifiers WHERE id = ?";
+    public void deleteIdentifier(int strId) {
+        String sql = "DELETE FROM Identifiers WHERE Id = ?";
  
         try (Connection conn = this.connect();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
  
             // set the corresponding param
-            pstmt.setInt(1, id);
+            pstmt.setInt(1, strId);
             // execute the delete statement
             pstmt.executeUpdate();
  
@@ -214,7 +308,7 @@ public class AppDB {
     
     //method for selecting all planet
     public void selectAllPlanets(){
-        String sql = "SELECT planetID, distance, name FROM planet";
+        String sql = "SELECT planetID, distance FROM planet";
         
         try (Connection conn = this.connect();
              Statement stmt  = conn.createStatement();
@@ -224,17 +318,18 @@ public class AppDB {
           
             while (rs.next()== true) {
                 System.out.println(rs.getInt("planetID") +  "\t" + 
-                                   rs.getFloat("distance") + "\t" +
-                                   rs.getString("name"));
+                                   rs.getFloat("distance"))''
+                                  // rs.getString("name"));
             
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
+
     //method for selecting all ships
     public void selectAllShips(){
-        String sql = "SELECT shipID, fuelCapacity, cargoCapacity, peopleCapacity, shipSize, name FROM ship";
+        String sql = "SELECT shipID, fuelCapacity, cargoCapacity, peopleCapacity, shipSize FROM ship";
         
         try (Connection conn = this.connect();
              Statement stmt  = conn.createStatement();
@@ -247,8 +342,8 @@ public class AppDB {
                                    rs.getInt("fuelCapacity") +  "\t" + 
                                    rs.getInt("cargoCapacity") +  "\t" + 
                                    rs.getInt("peopleCapacity") +  "\t" + 
-                                   rs.getString("shipSize") + "\t" +
-                                   rs.getString("name"));
+                                   rs.getString("shipSize"));
+                                   //rs.getString("strCargo"));
             
             }
         } catch (SQLException e) {
@@ -257,7 +352,7 @@ public class AppDB {
     }
     //method for selecting all persons
     public void selectAllIdentifiers(){
-        String sql = "SELECT id, type, value FROM Identifiers";
+        String sql = "SELECT Id, type, value FROM Identifiers";
         
         try (Connection conn = this.connect();
              Statement stmt  = conn.createStatement();
@@ -265,7 +360,7 @@ public class AppDB {
             
             // loop through the result set
             while (rs.next()) {
-                System.out.println(rs.getInt("id") +  "\t" + 
+                System.out.println(rs.getInt("Id") +  "\t" + 
                                    rs.getString("type") + "\t" + 
                                    rs.getString("value"));
             
@@ -279,22 +374,18 @@ public class AppDB {
     //main method for testing
     public static void main(String[] args){
         AppDB test = new AppDB();
+        test.createDatabase();
         test.connect();
         test.createPlanetTable();
-        test.insertPlanet(1, 1000, "Mars");
-        test.insertPlanet(2, 10000, "Venus");
-        test.insertPlanet(3, 100000, "Saturn");
-        test.selectAllPlanets();   
+        test.insertPlanet();
+        test.selectAllPlanets();
         test.createShipTable();
-        test.insertShip(1, 100, 10, 10, "Small", "Explorer");
-        test.insertShip(2, 10000, 100, 100, "Medium", "Discoverer");
-        test.insertShip(3, 10000000, 1000, 1000, "Large", "Cruiser");
+        test.insertShip();
         test.selectAllShips();
         test.createIdentifiersTable();
-        test.insertIdentifier(1, "name", "Bob");
-        test.insertIdentifier(2, "resource", "food");
-        test.insertIdentifier(3, "skill", "medic");
+        test.insertIdentifier();
         test.selectAllIdentifiers();
+        
         
     }
 }
