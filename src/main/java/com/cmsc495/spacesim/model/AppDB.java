@@ -119,7 +119,7 @@ public class AppDB {
     
     //Method for deleting rows in Planet table
     public void deletePlanet(int strId) {
-        String sql = "DELETE FROM planet WHERE strId = ?";
+        String sql = "DELETE FROM planet WHERE planetId = ?";
  
         try (Connection conn = this.connect();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -210,7 +210,7 @@ public class AppDB {
     }
     //Method for deleting rows in ship table
     public void deleteShip(int strId) {
-        String sql = "DELETE FROM ship WHERE strId = ?";
+        String sql = "DELETE FROM ship WHERE shipId = ?";
  
         try (Connection conn = this.connect();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -291,7 +291,7 @@ public class AppDB {
     }
     //Method for deleting rows in Identifiers table
     public void deleteIdentifier(int strId) {
-        String sql = "DELETE FROM Identifiers WHERE strId = ?";
+        String sql = "DELETE FROM Identifiers WHERE Id = ?";
  
         try (Connection conn = this.connect();
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
