@@ -12,8 +12,8 @@ package com.cmsc495.spacesim.view;
 
 import com.cmsc495.spacesim.controller.Controller;
 import com.cmsc495.spacesim.model.Person;
+import com.cmsc495.spacesim.model.Planelt;
 import com.cmsc495.spacesim.model.Ship;
-import com.cmsc495.spacesim.model.Planet;
 import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,9 +21,12 @@ import java.util.HashMap;
 import javax.swing.*;
 
 public class UserInterface extends javax.swing.JFrame {
+    
+    private ArrayList<JSpinner> resourceValues = new ArrayList<JSpinner>();
 
-    ArrayList<Person> pass = new ArrayList<Person>();
     ViewLog logWindow = new ViewLog();
+    private ArrayList<Person> pass = new ArrayList<Person>();
+    private ArrayList<JCheckBox> passengerChecks = new ArrayList<JCheckBox>();
     
     /**
      * Creates new form COPEUserInterface
@@ -223,10 +226,48 @@ public class UserInterface extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
-        // TODO add your handling code here:
+        
+        //get ship
+        //TODO set shiplist to type Ship
+        //Ship s = shipList.getSelectedValue();
+        Ship s = new Ship();
+        
+        //get target planet
+        //TODO set planetList to type Planet
+        //Planet target = planetList.getSelectedValue();
+        Planet target = new Planet("planet", 20);
+        
+        //get list of chosen people
+        //get selected checkboxes
+        ArrayList<Person> people = new ArrayList<Person>();
+        for (int i = 0; i < passengerChecks.size(); i++){
+            
+            JCheckBox j = passengerChecks.get(i);
+            if (j.isSelected()){
+                people.add(pass.get(i));
+            }
+        }
+        
+        
+        //get all resources
+        HashMap<String, Integer> resources = new HashMap<String, Integer>();
+        for (JSpinner sp : resourceValues){
+            resources.put(sp.getName(), (Integer)sp.getValue());
+        }
+        
+        System.out.println("sending ship");
+        System.out.println(s);
+        System.out.println(target);
+        System.out.println(people);
+        System.out.println(resources);
+        
+        //send trhe ship
+        Controller.sendShip(s, target, people, resources);
     }//GEN-LAST:event_submitButtonActionPerformed
 
     private void supplyPanelTestButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_supplyPanelTestButtonActionPerformed
+        supplyPanelInner.removeAll();
+        resourceValues.clear();
         HashMap<String, Integer> res = Controller.getAllResources();
 
         for(String k : res.keySet()){
@@ -245,6 +286,11 @@ public class UserInterface extends javax.swing.JFrame {
     private javax.swing.JPanel makeResourceContainerListItem(String text) {
         javax.swing.JPanel r = new javax.swing.JPanel();
         javax.swing.JSpinner s = new javax.swing.JSpinner();
+        s.setName(text);
+        
+        //add to total list
+        resourceValues.add(s);
+                
         javax.swing.JLabel l = new javax.swing.JLabel(text);
         r.add(l);
         r.add(s);
@@ -252,11 +298,14 @@ public class UserInterface extends javax.swing.JFrame {
     
     }//GEN-LAST:event_supplyPanelTestButtonActionPerformed
 
-    
-    private javax.swing.JPanel makePassengerContainerListItem(ButtonGroup bg, Person p, int index) {
+    // makePassengerContainerListItem will return a sub component that will be put in the passenger list,
+    // and also add this checkbox to the global list of checkboxes.
+    private javax.swing.JPanel makePassengerContainerListItem(Person p, int index) {
         javax.swing.JPanel r = new javax.swing.JPanel(new GridLayout(1,3));        
-        javax.swing.JCheckBox s = new javax.swing.JCheckBox();
-        s.setName(String.valueOf(index));
+        javax.swing.JCheckBox c = new javax.swing.JCheckBox();
+        c.setName(String.valueOf(index));
+        
+        passengerChecks.add(c);
         
         
         
@@ -265,7 +314,7 @@ public class UserInterface extends javax.swing.JFrame {
         
         r.add(l);
         r.add(l2);
-        r.add(s);
+        r.add(c);
         return r;
     }
     
@@ -298,19 +347,19 @@ public class UserInterface extends javax.swing.JFrame {
     
     private void refreshPassengerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshPassengerActionPerformed
         pass = Controller.getAllPeople();
+        passengerPanelInner.removeAll();
+        passengerChecks.clear();
        
-        ButtonGroup bg = new ButtonGroup();
+        
         for(int i = 0; i < pass.size(); i++){
             Person p = pass.get(i);
-            passengerPanelInner.add(makePassengerContainerListItem(bg, p, i));
+            passengerPanelInner.add(makePassengerContainerListItem(p, i));
         }
 
 
         passengerPanelInner.revalidate();
         passengerPanelInner.repaint();
 
-
-        System.out.println(bg);
     }//GEN-LAST:event_refreshPassengerActionPerformed
 
     private void viewLogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewLogButtonActionPerformed

@@ -31,28 +31,19 @@ public class Planet {
     
     //Constructor #1
     public Planet(String name, float distance, ArrayList<Requirement> requirements){
-        
         this.distance = distance;
         this.name = name;
-        isColonized = false;
-        people = new ArrayList();
         this.requirements = requirements;
-        dockedShips = new ArrayList();
-        resources = new HashMap();
+        
+        this.isColonized = false;
+        this.people = new ArrayList();
+        this.dockedShips = new ArrayList();
+        this.resources = new HashMap();
     } //End constructor #1
-    
-    
     
     //Constructor #2
     public Planet(String name, float distance){
-        
-        this.distance = distance;
-        this.name = name;
-        isColonized = false;
-        people = new ArrayList();
-        requirements = new ArrayList();
-        dockedShips = new ArrayList();
-        resources = new HashMap();
+        this(name, distance, new ArrayList<Requirement>());        
     } //End constructor #2
     
     
@@ -73,8 +64,6 @@ public class Planet {
     
     // add the given resources to the planet resources
     public void addResources(HashMap<String, Integer> r){
-        //track the total number of resources to check at the end
-        int totalInt = 0;
         
         //clone the resource map so we can rollback if we exceed the max cargo size
         HashMap<String, Integer> total = (HashMap)this.resources.clone();
@@ -84,7 +73,6 @@ public class Planet {
             if(!total.containsKey(k)){
                 int i = r.get(k) + this.resources.get(k);
                 total.put(k, i);
-                totalInt += i;
             }
         }
         
