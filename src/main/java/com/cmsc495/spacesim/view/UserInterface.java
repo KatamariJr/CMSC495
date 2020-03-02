@@ -12,7 +12,7 @@ package com.cmsc495.spacesim.view;
 
 import com.cmsc495.spacesim.controller.Controller;
 import com.cmsc495.spacesim.model.Person;
-import com.cmsc495.spacesim.model.Planelt;
+import com.cmsc495.spacesim.model.Planet;
 import com.cmsc495.spacesim.model.Ship;
 import java.awt.GridLayout;
 import java.util.ArrayList;
