@@ -198,7 +198,7 @@ public class UserInterface extends javax.swing.JFrame {
 
         optionsMenu.setText("Options");
 
-        loadDatabaseMenuItem.setText("jMenuItem1");
+        loadDatabaseMenuItem.setText("Load Database");
         loadDatabaseMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 loadDatabaseMenuItemActionPerformed(evt);
