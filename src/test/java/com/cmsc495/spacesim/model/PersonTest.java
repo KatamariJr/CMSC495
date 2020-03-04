@@ -56,10 +56,9 @@ public class PersonTest {
     @org.junit.Test
     public void testUnlock() {
         System.out.println("unlock");
-        Person instance = null;
-        instance.unlock();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Person test2 = new Person("Steven", "Farmer");
+        test2.unlock();
+        // print out lock status System.out.println()
     }
 
     /**
@@ -68,12 +67,10 @@ public class PersonTest {
     @org.junit.Test
     public void testIsLocked() {
         System.out.println("isLocked");
-        Person instance = null;
+        Person test1 = new Person("Charles", "Engineer");
         boolean expResult = false;
-        boolean result = instance.isLocked();
+        boolean result = test1.isLocked();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
     
 }
