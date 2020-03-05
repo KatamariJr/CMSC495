@@ -16,15 +16,12 @@ import com.cmsc495.spacesim.model.Planet;
 import com.cmsc495.spacesim.model.Ship;
 import java.awt.GridLayout;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import javax.swing.*;
 
 public class UserInterface extends javax.swing.JFrame {
     
     private ArrayList<JSpinner> resourceValues = new ArrayList<JSpinner>();
-
-    ViewLog logWindow = new ViewLog();
     private ArrayList<Person> pass = new ArrayList<Person>();
     private ArrayList<JCheckBox> passengerChecks = new ArrayList<JCheckBox>();
     
@@ -52,13 +49,13 @@ public class UserInterface extends javax.swing.JFrame {
         buttonGroup2 = new javax.swing.ButtonGroup();
         buttonGroup3 = new javax.swing.ButtonGroup();
         buttonGroup4 = new javax.swing.ButtonGroup();
+        supplyPanelTestButton = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         planetList = new javax.swing.JList<>();
         passengerPanel = new javax.swing.JPanel();
         passengerPanelScroll = new javax.swing.JScrollPane();
         passengerPanelInner = new javax.swing.JPanel();
-        refreshPassenger = new javax.swing.JButton();
         shipPanel = new javax.swing.JPanel();
         shipSizeComboBox = new javax.swing.JComboBox<>();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -66,9 +63,15 @@ public class UserInterface extends javax.swing.JFrame {
         supplyPanel = new javax.swing.JPanel();
         supplyPanelScroll = new javax.swing.JScrollPane();
         supplyPanelInner = new javax.swing.JPanel();
-        supplyPanelTestButton = new javax.swing.JButton();
         submitButton = new javax.swing.JButton();
         viewLogButton = new javax.swing.JButton();
+
+        supplyPanelTestButton.setText("jButton1");
+        supplyPanelTestButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                supplyPanelTestButtonActionPerformed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -82,7 +85,7 @@ public class UserInterface extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -95,19 +98,12 @@ public class UserInterface extends javax.swing.JFrame {
 
         passengerPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Passenger Selection"));
         passengerPanel.setLayout(new javax.swing.BoxLayout(passengerPanel, javax.swing.BoxLayout.Y_AXIS));
+        showPassengerSelection();
 
         passengerPanelInner.setLayout(new java.awt.GridLayout(0, 1));
         passengerPanelScroll.setViewportView(passengerPanelInner);
 
         passengerPanel.add(passengerPanelScroll);
-
-        refreshPassenger.setText("jButton1");
-        refreshPassenger.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                refreshPassengerActionPerformed(evt);
-            }
-        });
-        passengerPanel.add(refreshPassenger);
 
         shipPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder("Spaceship Selection")));
 
@@ -135,8 +131,8 @@ public class UserInterface extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, shipPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(shipPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane4)
-                    .addComponent(shipSizeComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(shipSizeComboBox, 0, 205, Short.MAX_VALUE))
                 .addContainerGap())
         );
         shipPanelLayout.setVerticalGroup(
@@ -151,19 +147,12 @@ public class UserInterface extends javax.swing.JFrame {
 
         supplyPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Supply Selection"));
         supplyPanel.setLayout(new javax.swing.BoxLayout(supplyPanel, javax.swing.BoxLayout.Y_AXIS));
+        showReourceSelection();
 
         supplyPanelInner.setLayout(new java.awt.GridLayout(0, 1));
         supplyPanelScroll.setViewportView(supplyPanelInner);
 
         supplyPanel.add(supplyPanelScroll);
-
-        supplyPanelTestButton.setText("jButton1");
-        supplyPanelTestButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                supplyPanelTestButtonActionPerformed(evt);
-            }
-        });
-        supplyPanel.add(supplyPanelTestButton);
 
         submitButton.setText("Submit");
         submitButton.addActionListener(new java.awt.event.ActionListener() {
@@ -188,15 +177,15 @@ public class UserInterface extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(viewLogButton)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(shipPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(passengerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(shipPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(passengerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 43, Short.MAX_VALUE)
+                        .addGap(0, 60, Short.MAX_VALUE)
                         .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(supplyPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -204,17 +193,15 @@ public class UserInterface extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(9, 11, Short.MAX_VALUE)
                         .addComponent(shipPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(passengerPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(supplyPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(passengerPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 553, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(supplyPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 553, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -229,13 +216,13 @@ public class UserInterface extends javax.swing.JFrame {
         
         //get ship
         //TODO set shiplist to type Ship
-        //Ship s = shipList.getSelectedValue();
-        Ship s = new Ship();
+        Ship s = shipList.getSelectedValue();
+        //Ship s = new Ship();
         
         //get target planet
         //TODO set planetList to type Planet
-        //Planet target = planetList.getSelectedValue();
-        Planet target = new Planet("planet", 20);
+        Planet target = planetList.getSelectedValue();
+        //Planet target = new Planet("planet", 20);
         
         //get list of chosen people
         //get selected checkboxes
@@ -252,6 +239,7 @@ public class UserInterface extends javax.swing.JFrame {
         //get all resources
         HashMap<String, Integer> resources = new HashMap<String, Integer>();
         for (JSpinner sp : resourceValues){
+            
             resources.put(sp.getName(), (Integer)sp.getValue());
         }
         
@@ -260,43 +248,9 @@ public class UserInterface extends javax.swing.JFrame {
         System.out.println(target);
         System.out.println(people);
         System.out.println(resources);
-        
         //send trhe ship
         Controller.sendShip(s, target, people, resources);
     }//GEN-LAST:event_submitButtonActionPerformed
-
-    private void supplyPanelTestButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_supplyPanelTestButtonActionPerformed
-        supplyPanelInner.removeAll();
-        resourceValues.clear();
-        HashMap<String, Integer> res = Controller.getAllResources();
-
-        for(String k : res.keySet()){
-            System.out.println("go");
-            supplyPanelInner.add(makeResourceContainerListItem(k));
-        }
-
-        supplyPanelInner.revalidate();
-        supplyPanelInner.repaint();
-
-
-        System.out.println(Arrays.toString(supplyPanelInner.getComponents()));
-        
-    }
-    
-    private javax.swing.JPanel makeResourceContainerListItem(String text) {
-        javax.swing.JPanel r = new javax.swing.JPanel();
-        javax.swing.JSpinner s = new javax.swing.JSpinner();
-        s.setName(text);
-        
-        //add to total list
-        resourceValues.add(s);
-                
-        javax.swing.JLabel l = new javax.swing.JLabel(text);
-        r.add(l);
-        r.add(s);
-        return r;
-    
-    }//GEN-LAST:event_supplyPanelTestButtonActionPerformed
 
     // makePassengerContainerListItem will return a sub component that will be put in the passenger list,
     // and also add this checkbox to the global list of checkboxes.
@@ -322,6 +276,7 @@ public class UserInterface extends javax.swing.JFrame {
     private void shipSizeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_shipSizeComboBoxActionPerformed
         setShipListModel();
         selectFirstShip();
+        selectFirstPlanet();
     }//GEN-LAST:event_shipSizeComboBoxActionPerformed
 
     // Ensure the first ship is selected
@@ -330,6 +285,16 @@ public class UserInterface extends javax.swing.JFrame {
         shipList.setSelectedIndex(0);
         }catch(Exception e){
             System.out.println("There are no ships to display");
+        }
+        
+    }
+    
+    // Ensure the first planet is selected
+    public void selectFirstPlanet(){
+        try{
+        planetList.setSelectedIndex(0);
+        }catch(Exception e){
+            System.out.println("There are no planets to display");
         }
         
     }
@@ -345,7 +310,27 @@ public class UserInterface extends javax.swing.JFrame {
         });
     }
     
-    private void refreshPassengerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshPassengerActionPerformed
+    // Display the list of available resources
+    private void showReourceSelection() {                                                      
+        supplyPanelInner.removeAll();
+        resourceValues.clear();
+        HashMap<String, Integer> res = Controller.getAllResources();
+
+        for(String k : res.keySet()){
+            //System.out.println("go");
+            supplyPanelInner.add(makeResourceContainerListItem(k));
+        }
+
+        supplyPanelInner.revalidate();
+        supplyPanelInner.repaint();
+
+
+        //System.out.println(Arrays.toString(supplyPanelInner.getComponents()));
+        
+    }
+    
+    // Display the list of skilled passengers
+    private void showPassengerSelection(){
         pass = Controller.getAllPeople();
         passengerPanelInner.removeAll();
         passengerChecks.clear();
@@ -359,12 +344,13 @@ public class UserInterface extends javax.swing.JFrame {
 
         passengerPanelInner.revalidate();
         passengerPanelInner.repaint();
-
-    }//GEN-LAST:event_refreshPassengerActionPerformed
-
+    }
+    
     private void viewLogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewLogButtonActionPerformed
         // TODO add your handling code here:
-        logWindow.setVisible(true);
+        
+        Controller.logWindow.setVisible(true);
+        
     }//GEN-LAST:event_viewLogButtonActionPerformed
 
     private void shipListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_shipListValueChanged
@@ -372,6 +358,42 @@ public class UserInterface extends javax.swing.JFrame {
         if(!shipList.isSelectionEmpty())
             planetList();
     }//GEN-LAST:event_shipListValueChanged
+
+    private void supplyPanelTestButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_supplyPanelTestButtonActionPerformed
+        supplyPanelInner.removeAll();
+        resourceValues.clear();
+        HashMap<String, Integer> res = Controller.getAllResources();
+
+        for(String k : res.keySet()){
+            //System.out.println("go");
+            supplyPanelInner.add(makeResourceContainerListItem(k));
+        }
+
+        supplyPanelInner.revalidate();
+        supplyPanelInner.repaint();
+
+        //System.out.println(Arrays.toString(supplyPanelInner.getComponents()));
+
+        }
+
+        private javax.swing.JPanel makeResourceContainerListItem(String text) {
+            javax.swing.JPanel r = new javax.swing.JPanel();
+            r.setAlignmentY(JPanel.LEFT_ALIGNMENT);
+            //r.setMaximumSize(new Dimension (10,5));
+            //r.setLayout(new GridLayout(0,2,15,1));
+            javax.swing.JSpinner s = new javax.swing.JSpinner();
+            s.setName(text);
+            //s.setPreferredSize(new Dimension(5,5));
+            //s.setMaximumSize(new Dimension (10,5));
+
+            //add to total list
+            resourceValues.add(s);
+
+            javax.swing.JLabel l = new javax.swing.JLabel(text);
+            r.add(l);
+            r.add(s);
+            return r;
+    }//GEN-LAST:event_supplyPanelTestButtonActionPerformed
 
 
     /**
@@ -425,6 +447,7 @@ public class UserInterface extends javax.swing.JFrame {
         planetList.setLayoutOrientation(JList.VERTICAL);
         
         jScrollPane1.getViewport().setView(planetList);
+        selectFirstPlanet();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -439,7 +462,6 @@ public class UserInterface extends javax.swing.JFrame {
     private javax.swing.JPanel passengerPanelInner;
     private javax.swing.JScrollPane passengerPanelScroll;
     private javax.swing.JList<Planet> planetList;
-    private javax.swing.JButton refreshPassenger;
     private javax.swing.JList<Ship> shipList;
     private javax.swing.JPanel shipPanel;
     private javax.swing.JComboBox<String> shipSizeComboBox;
