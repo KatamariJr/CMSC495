@@ -58,6 +58,7 @@ public class AppDB {
         //SQL statement for creating Planet table
         String sql = "CREATE TABLE IF NOT EXISTS planet (\n"
                 + "   planetID integer PRIMARY KEY,\n"
+                + "   name text NOT NULL,\n"
                 + "   distance float\n"
                // + "   name text NOT NULL\n "
                 + ");";
@@ -75,7 +76,7 @@ public class AppDB {
     
     //Method for inserting rows into Planet table
     public void insertPlanet() {
-        String sql = "INSERT INTO planet(distance) VALUES(?)";
+        String sql = "INSERT INTO planet(name, distance) VALUES(?,?)";
         int batchSize = 3;
         
         try{
@@ -90,13 +91,13 @@ public class AppDB {
       
             while((line = reader.readLine()) != null){
                 String[] s = line.split(",");
-                String strDistance = s[0];
-                //String strName = s[1];
+                String strName = s[0];
+                String strDistance = s[1];
                 
+                pstmt.setString(1, strName);
                 Float fDistance = Float.parseFloat(strDistance);
-                pstmt.setFloat(1, fDistance);
+                pstmt.setFloat(2, fDistance);
                 
-                //pstmt.setString(2, strName);
                 
                 pstmt.addBatch();
                 
@@ -140,6 +141,7 @@ public class AppDB {
         //SQL statement for creating Ship table
         String sql = "CREATE TABLE IF NOT EXISTS ship (\n"
                 + "   shipID integer PRIMARY KEY,\n"
+                + "   name text NOT NULL,\n"
                 + "   fuelCapacity integer,\n"
                 + "   cargoCapacity integer,\n"
                 + "   peopleCapacity integer,\n"
@@ -158,7 +160,7 @@ public class AppDB {
     }
     //Method for inserting rows into Ship table
     public void insertShip() {
-        String sql = "INSERT INTO ship(fuelCapacity,cargoCapacity,peopleCapacity,shipSize) VALUES(?,?,?,?)";
+        String sql = "INSERT INTO ship(name, fuelCapacity,cargoCapacity,peopleCapacity,shipSize) VALUES(?,?,?,?,?)";
  
         int batchSize = 3;
         
@@ -174,21 +176,24 @@ public class AppDB {
       
             while((line = reader.readLine()) != null){
                 String[] s = line.split(",");
-                String strFuel = s[0];
-                String strCargo = s[1];
-                String strPeople = s[2];
-                String strSize = s[3];
+                String strName = s[0];
+                String strFuel = s[1];
+                String strCargo = s[2];
+                String strPeople = s[3];
+                String strSize = s[4];
+                
+                pstmt.setString(1, strName);
                 
                 Integer sqlFuel = Integer.parseInt(strFuel);
-                pstmt.setInt(1, sqlFuel);
+                pstmt.setInt(2, sqlFuel);
                 
                 Integer sqlCargo = Integer.parseInt(strCargo);
-                pstmt.setInt(2, sqlCargo);
+                pstmt.setInt(3, sqlCargo);
                 
                 Integer sqlPeople = Integer.parseInt(strPeople);
-                pstmt.setInt(3, sqlPeople);
+                pstmt.setInt(4, sqlPeople);
                 
-                pstmt.setString(4, strSize);
+                pstmt.setString(5, strSize);
                 
                 pstmt.addBatch();
                 
@@ -308,7 +313,7 @@ public class AppDB {
     
     //method for selecting all planet
     public void selectAllPlanets(){
-        String sql = "SELECT planetID, distance FROM planet";
+        String sql = "SELECT planetID, name, distance FROM planet";
         
         try (Connection conn = this.connect();
              Statement stmt  = conn.createStatement();
@@ -318,9 +323,8 @@ public class AppDB {
           
             while (rs.next()== true) {
                 System.out.println(rs.getInt("planetID") +  "\t" + 
-                                   rs.getFloat("distance"))''
-                                  // rs.getString("name"));
-            
+                                rs.getString("name") + "\t" + 
+                                rs.getFloat("distance"));            
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -329,7 +333,7 @@ public class AppDB {
 
     //method for selecting all ships
     public void selectAllShips(){
-        String sql = "SELECT shipID, fuelCapacity, cargoCapacity, peopleCapacity, shipSize FROM ship";
+        String sql = "SELECT shipID, name, fuelCapacity, cargoCapacity, peopleCapacity, shipSize FROM ship";
         
         try (Connection conn = this.connect();
              Statement stmt  = conn.createStatement();
@@ -339,6 +343,7 @@ public class AppDB {
             
             while (rs.next()) {
                 System.out.println(rs.getInt("shipID") +  "\t" + 
+                                   rs.getString("name") +  "\t" +
                                    rs.getInt("fuelCapacity") +  "\t" + 
                                    rs.getInt("cargoCapacity") +  "\t" + 
                                    rs.getInt("peopleCapacity") +  "\t" + 
