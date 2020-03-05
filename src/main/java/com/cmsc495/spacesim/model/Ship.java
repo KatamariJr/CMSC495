@@ -26,15 +26,13 @@ public class Ship {
         this.peopleCapacity = peopleCapacity;
         this.name = name;
         this.shipSize = shipSize;
+        this.people = new ArrayList<Person>();
+        this.resources = new HashMap<String, Integer>();
     }
     
     // Default Ship Constructor with passed values
     public Ship () {
-        fuelCapacity = 500;
-        cargoCapacity = 15;
-        peopleCapacity = 6;
-        name = "Default Ship";
-        shipSize = "Small";
+        this(500, 15, 6, "Default Ship", "Small");
     }
     
     //Setters
@@ -187,6 +185,6 @@ public class Ship {
     
     // toString for Ship class. 
     public String toString(){
-        return name + "(" + fuelCapacity + " gal)";
+        return name;// + "(" + fuelCapacity + " gal)";
     }
 }

@@ -65,6 +65,11 @@ public class UserInterface extends javax.swing.JFrame {
         supplyPanelTestButton = new javax.swing.JButton();
         submitButton = new javax.swing.JButton();
         viewLogButton = new javax.swing.JButton();
+        mainWindowMenuBar = new javax.swing.JMenuBar();
+        fileMenu = new javax.swing.JMenu();
+        exitMenuItem = new javax.swing.JMenuItem();
+        optionsMenu = new javax.swing.JMenu();
+        loadDatabaseMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -175,6 +180,32 @@ public class UserInterface extends javax.swing.JFrame {
             }
         });
 
+        fileMenu.setText("File");
+
+        exitMenuItem.setText("Exit");
+        exitMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitMenuItemActionPerformed(evt);
+            }
+        });
+        fileMenu.add(exitMenuItem);
+
+        mainWindowMenuBar.add(fileMenu);
+
+        optionsMenu.setText("Options");
+
+        loadDatabaseMenuItem.setText("Load Database");
+        loadDatabaseMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loadDatabaseMenuItemActionPerformed(evt);
+            }
+        });
+        optionsMenu.add(loadDatabaseMenuItem);
+
+        mainWindowMenuBar.add(optionsMenu);
+
+        setJMenuBar(mainWindowMenuBar);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -182,9 +213,17 @@ public class UserInterface extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(viewLogButton)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(viewLogButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(shipPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(passengerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 43, Short.MAX_VALUE)
                         .addComponent(submitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -370,6 +409,14 @@ public class UserInterface extends javax.swing.JFrame {
             planetList();
     }//GEN-LAST:event_shipListValueChanged
 
+    private void exitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitMenuItemActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_exitMenuItemActionPerformed
+
+    private void loadDatabaseMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadDatabaseMenuItemActionPerformed
+        // TODO add your handling code here:
+        System.out.println("database load button clicked");
+    }//GEN-LAST:event_loadDatabaseMenuItemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -425,9 +472,18 @@ public class UserInterface extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.ButtonGroup buttonGroup3;
+    private javax.swing.ButtonGroup buttonGroup4;
+    private javax.swing.JMenuItem exitMenuItem;
+    private javax.swing.JMenu fileMenu;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JMenuItem loadDatabaseMenuItem;
+    private javax.swing.JMenuBar mainWindowMenuBar;
+    private javax.swing.JMenu optionsMenu;
     private javax.swing.JPanel passengerPanel;
     private javax.swing.JPanel passengerPanelInner;
     private javax.swing.JScrollPane passengerPanelScroll;

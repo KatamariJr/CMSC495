@@ -29,6 +29,7 @@ public class Controller {
         for(int i = 0; i < allResources.size(); i++){
             earth.resources.put(allResources.get(i), 999);
         }
+        earth.dockedShips.addAll(new Connect().getShip("Small' OR shipSize='Medium' OR shipSize='Large"));
         
         planets = new ArrayList<Planet>();
         planets.add(earth);
@@ -79,21 +80,21 @@ public class Controller {
     }
     
     private static ArrayList<String> getAllPossibleResources(){
-        //String[] str = {"Food", "Water", "Gasoline", "Coal", "Building Materials", "Medical Supplies"};
-        //return new ArrayList<String>(Arrays.asList(str));
-        return new Connect().getIdentifier("resource");
+        String[] str = {"Food", "Water", "Gasoline", "Coal", "Building Materials", "Medical Supplies"};
+        return new ArrayList<String>(Arrays.asList(str));
+        //return new Connect().getIdentifier("resource");
     }
     
     private static ArrayList<String> getAllPossibleSkills(){
-        //String[] str = {"Chemist", "Medic", "Architect", "Explorer", "Engineer"};
-        //return new ArrayList<String>(Arrays.asList(str));
-        return new Connect().getIdentifier("skill");
+        String[] str = {"Chemist", "Medic", "Architect", "Explorer", "Engineer"};
+        return new ArrayList<String>(Arrays.asList(str));
+        //return new Connect().getIdentifier("skill");
     }
     
     private static ArrayList<String> getAllPossiblePeopleNames(){
-        //String[] str = {"Alice", "Bob", "Charlie", "Darcy", "Edward"};
-        //return new ArrayList<String>(Arrays.asList(str));
-        return new Connect().getIdentifier("name");
+        String[] str = {"Alice", "Bob", "Charlie", "Darcy", "Edward"};
+        return new ArrayList<String>(Arrays.asList(str));
+        //return new Connect().getIdentifier("name");
     }
     
     
@@ -128,6 +129,21 @@ public class Controller {
         //this might be the spot where we should start a timer, but for now we appear at the planet immediately
         target.dockShip(s);
         unloadShip(s, target);
+    }
+    
+    // returns an ArrayList based on the size selected in a list
+    public static ArrayList<Ship> searchShipSize(String size) {
+        ArrayList<Ship> ships = new ArrayList<>();       
+        for(Ship ship : earth.dockedShips)
+            if(ship.shipSize.equals(size))
+                ships.add(ship);
+        
+        return ships;
+    }
+    
+    // get planet list based on fuel capacity of a ship
+    public static ArrayList<Planet> getPlanetList(float distance) {
+        return new Connect().getPlanet(distance);
     }
     
     // GetAllPeople will return all people on the starting planet.
