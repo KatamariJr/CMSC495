@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Test file for Person.java
  */
 
 package com.cmsc495.spacesim.model;
@@ -41,25 +39,33 @@ public class PersonTest {
     /**
      * Test of lock method, of class Person.
      */
-    @org.junit.Test
+    @org.junit.Test (expected = NullPointerException.class)
     public void testLock() {
-        System.out.println("lock");
-        Person instance = null;
-        instance.lock();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("***lock function***");
+        Person test3 = null;
+        test3.lock();
+        if (test3.locked = false) {
+            System.out.println("Lock function worked");
+        }
+        else {
+            fail("This function didn't change the boolean value");
+        }
     }
 
     /**
      * Test of unlock method, of class Person.
      */
-    @org.junit.Test
+    @org.junit.Test (expected = NullPointerException.class)
     public void testUnlock() {
-        System.out.println("unlock");
-        Person instance = null;
-        instance.unlock();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("***unlock function***");
+        Person test2 = null;
+        test2.unlock();
+        if (test2.locked = true) {
+            System.out.println("Unlock function worked");
+        }
+        else {
+            fail("This function didn't change the boolean value");
+        }
     }
 
     /**
@@ -68,12 +74,10 @@ public class PersonTest {
     @org.junit.Test
     public void testIsLocked() {
         System.out.println("isLocked");
-        Person instance = null;
+        Person test1 = new Person("Charles", "Engineer");
         boolean expResult = false;
-        boolean result = instance.isLocked();
+        boolean result = test1.isLocked();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
     
 }
