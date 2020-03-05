@@ -70,13 +70,10 @@ public class Planet {
                 
         // loop over all resources
         for(String k : r.keySet()){
-            if(!total.containsKey(k)){
-                int i = r.get(k) + this.resources.get(k);
-                total.put(k, i);
-            }
+            this.resources.put(k, this.resources.getOrDefault(k, r.get(k))+r.get(k));
         }
         
-        this.resources = total;
+        //this.resources = total;
     }
     
     //method for setting Planet name
@@ -101,18 +98,18 @@ public class Planet {
     
     // remove the given resources from the planet resources
     public void removeResources(HashMap<String, Integer> r) throws Exception{
-        HashMap<String, Integer> diff = (HashMap)this.resources.clone();
+       // HashMap<String, Integer> diff = (HashMap)this.resources.clone();
         
         for(String k : r.keySet()){
-            int valDiff = r.get(k) - diff.get(k);
+            int valDiff = this.resources.get(k) - r.get(k);
             if (valDiff < 0){
                 throw new Exception("resource removal would result in negative resource count");
             }
             
-            diff.put(k, valDiff);
+            this.resources.put(k, valDiff);
         }//End for loop to go through HashMap differentiation
-
-        this.resources = diff;
+        System.out.println("The resources removed on earth are: " + resources);
+        //this.resources = diff;
     }
     
     // add up the total individual colonization progresses
