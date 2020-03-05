@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Test file for Person.java
  */
 
 package com.cmsc495.spacesim.model;
@@ -41,24 +39,33 @@ public class PersonTest {
     /**
      * Test of lock method, of class Person.
      */
-    @org.junit.Test
+    @org.junit.Test (expected = NullPointerException.class)
     public void testLock() {
-        System.out.println("lock");
-        Person instance = null;
-        instance.lock();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        System.out.println("***lock function***");
+        Person test3 = null;
+        test3.lock();
+        if (test3.locked = false) {
+            System.out.println("Lock function worked");
+        }
+        else {
+            fail("This function didn't change the boolean value");
+        }
     }
 
     /**
      * Test of unlock method, of class Person.
      */
-    @org.junit.Test
+    @org.junit.Test (expected = NullPointerException.class)
     public void testUnlock() {
-        System.out.println("unlock");
-        Person test2 = new Person("Steven", "Farmer");
+        System.out.println("***unlock function***");
+        Person test2 = null;
         test2.unlock();
-        // print out lock status System.out.println()
+        if (test2.locked = true) {
+            System.out.println("Unlock function worked");
+        }
+        else {
+            fail("This function didn't change the boolean value");
+        }
     }
 
     /**
