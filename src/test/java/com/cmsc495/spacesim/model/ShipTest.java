@@ -48,11 +48,14 @@ public class ShipTest {
     public void testAddResources() throws Exception {
         System.out.println("addResources");
         HashMap<String, Integer> r = new HashMap<>();
+        r.put("Food", 5);
+        r.put("Water", 5);
+        r.put("Coal", 5);
         Ship instance = new Ship();
         instance.addResources(r);
         assertTrue(r.keySet().size() > 0);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        // fail("The test case is a prototype.");
     }
 
     /**
@@ -62,11 +65,13 @@ public class ShipTest {
     public void testAddPeople() {
         System.out.println("addPeople");
         ArrayList<Person> p = new ArrayList<>();
+        Person person = new Person("Suzy", "Engineer");
+        p.add(person);
         Ship instance = new Ship();
         instance.addPeople(p);
         assertTrue(p.size() == 1);
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        // fail("The test case is a prototype.");
     }
 
     /**
@@ -81,7 +86,7 @@ public class ShipTest {
         instance.removeResources(r);
         assertTrue(r.keySet().isEmpty());
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        // fail("The test case is a prototype.");
     }
 
     /**
@@ -95,7 +100,6 @@ public class ShipTest {
         instance.removePeople(p);
         assertTrue(p.isEmpty());
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-    
+        // fail("The test case is a prototype.");
+    }   
 }
