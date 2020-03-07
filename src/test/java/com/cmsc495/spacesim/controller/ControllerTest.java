@@ -9,12 +9,12 @@ import com.cmsc495.spacesim.model.Planet;
 import com.cmsc495.spacesim.model.Requirement;
 import com.cmsc495.spacesim.model.Ship;
 import com.cmsc495.spacesim.model.Person;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -123,36 +123,43 @@ public class ControllerTest {
     @Test
     public void testUnloadShip() {
         System.out.println("unloadShip");
-        Ship s = null;
-        Planet target = null;
+        Ship s = new Ship();
+        Planet target = new Planet("Jupiter", 1000);
+        ArrayList<Person> p = new ArrayList<>();
+        p.add(new Person("Silvester", "Student"));
+        HashMap<String, Integer> r = new HashMap<>();
+        r.put("Coal", 2);
+        try{
+            s.addResources(r);
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+        s.addPeople(p);
+        
         Controller.unloadShip(s, target);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        assertEquals(p.get(0), target.people.get(0));
+        assertEquals(r.get("Coal"), target.resources.get("Coal"));
     }
-
-    /**
-     * Test of logEvent method, of class Controller.
-     */
-    @Test
-    public void testLogEvent() {
-        System.out.println("logEvent");
-        String event = "";
-        Controller.logEvent(event);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
+    
     /**
      * Test of logFile method, of class Controller.
      */
     @Test
     public void testLogFile() {
         System.out.println("logFile");
-        String log = "";
-        String fileName = "";
+        String log = "passed";
+        String fileName = "testFile.txt";
         Controller.logFile(log, fileName);
+        try{
+            File file = new File("testFile.txt");
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            String line = reader.readLine();
+            assertEquals("---" + log, line);
+        }catch(IOException IO){
+            System.out.println("Error with file: " + IO.getMessage());
+        }
         // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        //fail("The test case is a prototype.");
     }
     
 }
