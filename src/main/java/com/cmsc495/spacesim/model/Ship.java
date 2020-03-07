@@ -142,7 +142,7 @@ public class Ship {
                 
         // loop over all resources
         for(String k : r.keySet()){
-            total.put(k, total.getOrDefault(k, r.get(k))+r.get(k));
+            total.put(k, total.getOrDefault(k, 0)+ r.get(k));
             totalInt += total.get(k);
         }
         
