@@ -26,8 +26,8 @@ public class Ship {
         this.peopleCapacity = peopleCapacity;
         this.name = name;
         this.shipSize = shipSize;
-        this.people = new ArrayList<Person>();
-        this.resources = new HashMap<String, Integer>();
+        this.people = new ArrayList<>();
+        this.resources = new HashMap<>();
     }
     
     // Default Ship Constructor with passed values
@@ -142,11 +142,8 @@ public class Ship {
                 
         // loop over all resources
         for(String k : r.keySet()){
-            if(!total.containsKey(k)){
-                int i = r.get(k) + this.resources.get(k);
-                total.put(k, i);
-                totalInt += i;
-            }
+            total.put(k, total.getOrDefault(k, r.get(k))+r.get(k));
+            totalInt += total.get(k);
         }
         
         //check max cargo amount

@@ -6,11 +6,9 @@
 package com.cmsc495.spacesim.model;
 
 import java.sql.Connection;
-import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.HashMap;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
@@ -19,7 +17,7 @@ import java.util.ArrayList;
  * @author Tom Helfrich
  */
 public class Connect {
-    String url = "jdbc:sqlite:test13.db";
+    String url = "jdbc:sqlite:test21.db";
     Connection conn = connect();
     
     private Connection connect() {

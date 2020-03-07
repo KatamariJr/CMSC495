@@ -16,31 +16,35 @@ public class Controller {
     
     private static Planet earth;
     private static ArrayList<Planet> planets;
+    private static ArrayList<String> names;
+    private static ArrayList<String> allSkills;
+    private static ArrayList<String> allResources;    
+    public static ViewLog logWindow = new ViewLog();
     
     // InitializeEarth will prepare earth for the simulation.
     public static void InitializeEarth(){
         earth = new Planet("Earth", 0);
+        names = getAllPossiblePeopleNames();
+        allSkills = getAllPossibleSkills();
+        allResources =  getAllPossibleResources();
         for (int i = 0; i < 50; i++) {
             earth.people.add(newPerson());
         }
         
         //populate the list of resources
-        ArrayList<String> allResources =  getAllPossibleResources();
         for(int i = 0; i < allResources.size(); i++){
             earth.resources.put(allResources.get(i), 999);
         }
         earth.dockedShips.addAll(new Connect().getShip("Small' OR shipSize='Medium' OR shipSize='Large"));
         
-        planets = new ArrayList<Planet>();
+        planets = new ArrayList<>();
         planets.add(earth);
     }
     
     // create a new person.
     private static Person newPerson(){
         Random r = new Random();
-        ArrayList<String> names = getAllPossiblePeopleNames();
-        ArrayList<String> skills = getAllPossibleSkills();
-        Person p = new Person(names.get(r.nextInt(names.size())), skills.get(r.nextInt(skills.size())));
+        Person p = new Person(names.get(r.nextInt(names.size())), allSkills.get(r.nextInt(allSkills.size())));
         return p;
     }
     
@@ -48,8 +52,7 @@ public class Controller {
     public static Requirement newRequirement(){
         Requirement req = new Requirement();
         Random r = new Random();
-        ArrayList<String> allSkills =  getAllPossibleSkills();
-        ArrayList<String> allResources =  getAllPossibleResources();
+
         //pick a random number of skills
         for(int i = 0; i < r.nextInt(REQUIREMENT_MAXIMUM_SKILL_TOTAL) + 1; i++){
             //add a random skill
@@ -80,21 +83,21 @@ public class Controller {
     }
     
     private static ArrayList<String> getAllPossibleResources(){
-        String[] str = {"Food", "Water", "Gasoline", "Coal", "Building Materials", "Medical Supplies"};
-        return new ArrayList<String>(Arrays.asList(str));
-        //return new Connect().getIdentifier("resource");
+        //String[] str = {"Food", "Water", "Gasoline", "Coal", "Building Materials", "Medical Supplies"};
+        //return new ArrayList<String>(Arrays.asList(str));
+        return new Connect().getIdentifier("resource");
     }
     
     private static ArrayList<String> getAllPossibleSkills(){
-        String[] str = {"Chemist", "Medic", "Architect", "Explorer", "Engineer"};
-        return new ArrayList<String>(Arrays.asList(str));
-        //return new Connect().getIdentifier("skill");
+        //String[] str = {"Chemist", "Medic", "Architect", "Explorer", "Engineer"};
+        //return new ArrayList<String>(Arrays.asList(str));
+        return new Connect().getIdentifier("skill");
     }
     
     private static ArrayList<String> getAllPossiblePeopleNames(){
-        String[] str = {"Alice", "Bob", "Charlie", "Darcy", "Edward"};
-        return new ArrayList<String>(Arrays.asList(str));
-        //return new Connect().getIdentifier("name");
+        //String[] str = {"Alice", "Bob", "Charlie", "Darcy", "Edward"};
+        //return new ArrayList<String>(Arrays.asList(str));
+        return new Connect().getIdentifier("name");
     }
     
     
@@ -108,10 +111,12 @@ public class Controller {
   
         //check if we can send the ship
         if (totalResources > s.cargoCapacity){
+            logEvent(s + " cargo capacity exceeded");
             throw new RuntimeException("insufficient cargo space");
         }
         float planetDistance  = earth.distanceToPlanet(target);
         if (planetDistance > s.fuelCapacity){
+            logEvent("Ship: [" + s + "] cannot reach planet: [" + target + "]");
             throw new RuntimeException("not enough fuel");
         }
         
@@ -119,19 +124,24 @@ public class Controller {
         try{
             earth.removeResources(resources);
             s.addResources(resources);
+            logEvent("Resources added to ship: ["+ s + "]");
         } catch(Exception e){
-            System.err.println(e);
+            logEvent("Error adding resources to ship: [" + s + "] (" + e.getMessage() + ")");
         }
         
         s.addPeople(people);
+        logEvent("Added [" + people + "] to ship: [" + s + "]");
         earth.undockShip(s);
+        logEvent("Ship: [" + s + "] has left earth for planet: [" + target + "]");
         
         //this might be the spot where we should start a timer, but for now we appear at the planet immediately
         target.dockShip(s);
+        logEvent("Ship: [" + s + "] has arrived on planet: [" + target + "]");
         unloadShip(s, target);
+        logEvent("People and resources from Ship: [" + s + "] unloaded onto planet: {" + target + "]");
     }
     
-    // returns an ArrayList based on the size selected in a list
+    // returns an ArrayList of ships based on the size selected in a list
     public static ArrayList<Ship> searchShipSize(String size) {
         ArrayList<Ship> ships = new ArrayList<>();       
         for(Ship ship : earth.dockedShips)
@@ -186,11 +196,16 @@ public class Controller {
        s.resources.clear();
        //System.out.println("The ship list after clearing : " + s.resources);
        //System.out.println("The planet has the following people: " + target.people);
+       logEvent("All people and resources unloaded from ship: {" + s + 
+               "], and added to planet: [" + target + "]" );
     }
 
      // In case we want to create a separte log for errors
-    public static void logEvent(String event){
-       logFile(event, "log.txt");
+    public static  void logEvent(String event){
+        event += " at [" + new Date() + "]";
+        logWindow.getAllLogEntries(event);
+        logFile(event, "log.txt");
+       //logWindow.getAllLogEntries(event);
     }
     // logs an event to a specified file
     public static void logFile(String log, String fileName){
@@ -199,7 +214,7 @@ public class Controller {
          // write the text variable using the bufferedwriter to testing.txt
          try {
              writer = new BufferedWriter(new FileWriter(fileName, true));
-             writer.write("---" + log + " at " + new Date());
+             writer.write("---" + log);
              writer.newLine();
          }
          // print error message if there is one
@@ -218,19 +233,5 @@ public class Controller {
                  System.out.println("Issue closing the File." + io.getMessage());
              }
          }
-     }
-    
-    // This method should not retrieve log entries from a log file but rather
-    // paste log entries to a log screen as they happen in real time
-    // The method would be called by any method that appends to a log file 
-    // and use that same data for the log file, which might be a text area
-    // It would log to the text area with minimal overhead
-    public static void getAllLogEntries(String logEntryText, UserInterface XXX){
-        synchronized(XXX){
-           // XXX.logArea.append(logEntryText); // log area may be the name of the textArea object
-           // XXX.logArea.setCaretPosition(
-           // XXX.logArea.getDocument().getLength());
-            XXX.notify();   
-        }
-    }   
+     } 
 }
