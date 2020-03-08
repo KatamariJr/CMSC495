@@ -32,8 +32,11 @@ public class UserInterface extends javax.swing.JFrame {
         
         Controller.InitializeEarth();
         initComponents();
-        if(!shipList.isSelectionEmpty())
+        /*if(!shipList.isSelectionEmpty()){
             planetList();
+        }else{
+                System.out.println("Ship List is empty");    
+                    }*/
     }
 
     /**
@@ -308,6 +311,7 @@ public class UserInterface extends javax.swing.JFrame {
             public int getSize() { return ships.size(); }
             public Ship getElementAt(int i) { return ships.get(i); }
         });
+       
     }
     
     // Display the list of available resources
