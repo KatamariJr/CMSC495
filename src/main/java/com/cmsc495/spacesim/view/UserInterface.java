@@ -1,3 +1,4 @@
+  
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -32,11 +33,7 @@ public class UserInterface extends javax.swing.JFrame {
         
         Controller.InitializeEarth();
         initComponents();
-        /*if(!shipList.isSelectionEmpty()){
-            planetList();
-        }else{
-                System.out.println("Ship List is empty");    
-                    }*/
+        setTitle("C.O.P.E. Space Colonization Simulator");
     }
 
     /**
@@ -218,14 +215,10 @@ public class UserInterface extends javax.swing.JFrame {
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
         
         //get ship
-        //TODO set shiplist to type Ship
         Ship s = shipList.getSelectedValue();
-        //Ship s = new Ship();
         
         //get target planet
-        //TODO set planetList to type Planet
         Planet target = planetList.getSelectedValue();
-        //Planet target = new Planet("planet", 20);
         
         //get list of chosen people
         //get selected checkboxes
@@ -248,10 +241,20 @@ public class UserInterface extends javax.swing.JFrame {
         
         System.out.println("sending ship");
         System.out.println(s);
-        System.out.println(target);
-        System.out.println(people);
+        
+        if (target == null) {
+            throw new NullPointerException("A planet was not selected. Try again.");
+        } else {
+            System.out.println(target);
+        }
+        
+        if (people.size() <= s.peopleCapacity) {
+            System.out.println(people);
+        } else {
+            System.out.println("Too many people chosen");
+        }
         System.out.println(resources);
-        //send trhe ship
+        //send the ship
         Controller.sendShip(s, target, people, resources);
     }//GEN-LAST:event_submitButtonActionPerformed
 
