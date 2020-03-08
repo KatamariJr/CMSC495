@@ -1,5 +1,295 @@
-Explorer,500,25,15,Small
-Voyager,500,75,30,Small
-Discover,1000,125,45,Medium
-USS Maryland,1000,200,60,Medium
-USS Kansas,2500,250,75,Large
+ex-Audacious,1000,25,15,Small
+ex-Brave,5000,75,30,Small
+ex-Edgar,5000,75,30,Small
+ex-Ethalion,15000,200,60,Medium
+ex-Irresistible,10000,125,45,Medium
+ex-Mars,20000,250,75,Large
+Explorer,10000,125,45,Medium
+HMS Africa,20000,250,75,Large
+HMS Eagle,15000,200,60,Medium
+HMS Hercules,10000,125,45,Medium
+HMS Ark Royal,1000,25,15,Small
+HMS Ark Royal,5000,75,30,Small
+HMS Colossus,15000,200,60,Medium
+HMS Courageous,5000,75,30,Small
+HMS Eagle,20000,250,75,Large
+HMS Eagle,15000,200,60,Medium
+HMS Formidable,15000,200,60,Medium
+HMS Furious,10000,125,45,Medium
+HMS Glorious,1000,25,15,Small
+HMS Glory,20000,250,75,Large
+HMS Hercules,20000,250,75,Large
+HMS Hermes,20000,250,75,Large
+HMS Illustrious,10000,125,45,Medium
+HMS Implacable,5000,75,30,Small
+HMS Indefatigable,10000,125,45,Medium
+HMS Indomitable,1000,25,15,Small
+HMS Leviathan,1000,25,15,Small
+HMS Magnificent,5000,75,30,Small
+HMS Majestic,15000,200,60,Medium
+HMS Ocean,1000,25,15,Small
+HMS Perseus,10000,125,45,Medium
+HMS Pioneer,1000,25,15,Small
+HMS Powerful,10000,125,45,Medium
+HMS Terrible,15000,200,60,Medium
+HMS Theseus,5000,75,30,Small
+HMS Triumph,10000,125,45,Medium
+HMS Unicorn,5000,75,30,Small
+HMS Venerable,15000,200,60,Medium
+HMS Vengeance,20000,250,75,Large
+HMS Victorious,20000,250,75,Large
+HMS Warrior,1000,25,15,Small
+Intrepid,15000,200,60,Medium
+Piranha,20000,250,75,Large
+USS Abraham Lincoln,1000,25,15,Small
+USS Alabama,5000,75,30,Small
+USS Alaska,10000,125,45,Medium
+USS Albany,15000,200,60,Medium
+USS Alexandria,20000,250,75,Large
+USS America,1000,25,15,Small
+USS Anchorage,5000,75,30,Small
+USS Annapolis,10000,125,45,Medium
+USS Antietam,15000,200,60,Medium
+USS Anzio,20000,250,75,Large
+USS Ardent,1000,25,15,Small
+USS Arleigh Burke,5000,75,30,Small
+USS Arlington,10000,125,45,Medium
+USS Asheville,15000,200,60,Medium
+USS Ashland,20000,250,75,Large
+USS Bainbridge,1000,25,15,Small
+USS Barry,5000,75,30,Small
+USS Bataan,10000,125,45,Medium
+USS Benfold,15000,200,60,Medium
+USS Billings,20000,250,75,Large
+USS Blue Ridge,1000,25,15,Small
+USS Boise,5000,75,30,Small
+USS Bonhomme Richard,10000,125,45,Medium
+USS Boxer,15000,200,60,Medium
+USS Bulkeley,20000,250,75,Large
+USS Bunker Hill,1000,25,15,Small
+USS California,5000,75,30,Small
+USS Cape St. George,10000,125,45,Medium
+USS Carl Vinson,15000,200,60,Medium
+USS Carney,20000,250,75,Large
+USS Carter Hall,1000,25,15,Small
+USS Chafee,5000,75,30,Small
+USS Champion,10000,125,45,Medium
+USS Chancellorsville,15000,200,60,Medium
+USS Charleston,20000,250,75,Large
+USS Charlotte,1000,25,15,Small
+USS Cheyenne,5000,75,30,Small
+USS Chicago,10000,125,45,Medium
+USS Chief,15000,200,60,Medium
+USS Chinook,20000,250,75,Large
+USS Chosin,1000,25,15,Small
+USS Chung-Hoon,5000,75,30,Small
+USS Cincinnati,10000,125,45,Medium
+USS Cole,15000,200,60,Medium
+USS Colorado,20000,250,75,Large
+USS Columbia,1000,25,15,Small
+USS Columbus,5000,75,30,Small
+USS Comstock,10000,125,45,Medium
+USS Connecticut,15000,200,60,Medium
+USS Constitution,20000,250,75,Large
+USS Coronado,1000,25,15,Small
+USS Cowpens,5000,75,30,Small
+USS Curtis Wilbur,10000,125,45,Medium
+USS Decatur,15000,200,60,Medium
+USS Detroit,20000,250,75,Large
+USS Devastator,1000,25,15,Small
+USS Dewey,5000,75,30,Small
+USS Dextrous,10000,125,45,Medium
+USS Donald Cook,15000,200,60,Medium
+USS Dwight D. Eisenhower,20000,250,75,Large
+USS Emory S. Land,1000,25,15,Small
+USS Essex,5000,75,30,Small
+USS Farragut,10000,125,45,Medium
+USS Firebolt,15000,200,60,Medium
+USS Fitzgerald,20000,250,75,Large
+USS Florida,1000,25,15,Small
+USS Forrest Sherman,5000,75,30,Small
+USS Fort McHenry,10000,125,45,Medium
+USS Fort Worth,15000,200,60,Medium
+USS Frank Cable,20000,250,75,Large
+USS Freedom,1000,25,15,Small
+USS Gabrielle Giffords,5000,75,30,Small
+USS George H.W. Bush,15000,200,60,Medium
+USS George Washington,10000,125,45,Medium
+USS Georgia,20000,250,75,Large
+USS Gerald R. Ford,1000,25,15,Small
+USS Germantown,5000,75,30,Small
+USS Gettysburg,10000,125,45,Medium
+USS Gladiator,15000,200,60,Medium
+USS Gonzalez,20000,250,75,Large
+USS Gravely,1000,25,15,Small
+USS Green Bay,5000,75,30,Small
+USS Greeneville,10000,125,45,Medium
+USS Gridley,15000,200,60,Medium
+USS Gunston Hall,20000,250,75,Large
+USS Halsey,1000,25,15,Small
+USS Hampton,5000,75,30,Small
+USS Harpers Ferry,10000,125,45,Medium
+USS Harry S. Truman,15000,200,60,Medium
+USS Hartford,20000,250,75,Large
+USS Hawaii,1000,25,15,Small
+USS Helena,5000,75,30,Small
+USS Henry M. Jackson,10000,125,45,Medium
+USS Higgins,15000,200,60,Medium
+USS Hopper,20000,250,75,Large
+USS Howard,1000,25,15,Small
+USS Hue City,5000,75,30,Small
+USS Hurricane,10000,125,45,Medium
+USS Illinois,15000,200,60,Medium
+USS Independence,20000,250,75,Large
+USS Indiana,1000,25,15,Small
+USS Indianapolis,5000,75,30,Small
+USS Iwo Jima,10000,125,45,Medium
+USS Jackson,15000,200,60,Medium
+USS James E. Williams,20000,250,75,Large
+USS Jason Dunham,1000,25,15,Small
+USS Jefferson City,5000,75,30,Small
+USS Jimmy Carter,10000,125,45,Medium
+USS John C. Stennis,15000,200,60,Medium
+USS John Finn,20000,250,75,Large
+USS John P. Murtha,1000,25,15,Small
+USS John Paul Jones,5000,75,30,Small
+USS John S. McCain,10000,125,45,Medium
+USS John Warner,15000,200,60,Medium
+USS Kearsarge,20000,250,75,Large
+USS Kentucky,1000,25,15,Small
+USS Key West,5000,75,30,Small
+USS Kidd,10000,125,45,Medium
+USS Laboon,15000,200,60,Medium
+USS Lake Champlain,20000,250,75,Large
+USS Lake Erie,1000,25,15,Small
+USS Lassen,5000,75,30,Small
+USS Lewis B. Puller,10000,125,45,Medium
+USS Leyte Gulf,15000,200,60,Medium
+USS Little Rock,20000,250,75,Large
+USS Louisiana,1000,25,15,Small
+USS Mahan,5000,75,30,Small
+USS Maine,10000,125,45,Medium
+USS Makin Island,15000,200,60,Medium
+USS Manchester,20000,250,75,Large
+USS Maryland,1000,25,15,Small
+USS Mason,5000,75,30,Small
+USS McCampbell,10000,125,45,Medium
+USS McFaul,15000,200,60,Medium
+USS Mesa Verde,20000,250,75,Large
+USS Michael Monsoor,1000,25,15,Small
+USS Michael Murphy,5000,75,30,Small
+USS Michigan,10000,125,45,Medium
+USS Milius,15000,200,60,Medium
+USS Milwaukee,20000,250,75,Large
+USS Minnesota,1000,25,15,Small
+USS Mississippi,5000,75,30,Small
+USS Missouri,10000,125,45,Medium
+USS Mitscher,15000,200,60,Medium
+USS Mobile Bay,20000,250,75,Large
+USS Momsen,1000,25,15,Small
+USS Monsoon,5000,75,30,Small
+USS Monterey,10000,125,45,Medium
+USS Montgomery,15000,200,60,Medium
+USS Montpelier,20000,250,75,Large
+USS Mount Whitney,1000,25,15,Small
+USS Mustin,5000,75,30,Small
+USS Nebraska,10000,125,45,Medium
+USS Nevada,15000,200,60,Medium
+USS New Hampshire,20000,250,75,Large
+USS New Mexico,1000,25,15,Small
+USS New Orleans,5000,75,30,Small
+USS New York,10000,125,45,Medium
+USS Newport News,15000,200,60,Medium
+USS Nimitz,20000,250,75,Large
+USS Nitze,1000,25,15,Small
+USS Normandy,5000,75,30,Small
+USS North Carolina,10000,125,45,Medium
+USS North Dakota,15000,200,60,Medium
+USS Oak Hill,1000,25,15,Small
+USS Ohio,5000,75,30,Small
+USS O'Kane,20000,250,75,Large
+USS Oklahoma City,10000,125,45,Medium
+USS Omaha,15000,200,60,Medium
+USS Oscar Austin,20000,250,75,Large
+USS Pasadena,1000,25,15,Small
+USS Patriot,5000,75,30,Small
+USS Paul Hamilton,10000,125,45,Medium
+USS Paul Ignatius,15000,200,60,Medium
+USS Pearl Harbor,20000,250,75,Large
+USS Pennsylvania,1000,25,15,Small
+USS Philippine Sea,5000,75,30,Small
+USS Pinckney,10000,125,45,Medium
+USS Pioneer,15000,200,60,Medium
+USS Port Royal,20000,250,75,Large
+USS Porter,1000,25,15,Small
+USS Portland,5000,75,30,Small
+USS Preble,10000,125,45,Medium
+USS Princeton,15000,200,60,Medium
+USS Providence,20000,250,75,Large
+USS Pueblo,1000,25,15,Small
+USS Rafael Peralta,10000,125,45,Medium
+USS Ralph Johnson,15000,200,60,Medium
+USS Ramage,20000,250,75,Large
+USS Rhode Island,1000,25,15,Small
+USS Ronald Reagan,5000,75,30,Small
+USS Roosevelt,10000,125,45,Medium
+USS Ross,15000,200,60,Medium
+USS Rushmore,20000,250,75,Large
+USS Russell,1000,25,15,Small
+USS Sampson,5000,75,30,Small
+USS San Antonio,10000,125,45,Medium
+USS San Diego,15000,200,60,Medium
+USS San Jacinto,20000,250,75,Large
+USS San Juan,1000,25,15,Small
+USS Santa Fe,5000,75,30,Small
+USS Scout,10000,125,45,Medium
+USS Scranton,15000,200,60,Medium
+USS Seawolf,20000,250,75,Large
+USS Sentry,1000,25,15,Small
+USS Shamal,5000,75,30,Small
+USS Shiloh,10000,125,45,Medium
+USS Shoup,15000,200,60,Medium
+USS Sioux City,20000,250,75,Large
+USS Sirocco,1000,25,15,Small
+USS Somerset,5000,75,30,Small
+USS South Dakota,10000,125,45,Medium
+USS Springfield,15000,200,60,Medium
+USS Spruance,20000,250,75,Large
+USS Squall,1000,25,15,Small
+USS Sterett,5000,75,30,Small
+USS Stethem,10000,125,45,Medium
+USS Stockdale,15000,200,60,Medium
+USS Stout,20000,250,75,Large
+USS Tempest,1000,25,15,Small
+USS Tennessee,5000,75,30,Small
+USS Texas,10000,125,45,Medium
+USS The Sullivans,15000,200,60,Medium
+USS Theodore Roosevelt,20000,250,75,Large
+USS Thomas Hudner,1000,25,15,Small
+USS Thunderbolt,5000,75,30,Small
+USS Toledo,10000,125,45,Medium
+USS Topeka,15000,200,60,Medium
+USS Tornado,20000,250,75,Large
+USS Tortuga,1000,25,15,Small
+USS Truxtun,5000,75,30,Small
+USS Tucson,10000,125,45,Medium
+USS Tulsa,15000,200,60,Medium
+USS Typhoon,20000,250,75,Large
+USS Vella Gulf,1000,25,15,Small
+USS Vicksburg,5000,75,30,Small
+USS Virginia,10000,125,45,Medium
+USS Warrior,15000,200,60,Medium
+USS Washington,20000,250,75,Large
+USS Wasp,1000,25,15,Small
+USS Wayne E. Meyer,5000,75,30,Small
+USS West Virginia,10000,125,45,Medium
+USS Whidbey Island,15000,200,60,Medium
+USS Whirlwind,20000,250,75,Large
+USS Wichita,10000,125,45,Medium
+USS William P. Lawrence,1000,25,15,Small
+USS Winston S. Churchill,5000,75,30,Small
+USS Wyoming,15000,200,60,Medium
+USS Zephyr,20000,250,75,Large
+USS Zumwalt,1000,25,15,Small
+Voyager,1000,25,15,Small
+Voyager1,5000,75,30,Small
