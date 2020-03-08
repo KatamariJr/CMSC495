@@ -1,5 +1,15 @@
-Planet,Mars
-Resource,Fuel
-Person,Bob
-Ship,Explorer
-Planet,Venus
+resource,Water
+resource,Fuel
+name,Bob
+name,Mary
+name,John
+name,Alex
+name,Alice
+name,Stephanie
+name,Chris
+resource,Building Materials
+skill,Chemist
+skill,Medic
+skill,Architect
+skill,Explorer
+skill,Engineer

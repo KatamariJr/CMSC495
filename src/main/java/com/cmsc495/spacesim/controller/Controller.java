@@ -23,6 +23,7 @@ public class Controller {
     
     // InitializeEarth will prepare earth for the simulation.
     public static void InitializeEarth(){
+        
         earth = new Planet("Earth", 0);
         names = getAllPossiblePeopleNames();
         allSkills = getAllPossibleSkills();
