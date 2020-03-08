@@ -21,7 +21,7 @@ import java.io.File;
  * @author Tom Helfrich
  */
 public class AppDB {
-    private static final String url = "jdbc:sqlite:spaceapp2.db";
+    private static final String url = "jdbc:sqlite:spaceappfinalproject.db";
     
     public AppDB(){
         
@@ -378,7 +378,7 @@ public class AppDB {
     
     //main method for testing
     public static void main(String[] args){
-        /*AppDB test = new AppDB();
+       /* AppDB test = new AppDB();
         test.createDatabase();
         test.connect();
         test.createPlanetTable();
