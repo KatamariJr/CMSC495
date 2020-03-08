@@ -33,11 +33,7 @@ public class UserInterface extends javax.swing.JFrame {
         
         Controller.InitializeEarth();
         initComponents();
-        /*if(!shipList.isSelectionEmpty()){
-            planetList();
-        }else{
-                System.out.println("Ship List is empty");    
-                    }*/
+        setTitle("C.O.P.E. Space Colonization Simulator");
     }
 
     /**
@@ -219,14 +215,10 @@ public class UserInterface extends javax.swing.JFrame {
     private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
         
         //get ship
-        //TODO set shiplist to type Ship
         Ship s = shipList.getSelectedValue();
-        //Ship s = new Ship();
         
         //get target planet
-        //TODO set planetList to type Planet
         Planet target = planetList.getSelectedValue();
-        //Planet target = new Planet("planet", 20);
         
         //get list of chosen people
         //get selected checkboxes
@@ -249,7 +241,13 @@ public class UserInterface extends javax.swing.JFrame {
         
         System.out.println("sending ship");
         System.out.println(s);
-        System.out.println(target);
+        
+        if (target == null) {
+            throw new NullPointerException("A planet was not selected. Try again.");
+        } else {
+            System.out.println(target);
+        }
+        
         System.out.println(people);
         System.out.println(resources);
         //send trhe ship
