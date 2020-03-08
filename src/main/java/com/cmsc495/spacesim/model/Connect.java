@@ -17,7 +17,7 @@ import java.util.ArrayList;
  * @author Tom Helfrich
  */
 public class Connect {
-    String url = "jdbc:sqlite:spaceapp.db";
+    String url = "jdbc:sqlite:spaceapp2.db";
     Connection conn = connect();
     
     private Connection connect() {
