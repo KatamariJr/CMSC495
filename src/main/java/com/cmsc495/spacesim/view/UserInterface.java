@@ -248,9 +248,13 @@ public class UserInterface extends javax.swing.JFrame {
             System.out.println(target);
         }
         
-        System.out.println(people);
+        if (people.size() <= s.peopleCapacity) {
+            System.out.println(people);
+        } else {
+            System.out.println("Too many people chosen");
+        }
         System.out.println(resources);
-        //send trhe ship
+        //send the ship
         Controller.sendShip(s, target, people, resources);
     }//GEN-LAST:event_submitButtonActionPerformed
 
