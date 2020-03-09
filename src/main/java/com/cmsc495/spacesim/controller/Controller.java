@@ -120,8 +120,11 @@ public class Controller {
             logEvent("Ship: [" + s + "] cannot reach planet: [" + target + "]");
             throw new RuntimeException("not enough fuel");
         }
+        if (people.size() > s.peopleCapacity) {
+            logEvent(s + " people capacity exceeded");
+            throw new RuntimeException("insufficient passenger space");
+        }
         
-        earth.removePeople(people);
         try{
             earth.removeResources(resources);
             s.addResources(resources);
@@ -129,9 +132,17 @@ public class Controller {
         } catch(Exception e){
             logEvent("Error adding resources to ship: [" + s + "] (" + e.getMessage() + ")");
         }
+
+        try{
+            earth.removePeople(people);
+            s.addPeople(people);
+            logEvent("Added [" + people + "] to ship: [" + s + "]");
+        } catch(Exception e){
+            logEvent("Error adding TOO MANY people to ship: [" + s + "] (" + e.getMessage() + ")");
+        }
         
-        s.addPeople(people);
-        logEvent("Added [" + people + "] to ship: [" + s + "]");
+
+
         earth.undockShip(s);
         logEvent("Ship: [" + s + "] has left earth for planet: [" + target + "]");
         

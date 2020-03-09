@@ -35,7 +35,8 @@ public class Person {
     // unlock a person after the requirement they are working on is completed.
     public void unlock(){
         //set locked=false
-        boolean locked = false;  
+        boolean locked = false;
+        locked = this.locked;
     }
     
     // return the value of the locked field
